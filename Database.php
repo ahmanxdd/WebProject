@@ -48,7 +48,7 @@
 			return $insertStr;
 		}
 		
-		public static function query($query) {
+		public static function query($query, $retJSON = false) {
 			$result = $db->query($query);
 			//for INSERT, UPDATE, DELETE
 			if ($result === true)
@@ -60,7 +60,11 @@
 			}
 			//for SELECT
 			if ($result->num_rows > 0) {
-				return "something"; //TODO
+				if ($retJSON) {
+					//TODO parse JSON
+				}
+				return $result;
+				
 			} 
 			else 
 				return  null;
