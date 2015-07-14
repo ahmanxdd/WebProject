@@ -14,4 +14,8 @@
 	function delDistrict($distNo) {
 		
 	}
+		
+	function delDistrict($distNo) {
+		
+	}
 ?>
