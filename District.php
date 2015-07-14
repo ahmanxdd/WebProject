@@ -11,7 +11,7 @@
 		}
 	}
 	
-	function delDistrict($distNo) {
+	function delDistrictfty($distNo) {
 		//iku!!!!!!!!!
 	}
 		
