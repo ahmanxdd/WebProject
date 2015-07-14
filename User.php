@@ -77,6 +77,7 @@
 			$adminObj = $adminTel;
 			$adminTel = $adminObj[adminTel];
 		}
+		$QUERY = 
 		
 		//...
 	}
