@@ -11,7 +11,7 @@
 		}
 	}
 	
-	function delDistrict($distNo) {
+	function delRAYMOND1District1($distNo) {
 		//iku!!!!!!!!!
 	}
 		
