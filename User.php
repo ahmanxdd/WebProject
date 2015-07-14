@@ -72,14 +72,27 @@
 	
 	function regAdmin($userNo, $adminTel) {
 		//check if the userNo is already a driver, customer or supplier, if yes abort, return false
-		
+		$query = "SELECT COUNT(*) FROM User "
+				."WHERE " . drvID . " IS NULL "
+				."AND " . custNo . " IS NULL "
+				."AND " . suppNo . " IS NULL "
+				."AND " . userNo . " = $userNo";
+				
+		$result = DB::query($query);
+		if($result->row_nums > 0)
+			return false;
+			
 		if (isset($adminTel) && is_array($adminTel)) { //for JSON
 			$adminObj = $adminTel;
 			$adminTel = $adminObj[adminTel];
 		}
-		$QUERY = 
+		$adminNo = DB::getLastIndex("Admin");
+		$insert_admin_query = DB::genInsertStr("Admin", $adminNo, $adminTel);
+		$update_user_query = "UPDATE User SET " . adminNo . " = $adminNo WHERE " . userNo . " = $userNo";
 		
-		//...
+		if(DB::query($insert_admin_query))
+			return DB::query($update_user_query);
+		return false;		
 	}
 	
 	function updateAdmin($adminNo, $adminTel) {
