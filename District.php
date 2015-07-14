@@ -11,7 +11,11 @@
 		}
 	}
 	
+<<<<<<< HEAD
 	function delDistrictfty($distNo) {
+=======
+	function delRAYMOND1District1($distNo) {
+>>>>>>> origin/master
 		//iku!!!!!!!!!
 	}
 		
