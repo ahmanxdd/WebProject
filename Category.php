@@ -12,9 +12,17 @@
 		
 	}
 	
-	function getSubCategories($catNo, $includeSelf) {
+	function getSubCategories($catNo, $includeSelf) { 
 		//use recursive
 		//desc, asc
+		//return array
+		
+		//arr[0][catNo], arr[0][catName], 
+	}
+	
+	function getSubCategories2($catNo, $includeSelf) 
+	{
+		
 	}
 	
 	function getAllCategories() {
