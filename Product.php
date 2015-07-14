@@ -9,12 +9,30 @@
 	function addProduct($prodName, $prodPrice, $prodPhoto, $stockQty, $catNo, $suppNo) {
 		if (isset($prodName) && is_array($prodName)) {
 			$prodObj = $prodName;
-			//for JSON Object
+			$prodName = 
 		}
 	}
 	
 	function delProduct($prodNo, $suppNo = null) {
 		//a product cannot be deleted if it is found in any customer order.
+		$suppQuery = "";
+		if(isset($suppNo))
+			$suppQuery .= "AND Product." . suppNo . " = $suppNo";
+			
+		$query = "SELECT OrderLine." . ordNo . " "
+				."FROM OrderLine, Product "
+				."WHERE OrderLine." . prodNo . " = $prodNo "
+				.$suppQuery;
+		
+		$result = DB::query($query);
+		if($result.num_rows > 0)
+			return false;
+				
+		//Delete product
+		$query = "UPDATE Product SET " . isDeleted . " = '1' "
+				."WHERE " . prodNo . " = $prodNo "
+				.$suppQuery;
+
 		//suppNo == null, 一定可以delete
 		
 		//if suppNo != null , ensure suppNo is Product.suppNo, 唔係唔比delete
@@ -22,6 +40,8 @@
 	
 	function getAllProducts() {
 		//desc, asc
+		//getAllProducts(prodName, "asc", prodPrice, "desc");
+		
 	}
 	
 	function getProduct($prodNo) {

@@ -14,6 +14,7 @@
 	const prodPrice = "prodPrice";
 	const prodPhoto = "prodPhoto";
 	const stockQty = "stockQty";
+	const isDeleted = "isDeleted";
 
 	const catNo = "catNo"; 			//Category
 	const catName = "catName";
@@ -35,7 +36,7 @@
 	const ordDate = "ordDate";
 	const ordDiscount = "ordDiscount";
 	const deliAddr = "deliAddr";
-	const theDateWhichTheCustomerWantTheOrderToBeDeliveried = "theDateWhichTheCustomerWantTheOrderToBeDeliveried"
+	const theDateWhichTheCustomerWantTheOrderToBeDeliveried = "theDateWhichTheCustomerWantTheOrderToBeDeliveried";
 		
 	const actualPrice = "actualPrice";	//OrderLine
 	const qty = "qty";
