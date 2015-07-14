@@ -48,6 +48,19 @@
 			return $insertStr;
 		}
 		
+		//Ar Lee
+		private static $PRIMARY_KEYS = array(
+			"User" => array('pk' => uesrNo, 'prefix' => 'U'),
+			"Admin" => adminNo,
+			"Supplier" => suppNo,
+			"Customer" => custNo,
+			"Driver" => drvID,
+			"District" => distNo,
+			"Category" => catNo,
+			"Product" => prodNo,
+			"Schedule" => jobNo,
+			"CustOrder" => ordNo);
+			
 		public static function query($query, $retJSON = false) {
 			$result = $db->query($query);
 			//for INSERT, UPDATE, DELETE
@@ -61,7 +74,11 @@
 			//for SELECT
 			if ($result->num_rows > 0) {
 				if ($retJSON) {
-					//TODO parse JSON
+					$l = 0;
+					$jsonArr = array()
+					while($row = $result->fetch_assoc())
+						$jsonArr[$l++] = $row;
+					return $jsonArr;
 				}
 				return $result;
 				
@@ -71,7 +88,7 @@
 		}
 		
 		public static function getLastIndex($tableName) {
-			return "111";
+			
 		}
 	}
 	
