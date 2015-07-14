@@ -12,7 +12,7 @@
 	}
 	
 	function delDistrict($distNo) {
-		
+		//iku!!!!!!!!!
 	}
 		
 	function delDistrict($distNo) {
