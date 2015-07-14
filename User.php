@@ -14,7 +14,7 @@
 	
 	function getUser($userNo) {
 		$query = "SELECT * FROM User " 
-			. "WHERE " . userNo . " = $userNo";	//no hardcode! , "WHERE userNo = $userNo" <-- 唔好咁打
+			. "WHERE " . userNo . " = '$userNo'";	//no hardcode! , "WHERE userNo = $userNo" <-- 唔好咁打
 		return DB::query($query);
 	}
 	
@@ -41,7 +41,7 @@
 		$ADMIN_NO = adminNo;
 		
 		$query = 'SELECT $DRV_ID $CUST_NO $SUPP_NO $ADMIN_NO FROM User '
-				. 'WHERE ' . userNo . " = $userNo";
+				. 'WHERE ' . userNo . " = '$userNo'";
 		$usertype = DB::query($query, false);
 		if ($row == null)
 			return false;
