@@ -65,21 +65,20 @@
 		//desc, asc
 		$query = "SELECt * FROM Product WHERE ";
 		$condition = array();
-		$index = 0;
 		if(isset($nameWith))
-			$condition[$index++] = prodName . " LIKE '%$nameWith%'";
+			$condition[] = prodName . " LIKE '%$nameWith%'";
 		if(isset($priceMin))
-			$condition[$index++] = prodPrice . " <= '$priceMax'";
+			$condition[] = prodPrice . " <= '$priceMax'";
 		if(isset($priceMax))
-			$condition[$index++] = prodPrice . " >= '$priceMin'";
+			$condition[] = prodPrice . " >= '$priceMin'";
 		if(isset($stockQtyMax))
-			$condition[$index++] = stockQty . " <= '$stockQtyMax'";
+			$condition[] = stockQty . " <= '$stockQtyMax'";
 		if(isset($stockQtyMin))
-			$condition[$index++] = stockQty . " >= '$stockQtyMin'";			
+			$condition[] = stockQty . " >= '$stockQtyMin'";			
 		if(isset($suppNo))
-			$condition[$index++] = suppNo . "  = '$suppNo'";	
+			$condition[] = suppNo . "  = '$suppNo'";	
 		if(isset($isDeleted))
-			$condition[$index++] = isDeleted . " = '$isDeleted'"; //RAYMOND: May have bug--> False or '0'?	
+			$condition[] = isDeleted . " = '$isDeleted'"; //RAYMOND: May have bug--> False or '0'?	
 				
 		if($isset($catNo))
 		{
@@ -88,7 +87,7 @@
 			foreach($subCategoryArray as $category)
 				$categoryCondition .= "'" . $category[catNo] . "',";
 			$categoryCondition = rtrim($categoryCondition, ",");
-			$condition[$index++] = $categoryCondition;			
+			$condition[] = $categoryCondition;			
 		}
 		
 		if(count($condition) > 0)
