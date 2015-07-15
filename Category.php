@@ -24,7 +24,7 @@
 		}
 		
 		$query = 'SELECT * FROM Category '
-			. 'WHERE ' . catParent . " = $catNo "
+			. 'WHERE ' . catParent . " = '$catNo' "
 			. 'ORDER BY ' . catName . ' '. $catNameOrder;
 		$result = DB::query($query, false);
 		if ($result === null)
@@ -47,7 +47,7 @@
 		}
 		
 		$query = 'SELECT * FROM Category '
-		    . 'WHERE ' . catParent . " = $catNo "
+		    . 'WHERE ' . catParent . " = '$catNo' "
 			. 'ORDER BY ' . catName . ' '. $catNameOrder;
 		$result = DB::query($query, false);
 		if ($result === null)
@@ -80,10 +80,10 @@
 	
 	function delCategory($catNo) {
 		$query = 'SELECT * FROM Category '
-				. 'WHERE ' . catParent . " = $catNo";
+				. 'WHERE ' . catParent . " = '$catNo'";
 		$result = DB::query($query, false);
 		if ($result == null) {
-			$query = 'DELETE FROM Category WHERE ' . catNo . " = $catNo";
+			$query = 'DELETE FROM Category WHERE ' . catNo . " = '$catNo'";
 			return DB::query($query);
 		}
 		

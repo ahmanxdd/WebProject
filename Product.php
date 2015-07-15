@@ -7,10 +7,19 @@
 	include_once("Category.php");
 	//Products
 	function addProduct($prodName, $prodPrice, $prodPhoto, $stockQty, $catNo, $suppNo) {
-		if (isset($prodName) && is_array($prodName)) {
-			$prodObj = $prodName;
-			$prodName = 
+		if (is_array($prodNo)) {	//for JSON associated array
+			$prodObj = $prodNo;
+			$prodName = $prodObj[prodName];
+			$prodPrice = $prodObj[prodPrice];
+			$prodPhoto = $prodObj[prodPhoto];
+			$stockQty = $prodObj[stockQty];
+			$catNo = $prodObj[catNo];
+			$suppNo = $prodObj[suppNo];
 		}
+		
+		
+		$query = DB::genInsertStr("Product", DB::getLastIndex("Product"),$prodName, $prodPrice, $prodPhoto, $stockQty, $catNo, $suppNo);
+		return DB::query($query);
 	}
 	
 	function delProduct($prodNo, $suppNo = null) {
@@ -78,7 +87,7 @@
 			$subCategoryArray = getSubCategories($catNo, true);
 			foreach($subCategoryArray as $category)
 				$categoryCondition .= "'" . $category[catNo] . "',";
-			$categoryCondition = substr($categoryCondition, -1, 1);
+			$categoryCondition = rtrim($categoryCondition, ",");
 			$condition[$index++] = $categoryCondition;			
 		}
 		
@@ -135,8 +144,8 @@
 			$query .= suppNo . " = '$suppNo',";
 		if(!issent($prodNo))
 			return false;
-		$query = substr($query, -1, 1);
-		$query .= " WHERE " . prodNo . " = $prodNo";
+		$query = rtrim($query, ",");
+		$query .= " WHERE " . prodNo . " = '$prodNo'";
 		
 		return DB::query($query);
 	}
@@ -150,7 +159,7 @@
 		// $add == 1 is qty += 1
 		if(!isset($prodNo))
 			return false;
-		$query = "UPDATE Product SET " . stockQty . " = " . stockQty . $add . " WHERE " . prodNo . " = $prodNo";
+		$query = "UPDATE Product SET " . stockQty . " = " . stockQty . $add . " WHERE " . prodNo . " = '$prodNo'";
 		return DB::query($query);
 		// $add == -2 is qty -= 2
 	}

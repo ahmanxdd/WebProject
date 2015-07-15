@@ -76,7 +76,7 @@
 				."WHERE " . drvID . " IS NULL "
 				."AND " . custNo . " IS NULL "
 				."AND " . suppNo . " IS NULL "
-				."AND " . userNo . " = $userNo";
+				."AND " . userNo . " = '$userNo'";
 				
 		$result = DB::query($query);
 		if($result->row_nums > 0)
@@ -88,7 +88,7 @@
 		}
 		$adminNo = DB::getLastIndex("Admin");
 		$insert_admin_query = DB::genInsertStr("Admin", $adminNo, $adminTel);
-		$update_user_query = "UPDATE User SET " . adminNo . " = $adminNo WHERE " . userNo . " = $userNo";
+		$update_user_query = "UPDATE User SET " . adminNo . " = '$adminNo' WHERE " . userNo . " = '$userNo'";
 		
 		if(DB::query($insert_admin_query))
 			return DB::query($update_user_query);
@@ -102,39 +102,113 @@
 			$adminObj = $adminTel;
 			$adminTel = $adminObj[adminTel];
 		}
+		if(!isset(adminTel))
+			return false;
+		$query = "UPDATE Admin SET " . adminTel . " = '$adminTel' "
+				."WHERE " . adminTel . " = '$adminTel'";
+		return DB::query($query);
 	}
 	
 	function regSupplier($userNo, $suppName, $suppTel, $suppAddr) {
 		//check if the userNo is already a driver, customer or admin, if yes abort, return false
+		
+		$query = "SELECT COUNT(*) FROM User "
+				."WHERE " . drvID . " IS NULL "
+				."AND " . custNo . " IS NULL "
+				."AND " . adminNo . " IS NULL "
+				."AND " . userNo . " = '$userNo'";
+				
+		$result = DB::query($query);
+		if($result->row_nums > 0)
+			return false;
+			
 		if (isset($suppName) && is_array($suppName)) { //for JSON
 			$suppObj = $suppName;
-			//...
+			$suppName = $suppObj[suppName];
+			$suppTel = $suppObj[suppTel];
+			$suppAddr = $suppObj[suppAddr];
 		}
+		
+		$suppNo = DB::getLastIndex("Supplier");
+		$insert_suppNo_query = DB::genInsertStr("Supplier", $suppNo, $suppName, $suppTel, $suppAddr);
+		$update_user_query = "UPDATE User SET " . suppNo . " = '$suppNo' WHERE " . userNo . " = '$userNo'";
+		
+		if(DB::query($insert_suppNo_query))
+			return DB::query($update_user_query);
+		return false;		
 	}
 	
 	function updateSupplier($suppNo, $suppName, $suppTel, $suppAddr) {
 		//$colname === null, stands for 'do not change the column'
-		//$colname === "null", stands for 'set the colume to null'
+		//$colname === "null", stands for 'set the colume to null'			
 		if (isset($suppName) && is_array($suppName)) { //for JSON
 			$suppObj = $suppName;
-			//...
+			$suppName = $suppObj[suppName];
+			$suppTel = $suppObj[suppTel];
+			$suppAddr = $suppObj[suppAddr];
 		}
+		$query = "UPDATE Supplier SET ";
+		if(isset($suppName))
+			$query .= suppName . "= '$suppName',";
+		if(isset($suppTel))
+			$query .= suppTel . "= '$suppTel',";
+		if(isset($suppAddr))
+			$query .= suppAddr . "= '$suppAddr'";
+		$query = rtrim($query, ",");
+		$query .= " WHERE " . suppNo . " = '$suppNo'";
+		return DB::query($query);		
+				
 	}
 	
 	function regDriver($userNo, $drvID, $drvName, $drvGender) {
 		//check if the userNo is already a supplier, customer or admin, if yes abort, return false
+		
+		
+		
+		$query = "SELECT COUNT(*) FROM User "
+				."WHERE " . suppNo . " IS NULL "
+				."AND " . custNo . " IS NULL "
+				."AND " . adminNo . " IS NULL "
+				."AND " . userNo . " = '$userNo'";
+				
+		$result = DB::query($query);
+		if($result->row_nums > 0)
+			return false;
+			
 		if (isset($drvID) && is_array($drvID)) { //for JSON
-			$suppObj = $drvID;
-			//...
+			$driObj = $drvID;
+			$divID = $driObj[divID];
+			$divName = $driObj[divName];
+			$divGender = $driObj[divGender];
 		}
+		
+		$divID = DB::getLastIndex("Driver");
+		$insert_driver_query = DB::genInsertStr("Driver", $divID, $divName, $divGender);
+		$update_user_query = "UPDATE User SET " . divID . " = '$divID' WHERE " . userNo . " = '$userNo'";
+		
+		if(DB::query($insert_driver_query))
+			return DB::query($update_user_query);
+		return false;	
 	}
 	
 	function updateDriver($drvID, $drvName, $drvGender) {
 		//$colname === null, stands for 'do not change the column'
-		//$colname === "null", stands for 'set the colume to null'
-		if (isset($drvID) && is_array($drvID)) {	//for JSON
-			$drvObj = $drvID;
-			//...
+		//$colname === "null", stands for 'set the colume to null'		
+		if (isset($drvID) && is_array($drvID)) { //for JSON
+			$driObj = $drvID;
+			$divID = $driObj[divID];
+			$divName = $driObj[divName];
+			$divGender = $driObj[divGender];
 		}
+		
+		
+		$query = "UPDATE Driver SET ";
+		if(isset($drvName))
+			$query .= divName . " = '$divName',";
+		if(issent($divGender))
+			$query .= divGender . " = '$divGender',";
+		$query = rtrim($query, ",");
+		$query .= " WHERE " . $divID . " = '$divID'";
+		return DB::query($query);
 	}
 ?>

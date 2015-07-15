@@ -2,13 +2,14 @@
 	//記住唔好hardcode column名
 	function getOrder($orderNo) {
 		$query = "SELECT * FROM OrderLine "
-					."WHERE " .ordNo." = $orderNo";					
+					."WHERE " .ordNo." = '$orderNo'";					
 		return DB::query($query);
 	}
 	
 	function getAllOrders() {
 		//desc, asc
-		$query = "SELECT * FROM OrderLine";
+		$query = "SELECT * FROM OrderLine"
+				.DB::genOrderByStr(func_get_args(), func_num_args(), 1);;
 		return DB::query($query);
 	}
 	
@@ -16,7 +17,7 @@
 
 		//return orders, ONLY all fields in CustOrder.
 		$query = "SELECT DISTINCT " . orderNo . " FROM OrderLine "
-			. "WHERE " . prodNo . " = $prodNo";
+			. "WHERE " . prodNo . " = '$prodNo'";
 		$orderLines = DB::query($query);
 		
 		$where = 'WHERE ';
@@ -43,7 +44,7 @@
 					."JOIN OrderLine ON CustOrder.ordNo = OrderLine.ordNo "
 					."JOIN Product ON OrderLine.prodNo = Product.prodNo " 
 					."JOIN Category ON Product.catNo = Category.catNo "
-					."WHERE " . catNo . " = $catNo ";
+					."WHERE " . catNo . " = '$catNo' "; //RAYMOND(Problem): Need subCategory?
 		$orderLines = DB::query($query);
 		
 		return DB::query($query);
@@ -53,7 +54,7 @@
 	function getOrdersByDistNo($distNo) { 
 		//desc, asc
 		$query = "SELECT * FROM CustOrder "
-					."WHERE " . discNo . " = $distNo "
+					."WHERE " . discNo . " = '$distNo' "
 					. DB::genOrderByStr(func_get_args(), func_num_args(), 1);
 		//return orders, ONLY all fields in CustOrder.
 	}
@@ -96,13 +97,15 @@
 	
 	function getOrderLinesByOrdNo($orderNo) {
 		$query = "SELECT * FROM OrderLine "
-		."WHERE " . ordNo . " = $orderNo"
+		."WHERE " . ordNo . " = '$orderNo'"
 		.DB::genOrderByStr(func_get_args(), func_num_args(), 1);		
 		return DB::query($query);
 	}
 	
 	function getOrderByTheDateWhichTheCustomerWantTheOrderToBeDeliveried($theDateWhichTheCustomerWantTheOrderToBeDeliveried)
 	{
-		$query = 
+		$query = "SELECT * FROM CustOrder "
+				."WHERE " . theDateWhichTheCustomerWantTheOrderToBeDeliveried . " = '$theDateWhichTheCustomerWantTheOrderToBeDeliveried'";
+		return DB::query($query);
 	}
 ?>
