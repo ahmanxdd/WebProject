@@ -51,15 +51,16 @@
 		//Ar Lee
 		private static $PRIMARY_KEYS = array(
 			"User" => array('pk' => uesrNo, 'prefix' => 'U'),
-			"Admin" => adminNo,
-			"Supplier" => suppNo,
-			"Customer" => custNo,
-			"Driver" => drvID,
-			"District" => distNo,
-			"Category" => catNo,
-			"Product" => prodNo,
-			"Schedule" => jobNo,
-			"CustOrder" => ordNo);
+			"Admin" => array('pk' => adminNo, 'prefix' => 'A'),
+			"Supplier" => array('pk' => suppNo, 'prefix' => 'S'),
+			"Customer" => array('pk' => custNo, 'prefix' => 'RC'),
+			"Driver" => array('pk' => drvID, 'prefix' => 'DR'),
+			"District" => array('pk' => distNo, 'prefix' => 'DT'),
+			"Category" => array('pk' => catNo, 'prefix' => 'CY'),
+			"Product" => array('pk' => prodNo, 'prefix' => 'PT'),
+			"Schedule" => array('pk' => jobNo, 'prefix' => 'JB'),
+			"CustOrder" => array('pk' => ordNo, 'prefix' => 'O')
+			);
 			
 		public static function query($query, $retJSON = false) {
 			$result = $db->query($query);
@@ -88,8 +89,11 @@
 		}
 		
 		public static function getLastIndex($tableName) {
-			
+			$Query = "SELECT MAX($PRIMARY_KEYS[$tableName]) FROM $DBName";
+			$num = preg_replace("/[^0-9]/", "", $string);
+			return (int)$num;
 		}
+
 	}
 	
 	DB::openDatabase();
