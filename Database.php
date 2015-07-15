@@ -89,8 +89,11 @@
 		}
 		
 		public static function getLastIndex($tableName) {
-			
+			$Query = "SELECT MAX($PRIMARY_KEYS[$tableName]) FROM $DBName";
+			$num = preg_replace("/[^0-9]/", "", $string);
+			return (int)$num;
 		}
+
 	}
 	
 	DB::openDatabase();
