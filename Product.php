@@ -3,7 +3,7 @@
 	//Table名可以hardcode
 	//code 寫法參照User.php
 	include_once("field_const.php");
-	include_once("dbconn.php");	
+	include_once("Database.php");	
 	include_once("Category.php");
 	//Products
 	function addProduct($prodName, $prodPrice, $prodPhoto, $stockQty, $catNo, $suppNo) {

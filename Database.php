@@ -6,14 +6,19 @@
 	
 	class DB {
 		public static $debugMode = false;
-		public static $DBHOST = "127.0.0.1";
-		public static $DBNAME = "sdp_test";
-		public static $USERNAME = "root";
-		public static $PASSWORD = "haha123";
-		public static $db;	
+		//public static $DBHOST = "127.0.0.1";
+		//public static $DBNAME = "sdp_test";
+		// public static $USERNAME = "root";
+		// public static $PASSWORD = "haha123";
+		public static $DBHOST = "ifelse.ninja";
+		public static $DBNAME = "projectDB";
+		public static $USERNAME = "imad";
+		public static $PASSWORD = "wewillgeta";
+		public static $db;
 		
 		public static function openDatabase() {
 			$db = new mysqli(DB::$DBHOST, DB::$USERNAME, DB::$PASSWORD, DB::$DBNAME);
+			return $db; //RAYMOND: Error above, needed to debug while u delete this row
 		}
 		
 		public static function genOrderByStr($args, $argsNum, $first) {
@@ -63,6 +68,7 @@
    		);
 			
 		public static function query($query, $retJSON = false) {
+			$db = DB::openDatabase();
 			$result = $db->query($query);
 			//for INSERT, UPDATE, DELETE
 			if ($result === true)
@@ -76,7 +82,7 @@
 			if ($result->num_rows > 0) {
 				if ($retJSON) {
 					$l = 0;
-					$jsonArr = array()
+					$jsonArr = array();
 					while($row = $result->fetch_assoc())
 						$jsonArr[$l++] = $row;
 					return $jsonArr;
