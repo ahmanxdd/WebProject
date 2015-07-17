@@ -18,7 +18,7 @@
 		$query = DB::genInsertStr("District", DB::getLastIndex("District"), $distName);
 		return DB::query($query);
 	}
-		
+	
 	function delDistrict($distNo) {
 		$query = "DELETE FROM District WHERE " . distNo . " = '$distNo'";
 		$result = DB::query($distNo);

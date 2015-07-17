@@ -22,7 +22,7 @@
 		//return orders, ONLY all fields in CustOrder.
 		$query = "SELECT DISTINCT " . orderNo . " FROM OrderLine "
 			. "WHERE " . prodNo . " = '$prodNo'";
-		$orderLines = DB::query($query);
+		$result = DB::query($query);
 		
 		$where = 'WHERE ';
 		if ($result->num_rows > 0) {
@@ -73,6 +73,13 @@
 					."AND " . prodNo . " = '%s'";
 		//1. check the stock level of each product, if stockLevel < qty, return 1
 		
+		$minDate = date("Y-m-d", strtotime(" + 2 days"));
+
+		if(!isset($theDateWhichTheCustomerWantTheOrderToBeDeliveried))
+			$theDateWhichTheCustomerWantTheOrderToBeDeliveried = $minDate;
+		else if(strtotime($theDateWhichTheCustomerWantTheOrderToBeDeliveried) < strtotime($minDate))
+			return false;
+
 		foreach($prods as $product)
 		{
 			$tmp_query = sprintf($query_format, $product[qty], $product[prodNo]);
@@ -96,21 +103,12 @@
 			$orderLine_query .= DB::genInsertStr("OrderLine", $product[prodNo], $orderNo, $product[actualPrice], $product[qty]) . ";";
 
 		//4. return true if success, return false if any other database error occurs.
-
-		echo $order_query . "<br>";
-		echo $orderLine_query;
-		$minDate = date("Y-m-d", strtotime(" + 2 days"));
-		echo $minDate;
-		if(!isset($theDateWhichTheCustomerWantTheOrderToBeDeliveried))
-			$theDateWhichTheCustomerWantTheOrderToBeDeliveried = $minDate;
-		else if($theDateWhichTheCustomerWantTheOrderToBeDeliveried < $minDate)
-			return false;
-			
 		if(DB::query($order_query) && DB::query($orderLine_query))
-		//	return true;
-		//return false;
-		matchSchedule($orderNo, $theDateWhichTheCustomerWantTheOrderToBeDeliveried, $distNo);
-		return true;
+		{
+			matchSchedule($orderNo, $theDateWhichTheCustomerWantTheOrderToBeDeliveried, $distNo);
+			return true;
+		}
+		return false;		
 	}
 	
 	function getOrderLinesByOrdNo($orderNo) {
