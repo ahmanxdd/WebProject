@@ -8,6 +8,14 @@
 		return DB::query($query);
 	}
 	
+	function getDistrict($distNo) {
+		$query = 'SELECT * FROM District WHERE ' . distNo . " = '$distNo'";
+		$result = DB::query($query, false);
+		if (!($dist = $result->fetch_assoc()))
+			return null;
+		return $dist;
+	}
+		
 	function addDistrict($distName) {
 		if (isset($distName) && is_array($distName)) {
 			$distObj = $distName;
@@ -20,12 +28,8 @@
 	}
 	
 	function delDistrict($distNo) {
-		$query = "DELETE FROM projectDB.'District' WHERE " . distNo . " = '$distNo'";
-		$query = "DELETE FROM District WHERE distNo = 'DST08'";
-		echo $query;
-		$result = DB::query($distNo);
-
-		
+		$query = "DELETE FROM District WHERE " . distNo . " = '$distNo'";
+		return DB::query($query);
 	}
 	
 	function updateDistrict($distNo, $distName)

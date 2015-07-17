@@ -212,6 +212,7 @@
 		return DB::query($query);
 	}
 	
+
 	function getUserNoByLoginName($loginName)
 	{
 		$query = "SELECT * FROM User WHERE " . loginName . " = '$loginName'";
@@ -221,4 +222,35 @@
 		$row = $result->fetch_array();
 		return $row[0];
 	}
+	
+	function getCustomer($custNo) {
+		$query = 'SELECT * FROM Customer WHERE ' . custNo . " = '$custNo'";
+		$result = DB::query($query, false);
+		if (!($cust = $result->fetch_assoc()))
+			return null;
+		return $cust;
+	}
+	
+	function getAllCustomer() {
+		//desc asc
+		$query = 'SELECT * FROM Customer ' 
+			. DB::genOrderByStr(func_get_args(), func_num_args, 0);
+		return DB::query($query);
+	}
+	
+	function getDriver($drvNo) {
+		$query = 'SELECT * FROM Driver WHERE ' . drvNo . " = '$drvNo'";
+		$result = DB::query($query);
+		if (!($drv = $result->fetch_assoc()))
+			return null;
+		return $drv;
+	}
+	
+	function getAllDrivers() {
+		//desc asc
+		$query = 'SELECT * FROM Driver ';
+		$query .= DB::genOrderByStr(func_get_args, func_num_args(), 0);
+		return DB::query($query);
+	}
+	
 ?>
