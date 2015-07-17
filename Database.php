@@ -101,14 +101,14 @@
 			$maxNum = $row[0];
 			$maxNum = preg_replace("/[^0-9]/", "", $maxNum);
 			$maxNum++;				
-			$prefix = DB::$PRIMARY_KEYS[$tableName['prefix']];
-			$num_fix = 5 - strlen(prefix);
-			$num_fix = strlen($maxNum) - $num_fix;
+			$prefix = DB::$PRIMARY_KEYS[$tableName]['prefix'];
+			$num_fix = 5 - strlen($prefix);
+			$num_fix = $num_fix - strlen($maxNum);
+			$num_v2 = "";
 			for($i = 0; $i < $num_fix; $i++)
 				$num_v2 .= "0";
-				
-			echo $prefix . $num_v2;
-			return (int)$maxNum;
+			$num_v2 .= $maxNum;
+			return $prefix . $num_v2;
 		}
 
 	}
