@@ -211,4 +211,28 @@
 		$query .= " WHERE " . $divID . " = '$divID'";
 		return DB::query($query);
 	}
+	
+	function getCustomer($custNo) {
+		$query = 'SELECT * FROM Customer WHERE ' . custNo . " = '$custNo'";
+		return DB::query($query);
+	}
+	
+	function getAllCustomer() {
+		//desc asc
+		$query = 'SELECT * FROM Customer ' 
+			. DB::genOrderByStr(func_get_args(), func_num_args, 0);
+		return DB::query($query);
+	}
+	
+	function getDriver($drvNo) {
+		$query = 'SELECT * FROM Driver WHERE ' . drvNo . " = '$drvNo'";
+		return DB::query($query);
+	}
+	
+	function getAllDrivers() {
+		//desc asc
+		$query = 'SELECT * FROM Driver ';
+		$query .= DB::genOrderByStr(func_get_args, func_num_args(), 0);
+		return DB::query($query);
+	}
 ?>
