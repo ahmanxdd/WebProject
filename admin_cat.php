@@ -9,6 +9,9 @@
 
 <script src='admin_table.js'></script>
 
+<script>
+
+</script>
 </head>
 <body>
 	<form action="admin_cat.php" method="post">
@@ -38,10 +41,12 @@
 								<span>' . $cat[catNo] . '</span>
 								<input type="hidden" name="catNo[]" value="' . $cat[catNo] . '"/>
 								<input type="text" name="catName[]" value="' . $cat[catName] . '"/>
-								<button type="button"> add </button>
+								<button type="button" onclick="addNewCat(this)"> add </button>
 							</div>';
 					if (isset($cat['subcat']))
 						$html .= genCatTable($cat['subcat']);
+					else
+						$html .= '<ul></ul>';
 					$html .= '</li>';
 				}
 				
@@ -51,6 +56,15 @@
 		?>
 		<input type='submit' />
 	</form>
+	
+	<li class='newCat' style="display:none">
+		<div>
+			<button>Remove</button>
+			<input type="text" name="newCatName[vSeq]" value="" />
+			<input type="hidden" name="newCatParent[vSeq]" value="vParent" />
+		</div>
+		<ul></ul>
+	</li>
 	
 </body>
 </html>
