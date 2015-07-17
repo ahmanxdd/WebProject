@@ -14,8 +14,8 @@
 		include_once('Brain/functions.php');
 		include_once('Brain/Order.php');
 		include_once('Brain/field_const.php');
-		
-		
+		include_once('Brain/User.php');
+		include_once('Brain/District.php');
 		$orders = getAllOrders();
 	?>
 	
@@ -26,21 +26,30 @@
 			<span class='adminTableTab'>Orders</span>
 		</div>
 		
+		<div>
+			<form action='admin_order.php' method='get'>
+				<span>Sort by:</span>
+				<select name='sortBy'>
+					<option value='prod'>Product</option>
+					<option value='cat'>Category</option>
+					<option value='dist'>District</option>
+				</select>
+				<input type="text" />
+				<input type='submit' value='GO'/>
+			</form>
+		</div>
 		<table id='adminDataTable' class='col-12 adminDataTable'>
 			<tr>
 				<th>Order No.</th>
 				<th>Order Date</th>
 				<th>Order Discount</th>
+				<th>Customer Name</th>
 				<th>Delivery Address</th>
 				<th>District</th>
-				<th>Customer Name</th>
 				<th>Delivery Job</th>
 			</tr>
 			
 			<?php
-				include_once('Brain/User.php');
-				include_once('Brain/District.php');
-				
 				foreach ($orders as $o) {
 					$cust = getCustomer($o[custNo]);
 					$dist = getDistrict($o[distNo]);
@@ -50,10 +59,10 @@
 							<td>' . $o[ordNo] . '</td>
 							<td>' . $o[ordDate] . '</td>
 							<td>' . $o[ordDiscount] . '</td>
+							<td> <a href="cust_details.php?custNo=' . $cust[custName] . '">' . $cust[custName] . '</td>
 							<td>' . $o[deliAddr] . '</td>
 							<td>' . $dist[distName] . '</td>
-							<td>' . $cust[custName] . '</td>
-							<td>' . $o[jobNo] . '</td>
+							<td> <a href="job_details.php?jobNo=' . $o[jobNo] . '">' . $o[jobNo] . '</a></td>
 						</tr>';
 				}							
 			?>
