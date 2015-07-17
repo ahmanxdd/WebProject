@@ -1,4 +1,5 @@
 <?php
+
 	//記住唔好hardcode column名
 	function getOrder($orderNo) {
 		$query = "SELECT * FROM CustOrder "
@@ -79,11 +80,11 @@
 		
 		//2.1 get Last index
 		$orderNo = DB::getLastIndex("CustOrder");		
-		$jobNo = null;
+
 		//2.2 add the the order to CustOrder
 		$order_query =  DB::genInsertStr("CustOrder", $orderNo, $orderDate, 
 			$theDateWhichTheCustomerWantTheOrderToBeDeliveried, $ordDiscount, 
-			$deliAddr, $custNo, $distNo, $jobNo);
+			$deliAddr, $custNo, $distNo, null);
 		
 
 		$orderLine_query = "";
@@ -91,14 +92,21 @@
 		foreach($prods as $product)
 			$orderLine_query .= DB::genInsertStr("OrderLine", $product[prodNo], $orderNo, $product[actualPrice], $product[qty]) . ";";
 
-		
-	
 		//4. return true if success, return false if any other database error occurs.
-		//if(DB::query($order_query) && DB::query($orderLine_query))
-		//	return true;
-		//return false;
+
 		echo $order_query . "<br>";
 		echo $orderLine_query;
+		$minDate = date("Y-m-d", strtotime(" + 2 days"));
+		echo $minDate;
+		if(!isset($theDateWhichTheCustomerWantTheOrderToBeDeliveried))
+			$theDateWhichTheCustomerWantTheOrderToBeDeliveried = $minDate;
+		else if($theDateWhichTheCustomerWantTheOrderToBeDeliveried < $minDate)
+			return false;
+			
+		if(DB::query($order_query) && DB::query($orderLine_query))
+		//	return true;
+		//return false;
+		matchSchedule($orderNo, $theDateWhichTheCustomerWantTheOrderToBeDeliveried, $distNo);
 		return true;
 	}
 	
@@ -113,6 +121,22 @@
 	{
 		$query = "SELECT * FROM CustOrder "
 				."WHERE " . theDateWhichTheCustomerWantTheOrderToBeDeliveried . " = '$theDateWhichTheCustomerWantTheOrderToBeDeliveried'";
+		return DB::query($query);
+	}
+	
+	function getOrdersByJobNo($jobNo)
+	{
+		$query = "SELECT * FROM CustOrder "
+				."WHERE " . jobNo . " = '$jobNo'";
+		$result = DB::query($query);
+		return $result;
+	}
+	
+	function updateJobNo($ordNo ,$jobNo)
+	{
+		$query = "UPDATE CustOrder SET " . jobNo . " = '$jobNo' "
+				."WHERE " . ordNo . " = '$ordNo'";
+		echo $ordNo . $jobNo;
 		return DB::query($query);
 	}
 ?>

@@ -51,4 +51,7 @@
 	const distNo = "distNo";			//District
 	const disName = "disName";
 
+
+	const numOfJobs = "numOfJobs" //View: NoOfJobs
+	
 ?>

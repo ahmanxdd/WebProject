@@ -68,9 +68,9 @@
 		if(isset($nameWith))
 			$condition[] = prodName . " LIKE '%$nameWith%'";
 		if(isset($priceMin))
-			$condition[] = prodPrice . " <= '$priceMax'";
-		if(isset($priceMax))
-			$condition[] = prodPrice . " >= '$priceMin'";
+  			$condition[] = prodPrice . " >= '$priceMin'";
+ 		 if(isset($priceMax))
+   			$condition[] = prodPrice . " <= '$priceMax'";
 		if(isset($stockQtyMax))
 			$condition[] = stockQty . " <= '$stockQtyMax'";
 		if(isset($stockQtyMin))
@@ -118,6 +118,8 @@
 	function updateProduct($prodNo, $prodName, $prodPrice, $prodPhoto, $stockQty, $catNo, $suppNo) {
 		//$xxx === null, stands for do not modify the column
 		//$xxx === "null", stands for set the column to null
+		
+		//RAYMOND: if all variable == null, will occur error
 		$query = "UPDATE Product SET ";
 			
 		if (is_array($prodNo)) {	//for JSON associated array
@@ -132,21 +134,24 @@
 		}
 		
 		if(isset($prodName))
-			$query .= prodName . " = '$prodName',";
+			$values[] = rodName . " = '$prodName'";
 		if(isset($prodPrice))
-			$query .= prodPrice . " = '$prodPrice',";
+			$values[] = prodPrice . " = '$prodPrice'";
 		if(isset($prodPhoto))
-			$query .= prodPhoto . " = '$prodPhoto',";
+			$values[] = prodPhoto . " = '$prodPhoto'";
 		if(isset($stockQty))
-			$query .= stockQty . " = '$stockQty',";			
+			$values[] =  stockQty . " = '$stockQty'";			
 		if(isset($catNo))
-			$query .= catNo . "  = '$catNo',";	
+			$values[] = catNo . "  = '$catNo'";	
 		if(isset($suppNo))
-			$query .= suppNo . " = '$suppNo',";
-		if(!issent($prodNo))
+			$values[] = suppNo . " = '$suppNo'";
+		if(!isset($prodNo))
 			return false;
-		$query = rtrim($query, ",");
-		$query .= " WHERE " . prodNo . " = '$prodNo'";
+		foreach($values as $value)
+			$query .= " " . $value . ",";	
+		$query = rtrim($query, ",") . " ";
+		
+		$query .= "WHERE " . prodNo . " = '$prodNo'";
 		
 		return DB::query($query);
 	}

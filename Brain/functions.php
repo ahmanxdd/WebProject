@@ -23,36 +23,40 @@
 		$fields = $result->fetch_fields();
 
 		$tables = array();
-		$html_table;
 
-		//start tag
-		$html_table =  "<table border='1'>";		
+	
 		//header
-		$html_table .= "<tr>";
+		$html_tBody = "<tr>";
 		foreach($fields as $field)
 		{
 			$tables[$field->table] = 0;
-			$html_table .= "<th>$field->name</th>";
+			$html_tBody .= "<th>$field->name</th>";
 		}
-		$html_table .= "</tr>";
+		$html_tBody .= "</tr>";
 		
 		//content
 		while($row = $result->fetch_array())
 		{
-			$html_table.= "<tr>";
+			$html_tBody.= "<tr>";
 			for($i = 0; $i < $result->field_count; $i++)
-				$html_table .= "<td>$row[$i]</td>";
-			$html_table .= "</tr>";
+				$html_tBody .= "<td>$row[$i]</td>";
+			$html_tBody .= "</tr>";
 		}
 		
-		//end tag
-		$html_table .= "</table>";
-		
-		
-		//printing
-		echo "<b>Table:  </b>";
+		//start tag
+		$html_table =  "<table border='1'>";	
+		$html_table .= "<caption style='text-align:left;border:1px solid black; border-bottom: none;'>";
+				$html_table .= "<b>Table:  </b>";
 		foreach($tables as $key=>$value)
-			echo $key . " ";
+			$html_table .= $key . " ";
+		$html_table .= "</caption>";
+		
+		
+		//end tag
+		$html_table .= $html_tBody . "</table>";
+		
 		echo $html_table;
+		
+
 	}
 ?>

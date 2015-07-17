@@ -19,5 +19,14 @@
 	function delDistrict($distNo) {
 		$query = "DELETE FROM District WHERE " . distNo . " = $distNo";
 		return DB::query($distNo);
+		
+	}
+	
+	function updateDistrict($distNo, $disName)
+	{
+		$query = "UPDATE District SET "
+				. distName . " = $disName "
+				. "WHERE " . distNo . " = $distNo";
+		return DB::queeery($query);
 	}
 ?>

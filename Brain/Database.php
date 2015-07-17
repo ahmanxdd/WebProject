@@ -46,7 +46,7 @@
 			if (is_null($args[$argsNum-1]))
 					$insertStr .= 'null';
 				else
-					$insertStr .= $args[$i];
+					$insertStr .= "'$args[$i]'";
 			$insertStr .= ")";
 			
 			return $insertStr;
@@ -62,7 +62,7 @@
    			"District" => array('pk' => distNo, 'prefix' => 'DT'),
    			"Category" => array('pk' => catNo, 'prefix' => 'CY'),
    			"Product" => array('pk' => prodNo, 'prefix' => 'PT'),
-   			"Schedule" => array('pk' => jobNo, 'prefix' => 'JB'),
+   			"Schedule" => array('pk' => jobNo, 'prefix' => 'J'),
    			"CustOrder" => array('pk' => ordNo, 'prefix' => 'OR')
    		);
 			
