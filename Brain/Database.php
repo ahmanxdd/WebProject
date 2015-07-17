@@ -52,6 +52,22 @@
 			return $insertStr;
 		}
 		
+		public static function genSetStr() {
+			$retStr = " SET ";
+			$args = func_get_args();
+			if (isset($args[1])) {
+				$retStr .= $args[0] . ' = ' . "'" . $args[1] . "'";
+			}
+			
+			for ($i = 2; $i < func_num_args(); $i+=2) {
+				if (isset($args[$i+1])) {
+					$retStr .= ',' . $args[$i] . ' = ' . "'" . $args[$i+1] . "'";
+				}
+			}
+			
+			return $retStr;
+		}
+	
 		//Ar Lee
 		private static $PRIMARY_KEYS = array(
 		   	"User" => array('pk' => userNo, 'prefix' => 'U'),	

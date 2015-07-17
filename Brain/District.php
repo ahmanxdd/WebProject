@@ -14,25 +14,22 @@
 			$distName = $distObj[distName];
 			//for JSON object
 		}
+		
 		$query = DB::genInsertStr("District", DB::getLastIndex("District"), $distName);
 		return DB::query($query);
 	}
-	
-	function updateDistrict($distNo, $distName) {
 		
-	}
-	
 	function delDistrict($distNo) {
-		$query = "DELETE FROM District WHERE " . distNo . " = $distNo";
+		$query = "DELETE FROM District WHERE " . distNo . " = '$distNo'";
 		return DB::query($distNo);
-		
 	}
 	
-	function updateDistrict($distNo, $disName)
+	function updateDistrict($distNo, $distName)
 	{
-		$query = "UPDATE District SET "
-				. distName . " = $disName "
-				. "WHERE " . distNo . " = $distNo";
-		return DB::queeery($query);
+		$query = "UPDATE District ";
+		$query .= DB::genSetStr(distName, $distName);
+		$query .= ' WHERE ' . distNo . " = '$distNo'";
+		return DB::query($query);
 	}
+	
 ?>
