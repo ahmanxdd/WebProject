@@ -38,12 +38,13 @@
 			</tr>
 			
 			<?php
-				include_once('Brain/Customer.php');
+				include_once('Brain/User.php');
 				include_once('Brain/District.php');
 				
 				foreach ($orders as $o) {
 					$cust = getCustomer($o[custNo]);
 					$dist = getDistrict($o[distNo]);
+					
 					echo 
 						'<tr>
 							<td>' . $o[ordNo] . '</td>

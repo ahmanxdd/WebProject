@@ -8,6 +8,14 @@
 		return DB::query($query);
 	}
 	
+	function getDistrict($distNo) {
+		$query = 'SELECT * FROM District WHERE ' . distNo . " = '$distNo'";
+		$result = DB::query($query, false);
+		if (!($dist = $result->fetch_assoc()))
+			return null;
+		return $dist;
+	}
+		
 	function addDistrict($distName) {
 		if (isset($distName) && is_array($distName)) {
 			$distObj = $distName;

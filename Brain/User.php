@@ -214,7 +214,10 @@
 	
 	function getCustomer($custNo) {
 		$query = 'SELECT * FROM Customer WHERE ' . custNo . " = '$custNo'";
-		return DB::query($query);
+		$result = DB::query($query, false);
+		if (!($cust = $result->fetch_assoc()))
+			return null;
+		return $cust;
 	}
 	
 	function getAllCustomer() {
@@ -226,7 +229,10 @@
 	
 	function getDriver($drvNo) {
 		$query = 'SELECT * FROM Driver WHERE ' . drvNo . " = '$drvNo'";
-		return DB::query($query);
+		$result = DB::query($query);
+		if (!($drv = $result->fetch_assoc()))
+			return null;
+		return $drv;
 	}
 	
 	function getAllDrivers() {
