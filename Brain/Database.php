@@ -46,7 +46,7 @@
 			if (is_null($args[$argsNum-1]))
 					$insertStr .= 'null';
 				else
-					$insertStr .= $args[$i];
+					$insertStr .= "'" . $args[$i] . "'";
 			$insertStr .= ")";
 			
 			return $insertStr;

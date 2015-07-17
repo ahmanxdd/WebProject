@@ -1,4 +1,7 @@
 <?php
+	include_once('field_const.php');
+	include_once('Database.php');
+	
 	//記住唔好hardcode column名
 	function getOrder($orderNo) {
 		$query = "SELECT * FROM CustOrder "

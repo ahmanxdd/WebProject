@@ -1,4 +1,6 @@
-<?php	
+<?php
+	include_once('field_const.php');
+	include_once('Database.php');
 	//District
 	function getAllDistricts() {
 		//desc, asc
@@ -7,13 +9,17 @@
 	}
 	
 	function addDistrict($distName) {
-		if (isset($distName)) {
+		if (isset($distName) && is_array($distName)) {
 			$distObj = $distName;
 			$distName = $distObj[distName];
 			//for JSON object
 		}
-		$query = DB::getInsertStr($District, DB::getLastIndex("District"), $distName);
+		$query = DB::genInsertStr("District", DB::getLastIndex("District"), $distName);
 		return DB::query($query);
+	}
+	
+	function updateDistrict($distNo, $distName) {
+		
 	}
 	
 	function delDistrict($distNo) {
