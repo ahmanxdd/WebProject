@@ -61,7 +61,7 @@
 	function getAllCategories() {
 		//desc, asc
 		$query = 'SELECT * FROM Category '
-			. DB::genOrderByStr(func_get_args(), func_num_args, 0);
+			. DB::genOrderByStr(func_get_args(), func_num_args(), 0);
 		return DB::query($query);
 	}
 	

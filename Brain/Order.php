@@ -65,7 +65,7 @@
 		//$prods[0][prodNo], $prods[0][actualPrice], $prods[0][qty]
 		//$prods[1][prodNo], $prods[1][actualPrice], $prods[1][qty]
 		$query_format = "SELECT " . prodNo . " FROM Product "
-					."WHERE " . stockQty . " >= '%s' "
+					."WHERE " . stockQty . " <= '%s' "
 					."AND " . prodNo . " = '%s'";
 		//1. check the stock level of each product, if stockLevel < qty, return 1
 		
@@ -73,27 +73,33 @@
 		{
 			$tmp_query = sprintf($query_format, $product[qty], $product[prodNo]);
 			$result = DB::query($tmp_query);
-			if($result->num_rows < 1)
+			if( $result->num_rows > 1)
 				return 1;			
 		}	
 		
 		//2.1 get Last index
-		$orderNo = "OR" + DB::getLastIndex("CustOrder");		
+		$orderNo = DB::getLastIndex("CustOrder");		
 		$jobNo = null;
 		//2.2 add the the order to CustOrder
-		$order_query = "INSERT INTO CustOrder "
-						."VALUES($orderNo, $orderDate, $theDateWhichTheCustomerWantTheOrderToBeDeliveried, $ordDiscount, $deliAddr, $custNo, $distNo, $jobNo)";
-		//3. add all the products to OrderLine
-		$orderLine_format = "(%s,%s,%0.2f,%d)";
-		$orderLine_query = "INSERT INTO OrderLine VALUES";
-		foreach($prods as $product)
-			$orderLine_query .= sprintf($orderLine_format, $product[prodNo], $orderNo, $product[actualPrice], $product[qty]) . ",";
-		$orderLine_query = str_replace($orderLine_query, "", -1);
+		$order_query =  DB::genInsertStr("CustOrder", $orderNo, $orderDate, 
+			$theDateWhichTheCustomerWantTheOrderToBeDeliveried, $ordDiscount, 
+			$deliAddr, $custNo, $distNo, $jobNo);
 		
+
+		$orderLine_query = "";
+		//3. add all the products to OrderLine
+		foreach($prods as $product)
+			$orderLine_query .= DB::genInsertStr("OrderLine", $product[prodNo], $orderNo, $product[actualPrice], $product[qty]) . ";";
+
+		
+	
 		//4. return true if success, return false if any other database error occurs.
-		if(DB::query($order_query) && DB::query($orderLine_query))
-			return true;
-		return false;
+		//if(DB::query($order_query) && DB::query($orderLine_query))
+		//	return true;
+		//return false;
+		echo $order_query . "<br>";
+		echo $orderLine_query;
+		return true;
 	}
 	
 	function getOrderLinesByOrdNo($orderNo) {

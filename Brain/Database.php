@@ -40,7 +40,7 @@
 				if (is_null($args[$i]))
 					$insertStr .= 'null,';
 				else
-					$insertStr .= $args[$i] . ',';
+					$insertStr .= "'$args[$i]'" . ',';
 			}
 			
 			if (is_null($args[$argsNum-1]))

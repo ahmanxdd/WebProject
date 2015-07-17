@@ -79,7 +79,7 @@
 			$condition[] = suppNo . "  = '$suppNo'";	
 		if(isset($isDeleted))
 			if($isDeleted)
-				$condition[] = isDeleted . " = '1'"; //RAYMOND: May have bug--> False or '0'?	
+				$condition[] = isDeleted . " = '1'"; 
 			else
 				$condition[] = isDeleted . " = '0'";
 		if(isset($catNo))
