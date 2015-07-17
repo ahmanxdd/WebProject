@@ -109,5 +109,12 @@
 		}
 		
 	}
+	
+	function updateCategory($catNo, $catName, $catParent) {
+		$query = 'UPDATE Category '
+				. DB::genSetStr(catName, $catName, catParent, $catParent)
+				. ' WHERE ' . catNo . " = '$catNo'";
+		return DB::query($query);
+	}
 		
 ?>
