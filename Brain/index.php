@@ -5,9 +5,9 @@
 	include_once "Category.php";
 	include_once "District.php";
 	include_once "Schedule.php";
-	include_once("field_const.php");
+	include_once "field_const.php";
 	include_once "UserControl.php";
-	
+	include_once "ShoppingCart.php";
 //	printThisDBResult(getOrdresByProductNo("OR001")); //RAYMOND:l 蟲蛀
 //	printThisDBResult(getAllJobsByDrvID("D0001"));
 
@@ -16,8 +16,16 @@
 	//addOrder(date("Y-m-d"), null , 0.25, "Noo","C0001", "DST02", array());
 	//matchSchedule("OR008",  date("Y-m-d"), "DST03");
 //	printThisDBResult(getAllOrders());
-	UserControl::login("U0002");
-	echo "<a href='loginText.php'> HI </a>";
-	UserControl::logout();
+//	UserControl::login("U0002");
+	//echo "<a href='loginText.php'> HI </a>";
+//	UserControl::logout();
+	$cart = new SCart();
+	$cart->addProduct("P00002", "100", "3");
+	$cart->addProduct("P00005", "100", "4");
+	//$cart->qtyPlusPlus("P00001");
+	
+	$products = $cart->getProducts();
+
+	print_r($products);
 
 ?>

@@ -1,48 +1,66 @@
 <?php
-	include_once "field_const";
+	include_once "field_const.php";
 	class SCart
 	{
-		private $_userID, $_product;
-		public function __construct($userID)
+		private $_product;
+		public function __construct()
 		{
-			$_userID = $userID;
+			session_start();
+			if(isset($_SESSION["SCart"]))
+				$this->_product = $_SESSION["SCart"];
 		}
 		
-		public function addProduct($product, $actaulPrice, $qty)
+		public function addProduct($product, $actualPrice, $qty)
 		{
-			$newArray[prodNo] = $productNo;
+			$newArray[prodNo] = $product;
 			$newArray[actualPrice] = $actualPrice;
 			$newArray[qty] = $qty;			
-			$_product[prodNo] = $newArray;
+			$this->_product[$product] = $newArray;
 		}
 		
-		public function getProducts($product)
+		public function getProducts()
 		{
-			return $_product;
+			if(!isset($this->_product))
+				return false;
+			return $this->_product;
 		}
 		
 		public function removeItem($productNo)
 		{
-			unset($_product[$productNo]);
+			unset($this->_product[$productNo]);
 		}
 		
 		public function qtyPlusPlus($productNo)
 		{
-			$_product[prodNo][qty]++;
+			$this->_product[$productNo][qty]++;
 		}
 		public function qtySubSub($productNo)
 		{
-			$_product[prodNo][qty]--;
-		}
-		public function clearCart()
-		{
-			unset($_product);
+			$this->_product[$productNo][qty]--;
 		}
 		
-		public function regCart()
+		public function getTotalAmount($productNo = null)
 		{
-			session_start();
-			if(isset($_SESSION[userID."_"]))
+			$totalAmount = 0;
+			if(!isset($productNo))
+				foreach($this->_product as $product)
+					$totalAmount += $product[actualPrice] * $product[qty];
+			else
+				$totalAmount = $this->_product[$productNo][actualPrice] * $this->_product[$productNo][qty];
+			return $totalAmount;
 		}
+		
+		public function clear()
+		{
+			unset($this->_product);
+		}
+		
+		public function __destruct() {
+			if(!isset($this->_product))
+				$_SESSION["SCart"] = null;
+			else
+       			$_SESSION["SCart"] = $this->_product;
+   		}
+		   
 	}
 ?>

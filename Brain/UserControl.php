@@ -8,12 +8,13 @@
 		{
 
 			session_start();
-			if(!isset($_COOKIE[userNo]))
+			if(!isset($_COOKIE[userNo], $_COOKIE["session_id"]))
 			{
 				session_destroy();
 				return false;				
 			}
-				
+			
+
 			$_userNo = $_COOKIE[userNo];
 			$result = getUser($_userNo);
 			$row = $result->fetch_assoc();
@@ -33,7 +34,7 @@
 				return false;			
 			}
 			$row = $result->fetch_array();
-			if(isset($row[0]) && $row[0] == session_id())
+			if(isset($row[0]) && $row[0] == $_COOKIE["PHPSESSID"])
 			{
 				session_destroy();
 				return true;				 
@@ -63,7 +64,6 @@
 				return false;
 
 			setCookie(userNo, $userNo, time() + 7200);	
-				
 			session_start();	
 			$query = "UPDATE User SET " . loginSession . " = '" . session_id() . "' " 
 					."WHERE " . userNo . " = '$userNo'";
@@ -84,6 +84,7 @@
 			session_regenerate_id(true);
 			session_destroy();
 			setCookie(userNo,"null");
+			setCookie("session_id", "null");
 
 			return DB::query($query);
 		}
