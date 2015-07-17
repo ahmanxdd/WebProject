@@ -20,9 +20,11 @@
 	}
 	
 	function delDistrict($distNo) {
-		$query = "DELETE FROM District WHERE " . distNo . " = '$distNo'";
+		$query = "DELETE FROM projectDB.'District' WHERE " . distNo . " = '$distNo'";
+		$query = "DELETE FROM District WHERE distNo = 'DST08'";
+		echo $query;
 		$result = DB::query($distNo);
-		echo DB::$db->error();
+
 		
 	}
 	

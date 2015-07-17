@@ -12,10 +12,14 @@
 		// public static $PASSWORD = "haha123";
 		public static $DBHOST = "ifelse.ninja";
 		public static $DBNAME = "projectDB";
-		public static $USERNAME = "imad";
-		public static $PASSWORD = "wewillgeta";
+		public static $USERNAME = "raymond";
+		public static $PASSWORD = "imraymond";
 		public static $db;
 		
+		public static function getDBConnection()
+		{
+			return DB::$db;
+		}
 		public static function openDatabase() {
 			DB::$db = new mysqli(DB::$DBHOST, DB::$USERNAME, DB::$PASSWORD, DB::$DBNAME);
 		}
@@ -75,7 +79,7 @@
    			"Supplier" => array('pk' => suppNo, 'prefix' => 'S'),
    			"Customer" => array('pk' => custNo, 'prefix' => 'C'),
    			"Driver" => array('pk' => drvID, 'prefix' => 'DR'),
-   			"District" => array('pk' => distNo, 'prefix' => 'DT'),
+   			"District" => array('pk' => distNo, 'prefix' => 'DST'),
    			"Category" => array('pk' => catNo, 'prefix' => 'CY'),
    			"Product" => array('pk' => prodNo, 'prefix' => 'PT'),
    			"Schedule" => array('pk' => jobNo, 'prefix' => 'J'),

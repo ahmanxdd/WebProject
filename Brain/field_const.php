@@ -23,7 +23,7 @@
 	const userNo = "userNo";		//User
 	const loginName = "loginName";
 	const loginPswd = "loginPswd";
-	const isLoggedIn = "isLoggedIn";
+	const loginSession = "loginSession";
 
 	const custNo = "custNo";		//Customer
 	const custName = "custName";

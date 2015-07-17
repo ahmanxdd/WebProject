@@ -211,4 +211,14 @@
 		$query .= " WHERE " . $divID . " = '$divID'";
 		return DB::query($query);
 	}
+	
+	function getUserNoByLoginName($loginName)
+	{
+		$query = "SELECT * FROM User WHERE " . loginName . " = '$loginName'";
+		$result = DB::query($query);
+		if(!$result)
+			return null;
+		$row = $result->fetch_array();
+		return $row[0];
+	}
 ?>
