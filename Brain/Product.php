@@ -5,6 +5,7 @@
 	include_once("field_const.php");
 	include_once("Database.php");	
 	include_once("Category.php");
+	
 	//Products
 	function addProduct($prodName, $prodPrice, $prodPhoto, $stockQty, $catNo, $suppNo) {
 		if (is_array($prodNo)) {	//for JSON associated array
