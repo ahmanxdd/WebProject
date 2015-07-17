@@ -17,9 +17,7 @@
 		include_once('Brain/field_const.php');
 		
 		regPost('distNo', 'distName', 'newDistName', 'dels');
-		
-		updateDistrict("DST01", "aaaa");
-		
+				
 		if (isset($distNo)) {
 			//handle add/modify/delete;
 			foreach ($newDistName as $newD) {

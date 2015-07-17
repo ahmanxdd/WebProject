@@ -21,7 +21,9 @@
 		
 	function delDistrict($distNo) {
 		$query = "DELETE FROM District WHERE " . distNo . " = '$distNo'";
-		return DB::query($distNo);
+		$result = DB::query($distNo);
+		echo DB::$db->error();
+		
 	}
 	
 	function updateDistrict($distNo, $distName)
