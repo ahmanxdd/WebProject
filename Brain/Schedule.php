@@ -61,13 +61,11 @@
 	}
 	
 	include_once "functions.php";
+	
 	function matchSchedule($ordNo, $jobDate, $distNo)
 	{
 		//1. Get All Driver and their jobs num in that day
-		$query = "SELECT * FROM Schedule "
-				."WHERE " . jobDate . " = '$jobDate' "
-				."AND " . distNo . " = '$distNo'";
-				
+			
 		$query = "SELECT * FROM NoOfJobs "
 				."JOIN "
 				."(SELECT MIN(" . numOfJobs . ") AS MinNum FROM NoOfJobs "
