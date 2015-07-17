@@ -30,30 +30,32 @@
 		if ($result === null)
 			return $retArr;
 		while($row = $result->fetch_assoc()) {
-			$subcatArr = getSubCategories($row[catNo], true, catNameOrder);
+			$subcatArr = getSubCategories($row[catNo], true, $catNameOrder);
 			foreach ($subcatArr as $val)
 				$retArr[$l++] = $val;
 		}
 		return $retArr;
 	}
 	
-	function getSubCategoriesNested($catNo, $includeSelf, $catNameOrder) {
-		$l = 0;
+	function getSubCategoriesNested($catNo, $catNameOrder) {
 		$retArr = array();
-		if ($includeSelf == true) {
-			$query = 'SELECT * FROM Category '
+		$query = 'SELECT * FROM Category '
 			. 'WHERE ' . catNo . " = '$catNo'";
-			$retArr[$l++] = DB::query($query, true);
-		}
+		$result = DB::query($query, false);
+		if (!$result || !($retArr = $result->fetch_assoc()))
+			return null;
 		
 		$query = 'SELECT * FROM Category '
 		    . 'WHERE ' . catParent . " = '$catNo' "
 			. 'ORDER BY ' . catName . ' '. $catNameOrder;
 		$result = DB::query($query, false);
-		if ($result === null)
+		if (!$result)
 			return $retArr;
+		
+		$l = 0;
+		$retArr['subcat'] = array();
 		while($row = $result->fetch_assoc())
-			$retArr[$l++] = getSubCategories($row[catNo], true, $catNameOrder);
+			$retArr['subcat'][$l++] = getSubCategoriesNested($row[catNo], $catNameOrder);
 		return $retArr;
 			
 	}
@@ -63,6 +65,19 @@
 		$query = 'SELECT * FROM Category '
 			. DB::genOrderByStr(func_get_args(), func_num_args(), 0);
 		return DB::query($query);
+	}
+	
+	function getAllCategoriesNested($catNameOrder = "ASC") {
+		$l = 0;
+		$retArr = array();
+		$query = 'SELECT * FROM Category WHERE ' . catParent . ' IS NULL';
+		$result = DB::query($query);
+		if (!$result)
+			return null;
+		while ($row = $result->fetch_assoc()) {
+			$retArr[$l++] = getSubCategoriesNested($row[catNo], $catNameOrder);
+		}
+		return $retArr;
 	}
 	
 	function addCategory($catName, $catParent) {
