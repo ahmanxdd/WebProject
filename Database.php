@@ -3,7 +3,7 @@
 	const DBNAME = "sdp_test";
 	const USERNAME = "root";
 	const PASSWORD = "haha123";
-	
+	DB::openDatabase();
 	class DB {
 		public static $debugMode = false;
 		//public static $DBHOST = "127.0.0.1";
@@ -17,8 +17,7 @@
 		public static $db;
 		
 		public static function openDatabase() {
-			$db = new mysqli(DB::$DBHOST, DB::$USERNAME, DB::$PASSWORD, DB::$DBNAME);
-			return $db; //RAYMOND: Error above, needed to debug while u delete this row
+			DB::$db = new mysqli(DB::$DBHOST, DB::$USERNAME, DB::$PASSWORD, DB::$DBNAME);
 		}
 		
 		public static function genOrderByStr($args, $argsNum, $first) {
@@ -55,7 +54,7 @@
 		
 		//Ar Lee
 		private static $PRIMARY_KEYS = array(
-		   	"User" => array('pk' => userNo, 'prefix' => 'U'),
+		   	"User" => array('pk' => userNo, 'prefix' => 'U'),	
   			"Admin" => array('pk' => adminNo, 'prefix' => 'A'),
    			"Supplier" => array('pk' => suppNo, 'prefix' => 'S'),
    			"Customer" => array('pk' => custNo, 'prefix' => 'C'),
@@ -68,13 +67,12 @@
    		);
 			
 		public static function query($query, $retJSON = false) {
-			$db = DB::openDatabase();
-			$result = $db->query($query);
+			$result = DB::$db->query($query);
 			//for INSERT, UPDATE, DELETE
 			if ($result === true)
 				return true;
 			if ($result === false) {
-				if ($debugMode)
+				if (DB::$debugMode)
 					die("Database error: " . $db->error);
 				return false;
 			}
@@ -95,14 +93,26 @@
 		}
 		
 		public static function getLastIndex($tableName) {
-			$Query = "SELECT MAX($PRIMARY_KEYS[$tableName]) FROM $DBName";
-			$num = preg_replace("/[^0-9]/", "", $string);
-			return (int)$num;
+			$query = "SELECT MAX(" . DB::$PRIMARY_KEYS[$tableName]["pk"] . ") FROM $tableName ";
+			$result = DB::query($query);
+			if(!($result))
+				return;
+			$row = $result->fetch_array();
+			$maxNum = $row[0];
+			$maxNum = preg_replace("/[^0-9]/", "", $maxNum);
+			$maxNum++;				
+			$prefix = DB::$PRIMARY_KEYS[$tableName['prefix']];
+			$num_fix = 5 - strlen(prefix);
+			$num_fix = strlen($maxNum) - $num_fix;
+			for($i = 0; $i < $num_fix; $i++)
+				$num_v2 .= "0";
+				
+			echo $prefix . $num_v2;
+			return (int)$maxNum;
 		}
 
 	}
 	
-	DB::openDatabase();
 
 	
 	

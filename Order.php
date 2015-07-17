@@ -1,14 +1,14 @@
 <?php
 	//記住唔好hardcode column名
 	function getOrder($orderNo) {
-		$query = "SELECT * FROM OrderLine "
+		$query = "SELECT * FROM CustOrder "
 					."WHERE " .ordNo." = '$orderNo'";					
 		return DB::query($query);
 	}
 	
 	function getAllOrders() {
 		//desc, asc
-		$query = "SELECT * FROM OrderLine"
+		$query = "SELECT * FROM CustOrder"
 				.DB::genOrderByStr(func_get_args(), func_num_args(), 1);;
 		return DB::query($query);
 	}
@@ -39,14 +39,14 @@
 	function getOrdresByCatNo($catNo) {
 		//desc, asc
 			//return orders, ONLY all fields in CustOrder.
-		$query = "SELECT CustOrder.* "  
+		$query = "SELECT CustOrder.*"  
 					."FROM CustOrder "
 					."JOIN OrderLine ON CustOrder.ordNo = OrderLine.ordNo "
 					."JOIN Product ON OrderLine.prodNo = Product.prodNo " 
 					."JOIN Category ON Product.catNo = Category.catNo "
-					."WHERE " . catNo . " = '$catNo' "; //RAYMOND(Problem): Need subCategory?
+					."WHERE Category." . catNo . " = '$catNo' "; //RAYMOND(Problem): Need subCategory?
 		$orderLines = DB::query($query);
-		
+
 		return DB::query($query);
 		//return orders, ONLY all fields in CustOrder.
 	}
@@ -66,8 +66,9 @@
 		//$prods[1][prodNo], $prods[1][actualPrice], $prods[1][qty]
 		$query_format = "SELECT " . prodNo . " FROM Product "
 					."WHERE " . stockQty . " >= '%s' "
-					."AND " . prodNo . " = '$s'";
+					."AND " . prodNo . " = '%s'";
 		//1. check the stock level of each product, if stockLevel < qty, return 1
+		
 		foreach($prods as $product)
 		{
 			$tmp_query = sprintf($query_format, $product[qty], $product[prodNo]);
@@ -81,7 +82,7 @@
 		$jobNo = null;
 		//2.2 add the the order to CustOrder
 		$order_query = "INSERT INTO CustOrder "
-						."VALUES($orderNo, $orderDate, $theDateWhichTheCustomerWantTheOrderToBeDeliveried, $ordDiscount, $deliAddr, $custNo, $disno, $jobNo)";
+						."VALUES($orderNo, $orderDate, $theDateWhichTheCustomerWantTheOrderToBeDeliveried, $ordDiscount, $deliAddr, $custNo, $distNo, $jobNo)";
 		//3. add all the products to OrderLine
 		$orderLine_format = "(%s,%s,%0.2f,%d)";
 		$orderLine_query = "INSERT INTO OrderLine VALUES";

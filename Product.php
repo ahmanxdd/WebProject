@@ -60,10 +60,10 @@
 		return DB::query($query);
 	}
 	
-	
+	//8 arguments for getProducts
 	function getProducts($nameWith, $priceMin, $priceMax, $stockQtyMin, $stockQtyMax, $catNo, $suppNo, $isDeleted = false) {
 		//desc, asc
-		$query = "SELECt * FROM Product WHERE ";
+		$query = "SELECT * FROM Product WHERE ";
 		$condition = array();
 		if(isset($nameWith))
 			$condition[] = prodName . " LIKE '%$nameWith%'";
@@ -78,9 +78,11 @@
 		if(isset($suppNo))
 			$condition[] = suppNo . "  = '$suppNo'";	
 		if(isset($isDeleted))
-			$condition[] = isDeleted . " = '$isDeleted'"; //RAYMOND: May have bug--> False or '0'?	
-				
-		if($isset($catNo))
+			if($isDeleted)
+				$condition[] = isDeleted . " = '1'"; //RAYMOND: May have bug--> False or '0'?	
+			else
+				$condition[] = isDeleted . " = '0'";
+		if(isset($catNo))
 		{
 			$categoryCondition = "catNo IN(";
 			$subCategoryArray = getSubCategories($catNo, true);
@@ -94,23 +96,23 @@
 		{
 			$query .= $condition[0];
 			for($i = 1; $i < count($condition); $i++)
-				$query .= "AND " . $condition[$i];
+				$query .= " AND " . $condition[$i];
 		}
-		$query .= " " . DB::genOrderByStr(func_get_args(), func_num_args(), 1);
+		$query .= " " . DB::genOrderByStr(func_get_args(), func_num_args(), 8);
 		//AND logic
 		return DB::query($query);
 	}
 	
 	function getProductsByName($nameWith) {
-		return getProducts($nameWith, null, null, null, null, null);
+		return getProducts($nameWith, null, null, null, null, null, null);
 	}
 	
 	function getProductsByCategory($catNo) {
-		return getProducts(null, null, null, null, $catNo, null);
+		return getProducts(null, null, null, null,null , $catNo, null);
 	}
 	
 	function getProductsBySupplier($suppNo) {
-		return getProducts(null, null, null, null, null, $suppNO);
+		return getProducts(null, null, null, null, null, $suppNO, null);
 	}
 	
 	function updateProduct($prodNo, $prodName, $prodPrice, $prodPhoto, $stockQty, $catNo, $suppNo) {

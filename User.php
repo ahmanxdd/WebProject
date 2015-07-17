@@ -1,6 +1,6 @@
 <?php
 	include_once("field_const.php");
-	include_once("dbconn.php");	
+	include_once("Database.php");	
 	
 	//User
 	function getAllUsers() {
@@ -102,7 +102,7 @@
 			$adminObj = $adminTel;
 			$adminTel = $adminObj[adminTel];
 		}
-		if(!isset(adminTel))
+		if(!isset($adminTel))
 			return false;
 		$query = "UPDATE Admin SET " . adminTel . " = '$adminTel' "
 				."WHERE " . adminTel . " = '$adminTel'";
