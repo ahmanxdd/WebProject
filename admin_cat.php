@@ -38,8 +38,10 @@
 					$html .= 
 						'<li>
 							<div>
+								<button type="button" onclick="removeCat(this)">Remove</button>
 								<span>' . $cat[catNo] . '</span>
-								<input type="hidden" name="catNo[]" value="' . $cat[catNo] . '"/>
+								<input type="hidden" name="dels[]" value="" v="' . $cat[catNo] . '"/>"
+								<input id="catNo" type="hidden" name="catNo[]" value="' . $cat[catNo] . '"/>
 								<input type="text" name="catName[]" value="' . $cat[catName] . '"/>
 								<button type="button" onclick="addNewCat(this)"> add </button>
 							</div>';
@@ -57,11 +59,13 @@
 		<input type='submit' />
 	</form>
 	
-	<li class='newCat' style="display:none">
+	<li id='newCat' style="display:none">
 		<div>
-			<button>Remove</button>
-			<input type="text" name="newCatName[vSeq]" value="" />
-			<input type="hidden" name="newCatParent[vSeq]" value="vParent" />
+			<button type="button" onclick="removeNewCat(this)">Remove</button>
+			<input id="catNo" type="hidden" name="newCatNo[]" value="" />
+			<input id="catName" type="text" name="newCatName[]" value="" />
+			<input id="catParent" type="hidden" name="newCatParent[]" value="" />
+			<button type="button" onclick="addNewCat(this);">add</button>
 		</div>
 		<ul></ul>
 	</li>

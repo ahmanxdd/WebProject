@@ -5,9 +5,31 @@ function addNewRecord() {
 }
 
 function addNewCat(btn) {
-	var catParent = $(btn).siblings("[type='hidden']").val();
-	var $newCat = $(".newCat").first().clone();
+	if (!window.newCatSeq)
+		newCatSeq = 0;
+	var catParent = $(btn).siblings("#catNo").val();
+	var $newCat = $("#newCat").clone();
+	$newCat.attr("id", "");
 	$newCat.css("display", "");
-	var newCatHtml = $newCat.html().replace(/vSeq/g, 0).replace("vParent", catParent);
-	$(btn).parent().append(newCatHtml);
+	
+	$newCat.find("#catParent").val(catParent).attr("name", "newCatParent[" + newCatSeq + "]");
+	$newCat.find("#catName").attr("name", "newCatName[" + newCatSeq + "]");
+	$newCat.find("#catNo").attr("name", "newCatNo[" + newCatSeq + "]").val(newCatSeq);
+	
+	$(btn).parents("li").first().children("ul").append($newCat);
+	newCatSeq++;
+}
+
+function removeNewCat(btnRemove) {
+	$(btnRemove).parents("li").first().remove();
+}
+
+function removeCat(liRemove) {
+	if (!$(liRemove).is("li")) 
+		liRemove = $(liRemove).parents("li").first();
+	$(liRemove).css("background", "red");
+}
+
+function setRemoveCat() {
+	
 }
