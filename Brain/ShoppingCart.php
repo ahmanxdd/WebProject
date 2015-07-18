@@ -47,12 +47,19 @@
 					$totalAmount += $product[actualPrice] * $product[qty];
 			else
 				$totalAmount = $this->_product[$productNo][actualPrice] * $this->_product[$productNo][qty];
+			$totalAmount = round($totalAmount,2);
 			return $totalAmount;
 		}
 		
 		public function clear()
 		{
 			unset($this->_product);
+		}
+		
+		public function checkOut($deliveryDate, $orderDiscount,$deliAddr, $custNo, $distNo)
+		{
+			include_once "Order.php";
+			addOrder(date("Y-m-d"), $deliveryDate, $orderDiscount, $deliAddr, $custNo, $distNo, $this->_product);
 		}
 		
 		public function __destruct() {
