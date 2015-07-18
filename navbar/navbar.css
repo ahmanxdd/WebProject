@@ -1,0 +1,17 @@
+.navBar_C {
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	padding: 5px;
+	top: 0px;
+	left: 0px;
+	background: red;
+}
+
+.navBar {
+
+}
+
+.navBar .navTab, .navBar .navLogo{
+	display: inline-block;
+}

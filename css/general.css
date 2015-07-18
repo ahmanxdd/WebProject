@@ -1,0 +1,17 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0px;
+}
+
+.content_C {
+	padding-top: 50px;
+}
+
+.inContent {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
