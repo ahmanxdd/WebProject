@@ -173,5 +173,89 @@
 	
 	function getSalesSummary($suppNo) {
 		//do not do this part yet.
+		//desc asc
+		$query = "SELECT OrderLine." . prodNo . ", Product." . prodName . ", Product." . prodPhoto . ", Product." . catNo . ", Category." . catName . ", SUM(OrderLine." . qty .") AS Sold "
+				."FROM OrderLine "
+				."JOIN Product ON Product." . prodNo . " = OrderLine." . prodNo . " "
+				."JOIN Category ON Product." . catNo . " = Category." . catNo . " "
+				."WHERE Product." . suppNo . " = '$suppNo' "
+				."AND " . isDeleted . " = 0 " 
+				."GROUP BY Product." .prodNo . " ";
+				echo $query;
+		return DB::query($query);
 	}
+	
+
+	
+	function getSalesSummaryByDistrict($suppNo, $distNo = null) {
+		//if distNo not set --> get all district and return an array
+		// $districts[distNo] --> result
+		if(!isset($distNo))
+		{
+			$result = getAllDistricts();
+			while($row = $result->fetch_assoc())
+				$districts[$row[distNo]] =  getSalesSummaryByDistrict($suppNo, $row[distNo], "Sold", "DESC");
+			return $districts;
+		}
+		
+		$query = "SELECT District." . distNo . ", District." . distName . ", OrderLine." . prodNo . ", Product." . prodName . ", Product." . prodPhoto . ", Product." . catNo . ", Category." . catName . ", SUM(OrderLine." . qty .") AS Sold "
+				."FROM OrderLine "
+				."JOIN CustOrder ON OrderLine." .ordNo . " = CustOrder." . ordNo . " "
+				."JOIN Product ON Product." . prodNo . " = OrderLine." . prodNo . " "
+				."JOIN Category ON Product." . catNo . " = Category." . catNo . " "
+				."JOIN District ON CustOrder." .distNo . " = District." . distNo . " "
+				."WHERE Product." . suppNo . " = '$suppNo' "
+				."AND District.". distNo . " = '$distNo' " 
+				."AND " . isDeleted . " = 0 " 
+				."GROUP BY Product." . prodNo . " "
+				.DB::genOrderByStr(func_get_args(), func_num_args(), 2);
+				return DB::query($query);			
+	}
+	
+		function getSalesSummaryByGender($suppNo, $isMale = null) {
+		//if distNo not set --> get all district and return an array
+		// $districts[distNo] --> result
+		if(!isset($isMale))
+		{
+			$genderChart["M"] =  getSalesSummaryByGender($suppNo, true, "Sold", "DESC");
+			$genderChart["F"] =  getSalesSummaryByGender($suppNo, false, "Sold", "DESC");
+			return $genderChart;
+		}
+		$custGender = 'F';
+		if($isMale)
+			$custGender = 'M';
+		
+		$query = "SELECT Customer." . custGender . ", District." . distNo . ", District." . distName . ", OrderLine." . prodNo . ", Product." . prodName . ", Product." . prodPhoto . ", Product." . catNo . ", Category." . catName . ", SUM(OrderLine." . qty .") AS Sold "
+				."FROM OrderLine "
+				."JOIN CustOrder ON OrderLine." .ordNo . " = CustOrder." . ordNo . " "
+				."JOIN Product ON Product." . prodNo . " = OrderLine." . prodNo . " "
+				."JOIN Category ON Product." . catNo . " = Category." . catNo . " "
+				."JOIN District ON CustOrder." . distNo . " = District." . distNo . " "
+				."JOIN Customer ON Customer." . custNo . " = CustOrder." . custNo . " "
+				."WHERE Product." . suppNo . " = '$suppNo' "
+				."AND Customer.". custGender . " = '$custGender' " 
+				."AND " . isDeleted . " = 0 " 
+				."GROUP BY Product." . prodNo . " "
+				.DB::genOrderByStr(func_get_args(), func_num_args(), 2);
+				return DB::query($query);			
+	}
+	
+	
+	
+	function getSalesSummaryByCatNo($suppNo) {
+		//do not do this part yet.
+		//desc asc
+		$query = "SELECT OrderLine." . prodNo . ", Product." . prodName . ", Product." . prodPhoto . ", Product." . catNo . ", Category." . catName . ", SUM(OrderLine." . qty .") AS Sold "
+				."FROM OrderLine "
+				."JOIN Product ON Product." . prodNo . " = OrderLine." . prodNo . " "
+				."JOIN Category ON Product." . catNo . " = Category." . catNo . " "
+				."WHERE Product." . suppNo . " = '$suppNo' "
+				."AND " . catNo . " = '$catNo' "
+				."AND " . isDeleted . " = 0 " 
+				."GROUP BY Product." .prodNo . " "
+				."ORDER BY Sold DESC";
+				echo $query;
+		return DB::query($query);
+	}
+	
 ?>

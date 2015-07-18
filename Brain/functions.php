@@ -15,7 +15,7 @@
 	
 	function printThisDBResult($result) //For debug usage, print all Database result
 	{
-		if(!isset($result))
+		if(!isset($result) || !$result)
 		{
 			echo "個 result 乜都冇, 冇野睇呀, 你想點Print ar?";
 			return false;

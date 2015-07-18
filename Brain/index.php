@@ -25,7 +25,8 @@
 	//$cart->qtyPlusPlus("P00001");
 	
 	$products = $cart->getProducts();
-
-	print_r($products);
+	$array = getSalesSummaryByGender("S0002", null);
+	foreach($array as $a)
+		printThisDBResult($a);
 
 ?>
