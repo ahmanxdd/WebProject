@@ -6,6 +6,7 @@
 	top: 0px;
 	left: 0px;
 	background: #55bbca;
+	z-index: 100;
 }
 
 .navBar {

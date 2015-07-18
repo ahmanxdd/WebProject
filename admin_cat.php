@@ -5,7 +5,7 @@
 <?php include("header2.php"); ?>
 
 	<form action="admin_cat.php" method="post">
-		<div id="adminCat_C">
+		<div id="adminCat_C" class="adminCat_C">
 		<?php
 			include_once('Brain/field_const.php');
 			include_once('Brain/functions.php');
@@ -51,13 +51,15 @@
 				foreach ($catArr as $cat) {
 					$html .= 
 						'<li>
-							<div>
-								<button id="btnRemove" type="button" onclick="removeCat(this)">Remove</button>
-								<span>' . $cat[catNo] . '</span>
-								<input id="dels" type="hidden" name="dels[]" value="" v="' . $cat[catNo] . '"/>
-								<input id="catNo" type="hidden" name="catNo[]" value="' . $cat[catNo] . '"/>
-								<input type="text" name="catName[]" value="' . $cat[catName] . '"/>
-								<button type="button" onclick="addNewCat(this)"> add </button>
+							<div class="centerVC">
+								<span class="centerV">
+									<button id="btnRemove" type="button" onclick="removeCat(this)">Remove</button>
+									<span>' . $cat[catNo] . '</span>
+									<input id="dels" type="hidden" name="dels[]" value="" v="' . $cat[catNo] . '"/>
+									<input id="catNo" type="hidden" name="catNo[]" value="' . $cat[catNo] . '"/>
+									<input type="text" name="catName[]" value="' . $cat[catName] . '"/>
+									<button type="button" onclick="addNewCat(this)"> add </button>
+								</span>
 							</div>';
 					if (isset($cat['subcat']))
 						$html .= genCatTable($cat['subcat']);

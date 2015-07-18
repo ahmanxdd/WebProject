@@ -1,2 +1,12 @@
-#sadminCat_C {
+.adminCat_C {
+}
+
+.adminCat_C ul li div{
+	height: 80px;
+	font-size: 1em;
+	margin: 5px;
+}
+
+.adminCat_C ul li div input {
+	font-size: 1em;
 }

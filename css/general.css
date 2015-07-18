@@ -8,12 +8,23 @@ body {
 
 .content_C {
 	padding-top: 50px;
+	font-size: 30px;
 }
 
 .inContent {
 	position: relative;
 	height: 100%;
 	width: 100%;
+}
+
+.centerVC {
+	position: relative;
+}
+
+.centerV {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
 }
 
 li {
