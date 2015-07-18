@@ -87,7 +87,7 @@
 	
 	function getAllJobsByDrvID($drvID)
 	{
-		$query = "SELECT * FROM Schedule WHERE " . drvID . "= '$drvID'";
+		$query = "SELECT * FROM Schedule WHERE " . drvID . "= '$drvID' " . DB::genOrderByStr(func_get_args(), func_num_args(), 1);
 		return DB::query($query);
 	}
 

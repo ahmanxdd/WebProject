@@ -4,10 +4,9 @@
 	include_once("User.php");
 	class UserControl
 	{
+		public static $type;
 		public static function checkState()
 		{
-
-			session_start();
 			if(!isset($_COOKIE[userNo], $_COOKIE["session_id"]))
 			{
 				session_destroy();
@@ -41,21 +40,46 @@
 			}
 			else 
 			
-			session_destroy();
 			return false;
 		}
 		
 		public static function login($loginName, $loginPswd)
 		{
 
+			session_start();	
+			session_unset();	
 			$dbc =  DB::getDBConnection();
 			$query = "SELECT * FROM User WHERE " . loginName . " = ? AND " . loginPswd . " = ? ";
 			$stmt = $dbc->prepare($query);
 			$stmt->bind_param("ss",$loginName, $loginPswd);
 			$stmt->execute();
 			$result = $stmt->get_result();		
-
-	
+			$row = $result->fetch_assoc();
+			if(isset($row[drvID]))
+			{
+				$_SESSION["typeID"] = $row[drvID];
+				UserControl::$type = "driver";
+			}
+			else if(isset($row[adminNo]))
+			{
+				$_SESSION["typeID"] = $row[adminNo];
+				UserControl::$type = "admin";
+			}
+			else if(isset($row[custNo]))
+			{
+				$_SESSION["typeID"] = $row[custNo];
+				UserControl::$type = "customer";
+			}
+			else if(isset($row[suppNo]))
+			{
+				$_SESSION["typeID"] = $row[suppNo];
+				UserControl::$type = "supplier";
+			}
+			else
+			{
+				$_SESSION["typeID"] = null;
+				UserControl::$type = null;
+			}
 			if($result->num_rows <= 0)
 				return false;
 				
@@ -63,14 +87,13 @@
 			if(!isset($userNo))
 				return false;
 
-			setCookie(userNo, $userNo, time() + 7200);	
-			session_start();	
+			setCookie(userNo, $userNo, time() + 
+				7200);	
+
 			$query = "UPDATE User SET " . loginSession . " = '" . session_id() . "' " 
 					."WHERE " . userNo . " = '$userNo'";
 			if(DB::query($query))
-			{
-				session_unset();		
-				session_destroy();
+			{	
 				return true;	
 			}	
 	
@@ -85,7 +108,7 @@
 			session_destroy();
 			setCookie(userNo,"null");
 			setCookie("session_id", "null");
-
+			UserControl::$type = null;
 			return DB::query($query);
 		}
 	}
