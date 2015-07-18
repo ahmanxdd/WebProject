@@ -49,7 +49,7 @@
 	const jobDate = "jobDate";
 
 	const distNo = "distNo";			//District
-	const disName = "disName";
+	const distName = "distName";
 
 
 	const numOfJobs = "numOfJobs" //View: NoOfJobs
