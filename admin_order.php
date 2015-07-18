@@ -1,15 +1,10 @@
-<html>
-<head>
-<link rel="stylesheet" type='text/css' href='general.css'/>
-<link rel='stylesheet' type='text/css' href='admin_table.css' />
+<?php include("header1.php") ?>
+<link rel="stylesheet" type="text/css" href="css/admin_table.css" />
+<script src='scripts/admin_table.js'></script>
+<?php include("header2.php") ?>
 
-<link rel="stylesheet" href="jquery_ui/jquery-ui.min.css">
-<script src="jquery_ui/external/jquery/jquery.js"></script>
-<script src="jquery_ui/jquery-ui.min.js"></script>
-
-
-</head>
 <body>
+	<?php include("admin_table_tabs.php") ?>
 	<?php
 		include_once('Brain/functions.php');
 		include_once('Brain/Order.php');
@@ -17,35 +12,35 @@
 		include_once('Brain/User.php');
 		include_once('Brain/District.php');
 		$orders = getAllOrders();
+		
+		regGet('searchBy', 'searchVal');
+		if (isset($sortBy)) {
+			
+		}
 	?>
 	
-	<div class='row adminDataTable_c'>
-		<div class='col-12'>
-			<span class='adminTableTab'>Category</span>
-			<span class='adminTableTab'>District</span>
-			<span class='adminTableTab'>Orders</span>
-		</div>
+	<div class='row adminTable_C'>
+		<form action='admin_order.php' method='get'>
+			<div class="filter_C col-m-100 iblk">
+					<span class='col-m-100 iblk'>Search by:</span>
+					<select name='searchBy'>
+						<option value='prod'>Product</option>
+						<option value='cat'>Category</option>
+						<option value='dist'>District</option>
+					</select>
+					<input type="text" name="searchVal"/>
+					<input class="btn" type='submit' value='GO'/>
+			</div>
+		</form>
 		
-		<div>
-			<form action='admin_order.php' method='get'>
-				<span>Sort by:</span>
-				<select name='sortBy'>
-					<option value='prod'>Product</option>
-					<option value='cat'>Category</option>
-					<option value='dist'>District</option>
-				</select>
-				<input type="text" />
-				<input type='submit' value='GO'/>
-			</form>
-		</div>
-		<table id='adminDataTable' class='col-12 adminDataTable'>
+		<table class="adminTable col-100" cellspacing="0">
 			<tr>
 				<th>Order No.</th>
-				<th>Order Date</th>
-				<th>Order Discount</th>
-				<th>Customer Name</th>
-				<th>Delivery Address</th>
-				<th>District</th>
+				<th>Date</th>
+				<th>Discount</th>
+				<th>Customer</th>
+				<th class="col-m-0">Delivery Address</th>
+				<th class="col-m-0">District</th>
 				<th>Delivery Job</th>
 			</tr>
 			
@@ -60,8 +55,8 @@
 							<td>' . $o[ordDate] . '</td>
 							<td>' . $o[ordDiscount] . '</td>
 							<td> <a href="cust_details.php?custNo=' . $cust[custName] . '">' . $cust[custName] . '</td>
-							<td>' . $o[deliAddr] . '</td>
-							<td>' . $dist[distName] . '</td>
+							<td class="col-m-0">' . $o[deliAddr] . '</td>
+							<td class="col-m-0">' . $dist[distName] . '</td>
 							<td> <a href="job_details.php?jobNo=' . $o[jobNo] . '">' . $o[jobNo] . '</a></td>
 						</tr>';
 				}							

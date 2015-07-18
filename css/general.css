@@ -3,7 +3,9 @@
 }
 
 body {
+	min-width: 600px;
 	margin: 0px;
+	font-family: Roboto Mono, Roboto, sans-serif;
 }
 
 .content_C {
@@ -31,4 +33,22 @@ body {
 
 li {
 	list-style-type: none;
+}
+
+.iblk {
+	display: inline-block;
+}
+
+.btn {
+	background: transparent;
+	outline: none;
+	border: 1px solid #55bbca;
+	color: #55bbca;
+	transition: background 0.2s, color 0.2s;
+	cursor: pointer;
+}
+
+.btn:hover {
+	background: #55bbca;
+	color: white;
 }

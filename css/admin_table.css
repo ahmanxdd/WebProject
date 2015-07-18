@@ -1,3 +1,67 @@
+.adminTableTabs {
+	height: 80px;
+	padding-top: 40px;
+	border-bottom: 2px solid #A0A0A0;
+	position: relative;
+}
+
+.adminTableTabs a{
+	margin: 0 20px;
+	display: inline-block;
+	text-decoration: none;
+	color: black;
+}
+
+.adminTableTabs a.activeAdminTab {
+	position: relative;
+	color: red;
+}
+
+.adminTable_C {
+	padding: 50px 20px;
+}
+
+.adminTable {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.adminTable th {
+	background: #808080;
+	color: white;
+	height: 50px;
+	font-size: 1.5em;
+}
+
+.adminTable tr td{
+	padding: 20px;
+	border-bottom: 1px solid #808080;
+	font-size: 1.2em;
+}
+
+.adminTable tr td input {
+	height: 30px;
+	font-size: 1.2em;
+	padding: 2px 5px;
+}
+
+.adminTable tr td input[type="checkbox"] {
+	width: 30px;
+	height: 30px;
+}
+
+/*
+.activeAdminTab::before {
+	content: "";
+	width: 80%;
+	height: 3px;
+	position: absolute;
+	left: 10%;
+	bottom: -10px;
+	background: red;
+}
+*/
+
 .adminCat_C {
 }
 
@@ -21,12 +85,41 @@
 	
 }
 
+.newRowRecord {
+	background: orange;
+}
+
 .rowRecordContent {
 	left: 10px;
 }
 
 .rowDeleted {
 	background: rgba(255, 64, 64, 0.8);
+}
+
+.filter_C {
+}
+
+.filter_C select, .filter_C input[type="text"], .filter_C input[type="submit"]  {
+	height: 40px;
+	margin-top: 10px;
+}
+
+.filter_C select{
+	width: 140px;
+	font-size: 0.8em;
+	padding: 5px 2px;
+}
+
+.filter_C input[type="text"] {
+	font-size: 0.8em;
+	padding: 5px 10px;
+}
+
+.filter_C input[type="submit"] {
+	width: 60px;
+	font-size: 0.7em;
+	vertical-align: top;
 }
 
 .btnAdd, .btnRemove, .btnRestore {
@@ -93,14 +186,5 @@
 .btnSubmit {
 	width: 100px;
 	height: 40px;
-	background: none;
-	outline: none;
-	border: 1px solid orange;
-	color: orange;
 	font-size: 0.6em;
-	transition: background 0.2s, color 0.2s;
-}
-
-.btnSubmit:hover {
-	
 }

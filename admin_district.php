@@ -1,16 +1,8 @@
-<html>
-<head>
-<link rel="stylesheet" type='text/css' href='general.css'/>
-<link rel='stylesheet' type='text/css' href='admin_table.css' />
-
-<link rel="stylesheet" href="jquery_ui/jquery-ui.min.css">
-<script src="jquery_ui/external/jquery/jquery.js"></script>
-<script src="jquery_ui/jquery-ui.min.js"></script>
-
-<script src='admin_table.js'></script>
-
-</head>
-<body>
+<?php include("header1.php") ?>
+<link rel="stylesheet" type="text/css" href="css/admin_table.css" />
+<script src='scripts/admin_table.js'></script>
+<?php include("header2.php") ?>
+	<?php include("admin_table_tabs.php") ?>
 	<?php
 		include_once('Brain/functions.php');
 		include_once('Brain/District.php');
@@ -21,7 +13,7 @@
 		if (isset($distNo)) {
 			//handle add/modify/delete;
 			foreach ($newDistName as $newD) {
-				if ($newD != "") {
+				if ($newD != "prevent_required") {
 					addDistrict($newD);
 				}
 			}
@@ -40,15 +32,9 @@
 		
 	?>
 	
-	<div class='row adminDataTable_c'>
-		<div class='col-12'>
-			<span class='adminTableTab'>Category</span>
-			<span class='adminTableTab'>District</span>
-			<span class='adminTableTab'>Orders</span>
-		</div>
-		
-		<form action='admin_table.php' method='post'>
-			<table id='adminDataTable' class='col-12 adminDataTable'>
+	<div class='row adminTable_C'>
+		<form id="adminDistForm" action='<?php echo $_SERVER['PHP_SELF'] ?>' method='post'>
+			<table class="adminTable col-100" cellspacing="0">
 				<tr>
 					<th>Delete </th>
 					<th>District ID</th>
@@ -69,13 +55,15 @@
 				?>
 
 				
-				<tr class='adminNewRecord' style='display:none'>
-					<td> New record </td>
-					<td> <input type='text' name='newDistName[]' value=''/> </td>
+				<tr class='adminNewDistrict' style='display:none'>
+					<td><button type="button" class="btnRemove" onclick="removeNewDistrict(this)"/> </td>
+					<td> New </td>
+					<td> <input id="newDistName" type='text' name='newDistName[]' value="prevent_required" required /> </td>
 				</tr>
 			</table>
-			<button type='button' onclick='addNewRecord()'>ADD</button>
-			<input type='submit' />
+			<button class="btnAdd" type='button' onclick='addNewDistrict()'></button>
+			<br/><br/>
+			<input class="btnSubmit btn" onclick="inputValidate(document.forms['adminDistForm'])" type='submit' value="Submit"/>
 		</form>
 	</div>
 </body>

@@ -1,7 +1,27 @@
-function addNewRecord() {
-	$tr = $(".adminNewRecord").first().clone();
+function addNewDistrict() {
+	$tr = $(".adminNewDistrict").last().clone();
 	$tr.css("display", "");
-	$("#adminDataTable").append($tr);
+	$tr.find("#newDistName").val("");
+	$(".adminTable").append($tr);
+	var orgHeight = $tr.height();
+	$tr.css("opacity", "0")
+		.css("height", "0px");
+	$tr.animate({
+		opacity: 1,
+		height: orgHeight
+	}, 300);
+}
+
+function removeNewDistrict(trDist) {
+	$trDist = $(trDist);
+	if (!$(trDist).is("tr"))
+		$trDist = $trDist.parents("tr").first();
+	$trDist.animate({
+		opacity: 0,
+		height: "0px"
+	}, 300, function(){
+		$trDist.remove();
+	})
 }
 
 function addNewCat(btn) {
@@ -14,9 +34,8 @@ function addNewCat(btn) {
 	
 	$newCat.find("#catParent").val(catParent)
 		.attr("name", "newCatParent[" + newCatSeq + "]");
-	$newCat.find("#catName").attr("name", "newCatName[" + newCatSeq + "]");
+	$newCat.find("#catName").attr("name", "newCatName[" + newCatSeq + "]").val("");
 	$newCat.find("#catNo").attr("name", "newCatNo[" + newCatSeq + "]").val(newCatSeq);
-	
 	$(btn).parents("li").first().children("ul").prepend($newCat);
 	
 	var $newCatBox = $newCat.find(".rowRecord").first();
@@ -32,8 +51,10 @@ function addNewCat(btn) {
 	newCatSeq++;
 }
 
-function removeNewCat(btnRemove) {
-	$liRemove = $(btnRemove).parents("li").first();
+function removeNewCat(liRemove) {
+	$liRemove = $(liRemove);
+	if (!$liRemove.is("li")) 
+		$liRemove = $(liRemove).parents("li").first();
 	$liRemove.animate({
 		opacity: "0",
 		height: "0px"
@@ -53,7 +74,7 @@ function removeCat(liRemove) {
 			setRemoveCat(this);
 		})
 	}
-	$(liRemove).find(".newCat").remove();
+	removeNewCat($(liRemove).find(".newCat"));
 	checkDisableRestore();
 }
 
@@ -85,5 +106,14 @@ function checkDisableRestore() {
 		if ($(this).parents("li").first().attr("deleted") == "true")
 			value = "disabled";
 		$(this).find("#btnRemove").prop("disabled", value);
+	});
+}
+
+function inputValidate(form) {
+	$(form).find(":required").each(function(){
+		var val = $(this).val();
+		if (!val || val.trim() == "") {
+			$(this).css("background", "rgba(255, 102, 102, 0.5)");
+		}
 	});
 }

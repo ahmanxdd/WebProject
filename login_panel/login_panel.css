@@ -7,6 +7,7 @@
 	padding: 10px;
 	background: white;
 	z-index: 200;
+	visibility: hidden;
 }
 
 .loginPanel {
