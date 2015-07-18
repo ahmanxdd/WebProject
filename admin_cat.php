@@ -51,16 +51,16 @@
 				foreach ($catArr as $cat) {
 					$html .= 
 						'<li>
-							<div class="centerVC">
-								<span class="centerV">
-									<button id="btnRemove" type="button" onclick="removeCat(this)">Remove</button>
-									<span>' . $cat[catNo] . '</span>
-									<input id="dels" type="hidden" name="dels[]" value="" v="' . $cat[catNo] . '"/>
-									<input id="catNo" type="hidden" name="catNo[]" value="' . $cat[catNo] . '"/>
-									<input type="text" name="catName[]" value="' . $cat[catName] . '"/>
-									<button type="button" onclick="addNewCat(this)"> add </button>
-								</span>
-							</div>';
+								<div class="centerVC rowRecord">
+									<span class="centerV rowRecordContent">
+										<button id="btnRemove" class="btnRestore btnRemove" type="button" onclick="removeCat(this);return false;"></button>
+										<span>' . $cat[catNo] . '</span>
+										<input id="dels" type="hidden" name="dels[]" value="" v="' . $cat[catNo] . '"/>
+										<input id="catNo" type="hidden" name="catNo[]" value="' . $cat[catNo] . '"/>
+										<input type="text" name="catName[]" value="' . $cat[catName] . '"/>
+										<button class="btnAdd" type="button" onclick="addNewCat(this)"></button>
+									</span>
+								</div>';
 					if (isset($cat['subcat']))
 						$html .= genCatTable($cat['subcat']);
 					else
@@ -72,17 +72,20 @@
 				return $html;
 			}
 		?>
-		<input type='submit' />
+		<input class='btnSubmit' type='submit' value="Submit"/>
 		</div>
 	</form>
 	
 	<li id='newCat' class="newCat" style="display:none">
-		<div>
-			<button type="button" onclick="removeNewCat(this)">Remove</button>
-			<input id="catNo" type="hidden" name="newCatNo[]" value="" />
-			<input id="catName" type="text" name="newCatName[]" value="" />
-			<input id="catParent" type="hidden" name="newCatParent[]" value="" />
-			<button type="button" onclick="addNewCat(this);">add</button>
+		<div class="centerVC rowRecord">
+			<span class="centerV rowRecordContent">
+				<button class="btnRemove btnRestore" "type="button" onclick="removeNewCat(this);return false;"></button>
+				<input id="catNo" type="hidden" name="newCatNo[]" value="" />
+				<input id="catParent" type="hidden" name="newCatParent[]" value="" />
+				<label>new</label>
+				<input id="catName" type="text" name="newCatName[]" value="" />		
+				<button class="btnAdd" type="button" onclick="addNewCat(this);"></button>
+			</span>
 		</div>
 		<ul></ul>
 	</li>

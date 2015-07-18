@@ -17,12 +17,29 @@ function addNewCat(btn) {
 	$newCat.find("#catName").attr("name", "newCatName[" + newCatSeq + "]");
 	$newCat.find("#catNo").attr("name", "newCatNo[" + newCatSeq + "]").val(newCatSeq);
 	
-	$(btn).parents("li").first().children("ul").append($newCat);
+	$(btn).parents("li").first().children("ul").prepend($newCat);
+	
+	var $newCatBox = $newCat.find(".rowRecord").first();
+	var orgHeight = $newCatBox.height();
+	$newCatBox
+		.css("opacity", "0")
+		.css("height", "0px");
+	$newCatBox.animate({
+		"opacity": "1",
+		"height" : orgHeight
+	}, 300);
+	
 	newCatSeq++;
 }
 
 function removeNewCat(btnRemove) {
-	$(btnRemove).parents("li").first().remove();
+	$liRemove = $(btnRemove).parents("li").first();
+	$liRemove.animate({
+		opacity: "0",
+		height: "0px"
+	}, 300, function(){
+		$liRemove.remove();
+	});
 }
 
 function removeCat(liRemove) {
@@ -41,16 +58,21 @@ function removeCat(liRemove) {
 }
 
 function setRemoveCat(liRemove) {
-	$(liRemove).children("div").css("background", "red");
-	$dels = $(liRemove).children("div").children("#dels");
+	$liRemove = $(liRemove);
+	$liRemove.children(".rowRecord").addClass("rowDeleted");
+	$liRemove.find(".btnRemove").first().removeClass("btnRemove").addClass("btnRestore").addClass("fa").addClass("fa-undo");
+	$liRemove.find(".btnAdd").hide();
+	$dels = $liRemove.find("#dels").first();
 	$dels.val($dels.attr("v"));
-	$(liRemove).attr("deleted", "true");
+	$liRemove.attr("deleted", "true");
 }
 
 function restoreCat(liRestore) {
 	if (!$(liRestore).is("li"))
 		liRestore = $(liRestore).parents("li").first();
-	$(liRestore).children("div").css("background", "");
+	$(liRestore).children(".rowRecord").removeClass("rowDeleted");
+	$(liRestore).find(".btnAdd").first().show();
+	$(liRestore).find(".btnRestore").first().removeClass("btnRestore").addClass("btnRemove").removeClass("fa").removeClass("fa-undo");
 	$dels = $(liRestore).children("div").children("#dels");
 	$dels.val("");
 	$(liRestore).attr("deleted", "false");
