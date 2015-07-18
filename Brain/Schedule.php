@@ -28,6 +28,11 @@
 		//echo $query;
 	}	
 		
+	function deleteJob($jobNo)
+	{
+		$query = "DELETE FROM Schedule WHERE " . jobNo . " = '$jobNo'";
+		return DB::query($query);
+	}
 	function editJob($jobNo, $jobDate, $distNo)
 	{
 		//RAYMOND: if all variable == null, will occur error
