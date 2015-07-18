@@ -1,5 +1,9 @@
 <?php		
-	//for extenral call	
+	/*
+		This part of the code for
+		1. ajax
+		2. check login state
+	*/
 	include_once "Brain/UserControl.php";
 	include_once "Brain/Schedule.php";
 	include_once('Brain/District.php');
@@ -41,7 +45,13 @@
 	
 
 ?>		
+
+
 <?php
+	/*
+		This part of the code for
+		1. update schedule
+	*/
 	$weekDay = "weekDay";
 	$district = "district";
 	$repeatTime = "repeatTime";
@@ -76,7 +86,10 @@
 		<th></th>
 	</tr>
 <?php
-
+	/*
+		This part of the code for
+		1. Generate Table
+	*/
 	$jobs = getAllJobsByDrvID($drvID, jobDate, "DESC");
 	$districts = getAllDistricts();
 	$selectionBox = "<select class='changable' hidden name='cbdistrict'>";
@@ -107,7 +120,10 @@
 	
 ?>	
 	</table>
-	
+	<?php
+
+		
+	?>
 	<form action="driver.php#" method="post">
 		<table>
 			<tr>
@@ -138,7 +154,7 @@
 		</table>	
 	</form>	
 	
-		<form action="driver.php" method="post">
+	<form action="driver.php" method="post">
 		<table>
 			<tr>
 				<td>Date: </td>
@@ -153,5 +169,7 @@
 		</table>	
 		<input type="submit" value='Assign' />
 	</form>	
+	
+	
 	</body>
 </html>
