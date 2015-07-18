@@ -25,11 +25,41 @@ function removeNewCat(btnRemove) {
 }
 
 function removeCat(liRemove) {
-	if (!$(liRemove).is("li")) 
+	if (!$(liRemove).is("li"))
 		liRemove = $(liRemove).parents("li").first();
-	$(liRemove).css("background", "red");
+	if ($(liRemove).attr("deleted") == "true")
+		restoreCat(liRemove);
+	else
+		setRemoveCat(liRemove);
+	$(liRemove).find(".newCat").remove();
+	checkDisableRestore();
 }
 
-function setRemoveCat() {
-	
+function setRemoveCat(liRemove) {
+	$(liRemove).children("div").css("background", "red");
+	$dels = $(liRemove).children("div").children("#dels");
+	$dels.val($dels.attr("v"));
+	$(liRemove).attr("deleted", "true");
+	$(liRemove).find("li").each(function() {
+		setRemoveCat(this);
+	})
+}
+
+function restoreCat(liRestore) {
+	if (!$(liRestore).is("li"))
+		liRestore = $(liRestore).parents("li").first();
+	$(liRestore).children("div").css("background", "");
+	$dels = $(liRestore).children("div").children("#dels");
+	$dels.val("");
+	$(liRestore).attr("deleted", "false");
+}
+
+function checkDisableRestore() {
+	$adminCatC = $("#adminCat_C");
+	$adminCatC.find("li").each(function() {
+		var value = "";
+		if ($(this).parents("li").first().attr("deleted") == "true")
+			value = "disabled";
+		$(this).find("#btnRemove").prop("disabled", value);
+	});
 }

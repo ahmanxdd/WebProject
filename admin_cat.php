@@ -15,6 +15,7 @@
 </head>
 <body>
 	<form action="admin_cat.php" method="post">
+		<div id="adminCat_C">
 		<?php
 			include_once('Brain/field_const.php');
 			include_once('Brain/functions.php');
@@ -38,9 +39,9 @@
 					$html .= 
 						'<li>
 							<div>
-								<button type="button" onclick="removeCat(this)">Remove</button>
+								<button id="btnRemove" type="button" onclick="removeCat(this)">Remove</button>
 								<span>' . $cat[catNo] . '</span>
-								<input type="hidden" name="dels[]" value="" v="' . $cat[catNo] . '"/>"
+								<input id="dels" type="hidden" name="dels[]" value="" v="' . $cat[catNo] . '"/>
 								<input id="catNo" type="hidden" name="catNo[]" value="' . $cat[catNo] . '"/>
 								<input type="text" name="catName[]" value="' . $cat[catName] . '"/>
 								<button type="button" onclick="addNewCat(this)"> add </button>
@@ -57,9 +58,10 @@
 			}
 		?>
 		<input type='submit' />
+		</div>
 	</form>
 	
-	<li id='newCat' style="display:none">
+	<li id='newCat' class="newCat" style="display:none">
 		<div>
 			<button type="button" onclick="removeNewCat(this)">Remove</button>
 			<input id="catNo" type="hidden" name="newCatNo[]" value="" />
