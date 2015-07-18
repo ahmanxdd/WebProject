@@ -249,7 +249,21 @@
 	function getAllDrivers() {
 		//desc asc
 		$query = 'SELECT * FROM Driver ';
-		$query .= DB::genOrderByStr(func_get_args, func_num_args(), 0);
+		$query .= DB::genOrderByStr(func_get_args(), func_num_args(), 0);
+		return DB::query($query);
+	}
+	
+	function getSupplier($suppNo) {
+		$query = 'SELECT * FROM Supplier WHERE ' . suppNo . " = '$suppNo'";
+		$result = DB::query($query);
+		if (!($supp = $result->fetch_assoc()))
+			return null;
+		return $supp;
+	}
+	
+	function getAllSuppliers() {
+		$query = 'SELECT * FROM Supplier ';
+		$query .= DB::genOrderByStr(func_get_args(), func_num_args(), 0);
 		return DB::query($query);
 	}
 	
