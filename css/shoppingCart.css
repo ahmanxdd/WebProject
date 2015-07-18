@@ -1,0 +1,136 @@
+body{
+		overflow-x:auto; overflow-y:hidden;
+	}
+
+	h1{
+		padding: 20px;
+	}
+
+	h2{
+		margin: 0px;
+		padding: 5px;
+	}
+
+	h4{
+		margin: 0px;
+		padding: 5px;
+	}
+
+	.list{
+		margin: 0px;
+		margin-left: 5%;
+		width:100%;
+		padding:5px;
+		font-style: bold;
+		float:left;
+	}
+	.l-item{
+		float: left;
+		width:45%;
+	}
+	.l-price{
+		float: left;
+		width:20%;
+	}	
+	.l-qty{
+		float: left;
+		width:15%;
+	}
+	.l-total{
+		float: left;
+		width:10%;
+	}
+
+	.item{
+		width:96%;
+		height: 150px;
+		margin-left: 20px;
+	}
+
+	.item-info{
+		float: left;
+		width: 50%;
+		height: 150px;
+	}
+
+	.info-img{
+		overflow: hidden;
+		float: left;
+		width: 256px;
+		height: 150px;
+	}
+
+	.img{
+		width: 256px;
+		height: 150px;
+	}
+	
+	.info-name{
+		float: left;
+		width: 350px;
+	}
+
+	.info-detail{
+		float: left;
+		width: 350px;
+		height: auto;
+	}
+
+	.item-price{
+		float: left;
+		width: 20%;
+		height: 150px;
+		text-align: center;
+	}
+
+	.item-qty{
+		float: left;
+		width: 15%;
+		height: 150px;
+		text-align: center;
+	}
+
+	#quantity{
+		width: 90px;
+	}
+
+	.item-total{
+		float: left;
+		width: 15%;
+		height: 150px;
+		text-align: center;
+	}
+
+	.total{
+		float: right;
+		margin-right: 30px;
+	}
+
+	.i-t-total{
+		width: 100%;
+	}
+
+	.i-t-remove{
+		width: 100%;
+	}
+
+	hr {
+		width:95%;
+	}
+
+	hr.item-hr {
+		background-color: #fff;
+		border-top: 2px dotted #8c8b8b;
+		width: 95%;
+	}
+	
+	.remove-all{
+		padding-left: 30px
+	}
+
+	.submit{
+		width: 100%;
+		float: right;
+		padding:30px;
+		text-align: right;
+	}
