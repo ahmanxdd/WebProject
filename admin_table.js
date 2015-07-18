@@ -12,7 +12,8 @@ function addNewCat(btn) {
 	$newCat.attr("id", "");
 	$newCat.css("display", "");
 	
-	$newCat.find("#catParent").val(catParent).attr("name", "newCatParent[" + newCatSeq + "]");
+	$newCat.find("#catParent").val(catParent)
+		.attr("name", "newCatParent[" + newCatSeq + "]");
 	$newCat.find("#catName").attr("name", "newCatName[" + newCatSeq + "]");
 	$newCat.find("#catNo").attr("name", "newCatNo[" + newCatSeq + "]").val(newCatSeq);
 	
@@ -29,8 +30,12 @@ function removeCat(liRemove) {
 		liRemove = $(liRemove).parents("li").first();
 	if ($(liRemove).attr("deleted") == "true")
 		restoreCat(liRemove);
-	else
+	else {
 		setRemoveCat(liRemove);
+		$(liRemove).find("li").each(function() {
+			setRemoveCat(this);
+		})
+	}
 	$(liRemove).find(".newCat").remove();
 	checkDisableRestore();
 }
@@ -40,9 +45,6 @@ function setRemoveCat(liRemove) {
 	$dels = $(liRemove).children("div").children("#dels");
 	$dels.val($dels.attr("v"));
 	$(liRemove).attr("deleted", "true");
-	$(liRemove).find("li").each(function() {
-		setRemoveCat(this);
-	})
 }
 
 function restoreCat(liRestore) {

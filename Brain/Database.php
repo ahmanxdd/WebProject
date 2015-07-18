@@ -80,7 +80,7 @@
    			"Customer" => array('pk' => custNo, 'prefix' => 'C'),
    			"Driver" => array('pk' => drvID, 'prefix' => 'DR'),
    			"District" => array('pk' => distNo, 'prefix' => 'DST'),
-   			"Category" => array('pk' => catNo, 'prefix' => 'CY'),
+   			"Category" => array('pk' => catNo, 'prefix' => 'CAT'),
    			"Product" => array('pk' => prodNo, 'prefix' => 'PT'),
    			"Schedule" => array('pk' => jobNo, 'prefix' => 'J'),
    			"CustOrder" => array('pk' => ordNo, 'prefix' => 'OR')

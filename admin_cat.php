@@ -21,7 +21,7 @@
 			include_once('Brain/functions.php');
 			include_once('Brain/Category.php');
 			
-			regPost('catNo', 'catName', null);
+			regPost('catNo', 'catName', 'newCatNo', 'newCatName', 'newCatParent', 'dels');
 			if (isset($catNo)) {
 				//from post method
 				$size = sizeof($catNo);
@@ -29,6 +29,29 @@
 					updateCategory($catNo[$i], $catName[$i]);
 			}
 			
+			if (isset($newCatNo)){
+				$catNoTable = array();
+				foreach ($newCatNo as $i => $v) {
+					if ($newCatNo[$i] == "")
+						continue;
+					$nCatParent = $newCatParent[$i];
+					if ($nCatParent[0] != 'C')
+						$nCatParent = $catNoTable[$nCatParent];
+					$newIndex = addCategory($newCatName[$i], $nCatParent);
+					$catNoTable[$newCatNo[$i]] = $newIndex;
+				}
+			}
+			
+			if(isset($dels)) {
+				$size = sizeof($dels);
+				for ($i = $size-1; $i >= 0; $i--) {
+					if ($dels[$i] == "")
+						continue;
+					if (!delOneCategory($dels[$i])) {
+						//you cannot delete the category at this moment
+					}
+				}
+			}
 			
 			$cats = getAllCategoriesNested();
 			echo genCatTable($cats);

@@ -90,7 +90,9 @@
 		$catNo = DB::getLastIndex("Category");
 		
 		$query = DB::genInsertStr("Category", $catNo, $catName, $catParent);
-		return DB::query($query);
+		if (!DB::query($query))
+			return null;
+		return $catNo;
 	}
 	
 	function delCategory($catNo) {
@@ -108,6 +110,12 @@
 				return false;
 		}
 		
+	}
+	
+	function delOneCategory($catNo) {
+		$query = 'DELETE FROM Category '
+				. 'WHERE ' . catNo . " = '$catNo'";
+		return DB::query($query);
 	}
 	
 	function updateCategory($catNo, $catName, $catParent) {
