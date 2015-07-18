@@ -5,13 +5,37 @@
 	padding: 5px;
 	top: 0px;
 	left: 0px;
-	background: red;
+	background: #55bbca;
 }
 
 .navBar {
-
+	color: white;
+	font-family: "Roboto Mono",Roboto,sans-serif;
 }
 
 .navBar .navTab, .navBar .navLogo{
+	height: 100%;
 	display: inline-block;
+}
+
+.navTab_active {
+	color: #505050;
+}
+
+.navTab div, .navLogo div {
+	height: 100%;
+	position: relative;
+}
+
+.navTab div a, .navLogo div a{
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	font-weight: 800;
+	text-decoration: none;
+	color:　white;
+}
+
+.navTab a {
+	color: white;
 }

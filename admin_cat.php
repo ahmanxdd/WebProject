@@ -1,19 +1,9 @@
-<html>
-<head>
-<link rel="stylesheet" type='text/css' href='general.css'/>
-<link rel='stylesheet' type='text/css' href='admin_table.css' />
+<?php include("header1.php"); ?>
+<link rel="stylesheet" type="text/css" href="css/admin_table.css" />
+<script src="scripts/admin_table.js"></script>
+<title>Admin Category</title>
+<?php include("header2.php"); ?>
 
-<link rel="stylesheet" href="jquery_ui/jquery-ui.min.css">
-<script src="jquery_ui/external/jquery/jquery.js"></script>
-<script src="jquery_ui/jquery-ui.min.js"></script>
-
-<script src='admin_table.js'></script>
-
-<script>
-
-</script>
-</head>
-<body>
 	<form action="admin_cat.php" method="post">
 		<div id="adminCat_C">
 		<?php
@@ -94,6 +84,5 @@
 		</div>
 		<ul></ul>
 	</li>
-	
-</body>
-</html>
+
+<?php include("footer.php"); ?>
