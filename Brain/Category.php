@@ -23,7 +23,6 @@
 			$result = DB::query($query, true);
 
 			if ($result == null)
-
 				return null;
 			$retArr[$l++] = $result[0];
 		}
