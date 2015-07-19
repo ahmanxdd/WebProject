@@ -80,7 +80,8 @@
 }
 
 .qty {
-	width: 20px;
+	width: 30px;
+	border: 0px solid transparent;
 	text-align: center;
 }
 

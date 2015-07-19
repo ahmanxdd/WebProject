@@ -2,18 +2,21 @@ var CART_AJAX_URL = "ajax/cart.php";
 
 function btnAddCartClicked(btnAddToCart) {
 	$btnAddToCart = $(btnAddToCart);
+	var prodNo = $btnAddToCart.parents(".prodItem_C").first().attr("id");
 	if ($btnAddToCart.attr("rm") == "false") {
+		var qty = $btnAddToCart.find("input").val();
+		if (qty == "" || qty == 0 || qty % 1 != 0) {
+			$btnAddToCart.find("input").css("background", ERROR_FIELD_COLOR);
+			return;
+		}
 		btnAddToCart.innerHTML = "REMOVE FROM CART";
 		$btnAddToCart.attr("rm", "true");
+		addToCart(prodNo, qty);
 	}
 	else {
 		btnAddToCart.innerHTML = 'ADD <input class="qty" type="text" onclick="event.stopPropagation();"/> TO CART';
 		$btnAddToCart.attr("rm", "false");
 	}
-	
-	var prodNo = $btnAddToCart.parents(".prodItem_C").first().attr("id");
-	var qty = $btnAddToCart.find("input").val();
-	addToCart(prodNo, qty);
 }
 
 function addToCart(prodNo, qty) {
@@ -24,6 +27,11 @@ function addToCart(prodNo, qty) {
 			"qty" : qty
 		}, function(data) {
 			alert(data);
+			if (data.indexOf("Error") != -1){
+				alert("Please login first");
+				showLoginPanel();
+				return;
+			}
 			reloadCartMenu(data);
 		});
 }
@@ -34,8 +42,11 @@ function removeFromCart(prodNo) {
 			"act": "remove",
 			"prodNo": prodNo
 		}, function(data) {
+			if (data.indexOf("Error") != -1){
+				
+				return;
+			}
 			alert(data);
-			//reloadCartMenu(data);
 		})
 }
 
