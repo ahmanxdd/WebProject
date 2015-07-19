@@ -96,7 +96,13 @@
 				</div >
 				<div class="searchInfo_C" style="width:500px;margin-bottom:0px">
 					<label>Category</label>
-					<select name="catNo"> </select>
+					<select name="catNo">
+					<?php
+						include_once("Brain/Category.php");
+						$cats = getAllCategories();
+						echo genAllOptionsHtml($cats);
+					?>
+					</select>
 				</div>
 				<button class="fa fa-2x fa-search btnSearch"></button>
 				<span class="fa fa-times clsSearchBar" onclick="closeSearchBar()"></span>

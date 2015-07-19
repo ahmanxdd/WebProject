@@ -117,3 +117,23 @@ function inputValidate(form) {
 		}
 	});
 }
+
+function updateSearch(s) {
+	var v = s.options[s.selectedIndex].value;
+	$p = $("select[name='searchByProd']");
+	$c = $("select[name='searchByCat']");
+	$d = $("select[name='searchByDist']");
+	$p.hide();
+	$c.hide();
+	$d.hide();
+	
+	if (v == "prod") {
+		$p.show();
+	}
+	else if (v == "cat") {
+		$c.show();
+	}
+	else if (v == "dist") {
+		$d.show();
+	}
+}

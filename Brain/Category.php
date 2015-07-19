@@ -128,5 +128,14 @@
 				. ' WHERE ' . catNo . " = '$catNo'";
 		return DB::query($query);
 	}
+	
+	function genAllOptionsHtml($catArr) {
+		$retHtml = '';
+		foreach ($catArr as $c) {
+			$retHtml .=
+				'<option value="' . $c[catNo] . '">'. $c[catName] . '</option>';
+		}
+		return $retHtml;
+	}
 		
 ?>

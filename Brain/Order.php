@@ -57,7 +57,7 @@
 	function getOrdersByDistNo($distNo) { 
 		//desc, asc
 		$query = "SELECT * FROM CustOrder "
-					."WHERE " . discNo . " = '$distNo' "
+					."WHERE " . distNo . " = '$distNo' "
 					. DB::genOrderByStr(func_get_args(), func_num_args(), 1);
 		//return orders, ONLY all fields in CustOrder.
 	}
