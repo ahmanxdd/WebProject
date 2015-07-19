@@ -1,0 +1,90 @@
+.prod_C {
+	padding-top: 20px;
+}
+
+.prod_C2 {
+	display: inline-block;
+	margin: 0 auto;
+	position: relative;
+}
+
+.prodItem_C {
+	padding: 10px;
+	display: inline-block;
+	overflow: hidden;
+}
+
+.prodItem_inContent {
+	width: 100%;
+	position: relative;
+	padding: 10px;
+	border-left: 2px solid grey;
+	border-bottom: 2px solid grey;
+}
+
+.prodItem_inContent:before {
+	content: "";
+	background: white;
+	width: 2px;
+	height: 15px;
+	position: absolute;
+	top: 0px;
+	left: -2px;
+}
+
+.prodItem_C div {
+	display: inline-block;
+}
+
+.prodItem_C .imgContainer {
+	height: 210px;
+	width: 210px;
+	background-color: red;
+	float:left;
+}
+
+.prodInfo_C {
+	width: 300px;
+	float: left;
+	padding: 10px;
+}
+
+.prodInfo_C h2{
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 10px;
+	font-size: 0.8em;
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+
+.prodInfo_C table tr th, .prodInfo_C table tr td {
+	font-size: 1.2em;
+}
+
+.prodInfo_C table tr th {
+	padding: 5px;
+	padding-right: 15px;
+	color: #707070;
+	text-align: left;
+}
+
+.prodInfo_C table tr td {
+	font-weight: 600;
+}
+
+.btnAddToChart {
+	height: 40px;
+	width: 150px;
+	margin-top: 10px;
+	background: #00C000;
+	border: 0px solid white;
+	outline: none;
+	font-size: 0.5em;
+	color: white;
+	font-weight: bold;
+	transition: 
+}
+
+.btnAddToChart {
+}

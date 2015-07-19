@@ -1,9 +1,9 @@
-<?php include("header1.php") ?>
+<?php include("header1.php"); ?>
 <link rel="stylesheet" type="text/css" href="css/admin_table.css" />
-<script src='scripts/admin_table.js'></script>
-<?php include("header2.php") ?>
+<script src="scripts/admin_table.js"></script>
+<title>Admin Category</title>
+<?php include("header2.php"); ?>
 
-<body>
 	<?php include("admin_table_tabs.php") ?>
 	<?php
 		include_once('Brain/functions.php');
@@ -64,6 +64,4 @@
 			
 		</table>
 		
-	</div>
-</body>
-</html>
+<?php include("footer.php"); ?>

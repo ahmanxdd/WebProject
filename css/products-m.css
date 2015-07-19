@@ -1,0 +1,24 @@
+@media only screen and (max-width: 1790px) {
+	.prodItem_C {
+		width: 25%;
+	}
+}
+
+@media only screen and (max-width: 1340px) {
+	.prodItem_C {
+		width: 33%;
+	}
+}
+
+
+@media only screen and (max-width: 1025px) {
+	.prodItem_C {
+		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.prodItem_C {
+		width: 100%;
+	}
+}

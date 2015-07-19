@@ -33,6 +33,14 @@
 	font-size: 1.5em;
 }
 
+.adminTable tr {
+	transition: background 0.2s;
+}
+
+.adminTable tr:hover {
+	background: rgba(255, 184, 112, 0.5);
+}
+
 .adminTable tr td{
 	padding: 20px;
 	border-bottom: 1px solid #808080;
@@ -78,11 +86,12 @@
 	height: 80px;
 	font-size: 1em;
 	margin: 5px;
-	transition: background 0.3s;
+	border-bottom: 1px solid grey;
+	transition: background 0.2s;
 }
 
 .rowRecord:hover {
-	
+	background: rgba(255, 184, 112, 0.5);
 }
 
 .newRowRecord {
@@ -140,6 +149,14 @@
 
 .btnRestore[disabled] {
 	color: #C0C0C0;
+}
+
+.btnAdd {
+	transition: transform 0.2s;
+}
+
+.btnAdd:hover {
+	transform: scale(1.1, 1.1);
 }
 
 .btnAdd:before, .btnAdd:after {
