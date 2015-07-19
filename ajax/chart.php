@@ -1,9 +1,8 @@
 <?php
 	include_once "../Brain/functions.php";
 	include_once "../Brain/Product.php";		
-//	regPost($_POST["requestCode"], $_POST[suppNo]);
-	$requestCode = 1;
-	$suppNo = "S0001";
+	$requestCode = $_POST["requestCode"];
+	$suppNo =  $_POST[suppNo];
 	$array["title"]["text"] = "Result";
 	$array["animationEnabled"] = "true";
 	$array["data"][0]["type"] = "column";
@@ -18,12 +17,15 @@
 			$chart = getSalesSummaryByGender($suppNo);			
 			$chart = $chart["F"];
 			break;
+		case 3:
+			$chart = getSalesSummaryByDistrict($suppNo,"DST01");			
+			break;
 	}
 
 	while($row = $chart->fetch_assoc())
 	{
 		$newArr["label"] = $row[prodName];
-		$newArr["y"] = $row["Sold"];
+		$newArr["y"] = intval($row["Sold"]);
 		$array["data"][0]["dataPoints"][] = $newArr;
 	}
 	echo json_encode($array); 

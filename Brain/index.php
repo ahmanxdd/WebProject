@@ -27,8 +27,8 @@
 	//$products = $cart->getProducts();
 	//$array = getSalesSummaryByGender("S0002", null);
 	//foreach($array as $a)
-		printThisDBResult(getProducts(null,null,null,null,null,"CAT05",null));
-		print_r(getSubCategories("CAT05",true));
+	//	printThisDBResult(getProducts(null,null,null,null,null,"CAT05",null));
+		print_r(getSubCategories("CAT07",true));
 		//$array = getSubCategoriesNested("CAT01","ASC");
 	//print_r($array);
 ?>

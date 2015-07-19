@@ -21,7 +21,7 @@
 			$query = 'SELECT * FROM Category '
 			. 'WHERE ' . catNo . " = '$catNo'";
 			$result = DB::query($query, true);
-			if (!($retArr[$l++] = $result->fetch_assoc())
+			if (!($retArr[$l++] = $result->fetch_assoc()))
 				return null;
 		}
 		

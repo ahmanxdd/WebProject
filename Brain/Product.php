@@ -194,10 +194,11 @@
 	function getSalesSummaryByDistrict($suppNo, $distNo = null) {
 		//if distNo not set --> get all district and return an array
 		// $districts[distNo] --> result
+		include_once "District.php";
 		if(!isset($distNo))
 		{
 			$result = getAllDistricts();
-			while($row = $result->fetch_assoc())
+			while($row = $result->fetch_array())
 				$districts[$row[distNo]] =  getSalesSummaryByDistrict($suppNo, $row[distNo], "Sold", "DESC");
 			return $districts;
 		}

@@ -13,8 +13,7 @@ $(document).ready(function () {
 window.onload = function () {
 
 //Better to construct options first and then pass it as a parameter
-	var options = array;
-	$("#chartHolder").CanvasJSChart(options);
+
     
     
 }
@@ -35,7 +34,7 @@ function getChart(reCode,suppNo)
 		}).done(		
 			function(data)
 			{
-					alert(data);
+				alert(data);
 				addData(JSON.parse(data));
 			}
 		);
