@@ -30,7 +30,7 @@
 	const custGender = "custGender";
 	const custDOB = "custDOB";
 	const custTel = "custTel";
-const custAddr = "custAddr";
+	const custAddr = "custAddr";
 
 	const ordNo = "ordNo";			//CustOrder
 	const ordDate = "ordDate";

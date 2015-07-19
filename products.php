@@ -10,8 +10,10 @@
 	include_once("Brain/Product.php");
 	include_once("Brain/Category.php");
 	include_once("Brain/User.php");
+	include_once("Brain/ShoppingCart.php");
 	
 	regGet('prodName', 'priceMin', 'priceMax', 'catNo');
+	$cart = new SCart();
 	$prods = getProducts($prodName, $priceMin, $priceMax, null , null, $catNo, null);
 	//$prods = getAllProducts();
 ?>
@@ -59,7 +61,7 @@
 								if (!$outOfStock
 									&& (UserControl::getType() == NULL || UserControl::getType() == 'c')) {
 									echo '
-									<button class="btnAddToChart" rm="false" onclick="btnAddCartClicked(this)">
+									<button class="btnAddToChart" rm="'. $cart->getTotalAmount($p[prodNo])==null?'true':'false' . "'" onclick="btnAddCartClicked(this)">
 										ADD <input class="qty" type="text" value="1" onclick="event.stopPropagation();"/> TO CART
 									</button>';
 								} 

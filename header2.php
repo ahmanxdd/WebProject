@@ -25,7 +25,8 @@
 							<?php
 								include_once("Brain/ShoppingCart.php");
 								$cart = new SCart();
-								echo SCart::genCartMenuHtml($cart->getProducts());
+								$html = SCart::genCartMenuHtml($cart->getProducts());
+								echo $html;
 							?>
 						</ul>
 						<button onclick="window.location='shoppingCart.php'">VIEW CART</button>

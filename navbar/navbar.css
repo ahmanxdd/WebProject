@@ -56,7 +56,7 @@
 }
 
 .cartMenu {
-	width: 300px;
+	width: 350px;
 	position: absolute;
 	top: 100%;
 	left: 50%;
@@ -85,12 +85,14 @@
 }
 
 .cartMenu > ul > li > label{
-	width: 80%;
+	width: 70%;
+	font-size: 1em;
 	display: inline-block;
 }
 
 .cartMenu > ul > li > span {
 	width: 15%;
+	font-size: 1em;
 	display: inline-block;
 	text-align: right;
 	vertical-align: top;
@@ -98,5 +100,14 @@
 
 .cartMenu > button {
 	width: 200px;
-	margin: auto auto;
+	height: 40px;
+	margin-top: 10px;
+	margin-left:  65px;
+	background: #00C000;
+	border: 0px solid white;
+	outline: none;
+	color: white;
+	font-weight: bold;
+	font-size: 1.2em;
 }
+
