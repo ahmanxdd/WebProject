@@ -24,42 +24,45 @@
 				}
 				
 				echo 
-					'<div class="prodItem_C col-32 col-m-100">
+					'<div id="' . $p[prodNo] . '" class="prodItem_C col-32 col-m-100">
 						<div class="prodItem_inContent">
-							<div class="imgContainer"></div>
+							<div class="imgContainer prodImg">
+								<img onload="cropImg(this);" src="product_image/' . $p[prodPhoto] . '"/>;
+							</div>
 							<div class="prodInfo_C">
 								<h2 alt="' . $p[prodName] . '">' . $prodName . '</h2>
-								<table>
-									<tr>
-										<th>Price:</th>
-										<td>$' . $p[prodPrice]  . '</td>
-									</tr>
-									<tr>
-										<th>Supplier:</th>
-										<td>' . $s[suppName] . '</td>
-									</tr> ';
-								if (UserControl::getType() == 'a') {
-									echo 
-									'<tr>
-										<th>Stock:</th>
-										<td>' . $p[stockQty] . '</td>
-									</tr>';
+								<div class="prodInfoTable_C">
+									<table>
+										<tr>
+											<th>Price:</th>
+											<td>$' . $p[prodPrice]  . '</td>
+										</tr>
+										<tr>
+											<th>Supplier:</th>
+											<td>' . $s[suppName] . '</td>
+										</tr> ';
+									if (UserControl::getType() == 'a') {
+										echo 
+										'<tr>
+											<th>Stock:</th>
+											<td>' . $p[stockQty] . '</td>
+										</tr>';
+									}
+									echo '	
+									</table> ';
+								if (!$outOfStock
+									&& (UserControl::getType() == NULL || UserControl::getType() == 'c')) {
+									echo '
+									<button class="btnAddToChart" rm="false" onclick="btnAddCartClicked(this)">
+										ADD <input class="qty" type="text" value="1" onclick="event.stopPropagation();"/> TO CART
+									</button>';
+								} 
+								else {
+									echo '
+									<div class="outOfStock">OUT OF STOCK!</div>';
 								}
-								echo '	
-								</table> ';
-							if (!$outOfStock
-								&& (UserControl::getType() == NULL || UserControl::getType() == 'c')) {
-								echo '
-								<button class="btnAddToChart" rm="false" onclick="addToCart(this)">
-									ADD <input class="qty" type="text" onclick="event.stopPropagation();"/> TO CART
-								</button>';
-							} 
-							else {
-								echo '
-								<div class="outOfStock">OUT OF STOCK!</div>';
-							}
-							
-							echo '	
+							echo '
+								</div>
 							</div>
 						</div>
 					</div>';

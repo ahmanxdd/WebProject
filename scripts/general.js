@@ -1,0 +1,1 @@
+var ERROR_FIELD_COLOR = "rgb(255, 127, 127)";

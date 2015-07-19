@@ -49,7 +49,7 @@
 								<input type="hidden" name="distNo[]" value="'. $d[distNo] . '"/>
 								<td> <input type="checkbox" name="dels[]" value="'. $d[distNo] . '"/> </td>
 								<td>' . $d[distNo] . '</td>
-								<td> <input type="text" name="distName[]" value="'. $d[distName] . '"/> </td>
+								<td> <input type="text" required name="distName[]" value="'. $d[distName] . '"/> </td>
 							</tr>';
 					}							
 				?>
