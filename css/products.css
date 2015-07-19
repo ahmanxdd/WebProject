@@ -73,9 +73,13 @@
 	font-weight: 600;
 }
 
+.qty {
+	width: 20px;
+}
+
 .btnAddToChart {
 	height: 40px;
-	width: 150px;
+	width: 180px;
 	margin-top: 10px;
 	background: #00C000;
 	border: 0px solid white;
@@ -86,5 +90,14 @@
 	transition: 
 }
 
-.btnAddToChart {
+.btnAddToChart[disabled]{
+	background: green;
+}
+
+.btnAddToChart[rm="true"] {
+	background: yellow;
+}
+
+.outOfStock {
+	
 }

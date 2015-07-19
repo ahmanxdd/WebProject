@@ -7,7 +7,8 @@
 	include_once("Brain/field_const.php");
 	include_once("Brain/Product.php");
 	include_once("Brain/Category.php");
-	include_once("Brain/User.php");
+	error_reporting(0);
+	
 	$prods = getAllProducts();
 ?>
 
@@ -16,27 +17,49 @@
 		<?php
 			foreach ($prods as $p) {
 				$s = getSupplier($p[suppNo]);
+				$prodName = $p[prodName];
+				$outOfStock = ($p[stockQty] <= 1);
+				if (strlen($prodName) > 23) {
+					$prodName = substr($prodName, 0, 20) . '...';
+				}
+				
 				echo 
 					'<div class="prodItem_C col-32 col-m-100">
 						<div class="prodItem_inContent">
 							<div class="imgContainer"></div>
 							<div class="prodInfo_C">
-								<h2>' . $p[prodName] . '</h2>
+								<h2 alt="' . $p[prodName] . '">' . $prodName . '</h2>
 								<table>
 									<tr>
-										<th>Price</th>
-										<td>' . $p[prodPrice]  . '</td>
+										<th>Price:</th>
+										<td>$' . $p[prodPrice]  . '</td>
 									</tr>
 									<tr>
-										<th>Supplier</th>
+										<th>Supplier:</th>
 										<td>' . $s[suppName] . '</td>
-									</tr>
-									<tr>
+									</tr> ';
+								if (UserControl::getType() == 'a') {
+									echo 
+									'<tr>
 										<th>Stock:</th>
 										<td>' . $p[stockQty] . '</td>
-									</tr>
-								</table>
-								<button class="btnAddToChart" onclick="addToCart(this)">ADD TO CART</button>
+									</tr>';
+								}
+								echo '	
+								</table> ';
+							if (!$outOfStock
+								&& (UserControl::getType() == NULL || UserControl::getType() == 'c')) {
+								echo '
+								<button class="btnAddToChart" rm="false" onclick="addToCart(this)">
+									ADD <input class="qty" type="text" onclick="event.stopPropagation();"/> TO CART
+								</button>';
+							} 
+							else {
+								echo '
+								<div class="outOfStock">OUT OF STOCK!</div>';
+							}
+							
+							echo '	
 							</div>
 						</div>
 					</div>';
