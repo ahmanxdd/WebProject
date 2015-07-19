@@ -1,7 +1,7 @@
 <?php
 	include_once('field_const.php');
 	include_once('Database.php');
-
+	include_once('Schedule.php');
 	//記住唔好hardcode column名
 	function getOrder($orderNo) {
 		$query = "SELECT * FROM CustOrder "
@@ -70,6 +70,7 @@
 		$query_format = "SELECT " . prodNo . " FROM Product "
 					."WHERE " . stockQty . " <= '%s' "
 					."AND " . prodNo . " = '%s'";
+					
 		//1. check the stock level of each product, if stockLevel < qty, return 1
 		
 		$minDate = date("Y-m-d", strtotime(" + 2 days"));
@@ -103,7 +104,7 @@
 
 		//4. return true if success, return false if any other database error occurs.
 		if(DB::query($order_query) && DB::query($orderLine_query))
-		{
+		{						
 			matchSchedule($orderNo, $theDateWhichTheCustomerWantTheOrderToBeDeliveried, $distNo);
 			return true;
 		}
@@ -144,7 +145,6 @@
 	{
 		$query = "UPDATE CustOrder SET " . jobNo . " = '$jobNo' "
 				."WHERE " . ordNo . " = '$ordNo'";
-		echo $ordNo . $jobNo;
 		return DB::query($query);
 	}
 ?>

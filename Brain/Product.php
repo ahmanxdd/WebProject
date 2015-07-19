@@ -245,28 +245,18 @@
 	
 	
 
-	function getSalesSummaryByCat($suppNo, $catNo = null) {
+	function getSalesSummaryByCat($suppNo, $catNo) {
 	//if distNo not set --> get all district and return an array
 	// $districts[distNo] --> result
-	if(!isset($isMale))
-	{
-		$genderChart["M"] =  getSalesSummaryByGender($suppNo, true, "Sold", "DESC");
-		$genderChart["F"] =  getSalesSummaryByGender($suppNo, false, "Sold", "DESC");
-		return $genderChart;
-	}
-	
-	$category_famliy = getSubCategoriesNested($catNo, "ASC");
 
-	foreach($category_famliy as $current)
-	while(isset($current[catParent]['subcat']))
-	{
-		$condition = "Category." . catNo . " = '" . $current[catNo] ."'";
-		echo "<br>" . $current[catNo];
-		$current = $current['subcat'];
-	}
-	foreach($category_famliy as $c)
-		$conditon = "Category." . catNo . " = $category_famliy";
 	
+	$category_famliy = getSubCategories($catNo, true);
+
+	$condition = catNo . " IN(";
+	foreach($category_famliy as $c)
+		$condition .= "'" . $c[catNo] ."'" . ",";
+		
+	$condition = rtrim($condition,",") .") "; 
 	
 	$query = "SELECT Customer." . custGender . ", District." . distNo . ", District." . distName . ", OrderLine." . prodNo . ", Product." . prodName . ", Product." . prodPhoto . ", Product." . catNo . ", Category." . catName . ", SUM(OrderLine." . qty .") AS Sold "
 			."FROM OrderLine "
@@ -276,7 +266,7 @@
 			."JOIN District ON CustOrder." . distNo . " = District." . distNo . " "
 			."JOIN Customer ON Customer." . custNo . " = CustOrder." . custNo . " "
 			."WHERE Product." . suppNo . " = '$suppNo' "
-			."AND Customer.". custGender . " = '$custGender' " 
+			."AND Category." .  $condition
 			."AND " . isDeleted . " = 0 " 
 			."GROUP BY Product." . prodNo . " "
 			.DB::genOrderByStr(func_get_args(), func_num_args(), 2);

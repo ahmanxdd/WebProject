@@ -24,14 +24,35 @@ window.onload = function () {
 
 function addData(array)
 {
-	$("#chartHolder").CanvasJSChart().options.data = array["data"];    
+	$("#chartHolder").CanvasJSChart().options = array;    
      $("#chartHolder").CanvasJSChart().render();
 }
 
-function getChart(reCode,suppNo)
+
+function getCatChart(reCode,suppNo)
+{
+	
+	catNo = $("#selectcat").val();
+	title = $("#selectcat option:selected").html();
+	$.post("ajax/chart.php",
+		{
+			'catNo':catNo,
+			'title': title,
+			'suppNo': suppNo,
+			'requestCode': reCode
+		}).done(		
+			function(data)
+			{
+				addData(JSON.parse(data));
+			}
+		);
+}
+
+function getChart(reCode,suppNo,title)
 {
 	$.post("ajax/chart.php",
 		{
+			'title': title,
 			'suppNo': suppNo,
 			'requestCode': reCode
 		}).done(		

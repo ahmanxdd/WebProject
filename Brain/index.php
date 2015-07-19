@@ -1,8 +1,9 @@
 <html><body><?php 
 	
-	include "ShoppingCart.php";
+	include "Product.php";
+	include "functions.php";
 //	printThisDBResult(getOrdresByProductNo("OR001")); //RAYMOND:l 蟲蛀
-//	printThisDBResult(getAllJobsByDrvID("D0001"));
+	printThisDBResult(getSalesSummaryByCat("S0001","CAT03"));
 
 //	printThisDBResult(getAllDistricts());
 //	markJobDate("D0003", date("Y-m-d"), "DST01");

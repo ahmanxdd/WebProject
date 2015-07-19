@@ -1,11 +1,10 @@
 <?php
 	include_once "Brain/field_const.php";
+	include_once "Brain/User.php";
 	include("header1.php");
 ?>
-<!DOCTYPE>
 <link href="css/register.css" rel="stylesheet" type="text/css" />
 <script src='js/register.js'> </script>
-
 <?php
 	include("Brain/District.php"); 
 	include("header2.php"); 
@@ -26,13 +25,28 @@
 		$custGender = $_POST['custGender'];
 		$custDOB = $_POST['custDOB'];
 		$custTel = $_POST['custTel'];
+		$distNo = $_POST['distNo']; 
 		$custAddr = $_POST['custAddr'];
-
-		if($loginPswd != $rePswd){
+		
+		if(count(getUserNoByLoginName($loginName)) != 0)
+			echo "<script> alert('The username already exist!, please change other one!')</script>";
+		else if($loginPswd != $rePswd)
 			echo "<script> alert('Password and re-enter password must be same!')</script> ";
-		}
-		if($custAddr == "")
+		else if($custAddr == "")
 			echo "<script> alert('Please enter Address!')</script>";
+		else{
+			if (addUser($loginName, $loginPswd)){
+				if (regCustomer(getUserNoByLoginName($loginName), $custName, $custGender, $custDOB, $custTel, $custAddr, $distNo)){
+					echo "<script> alert('Successful register!')</script>";
+					unset($_POST);
+				}else {
+					delUser(getUserNoByLoginName($loginName));
+					echo "<script> alert('Unsuccessful register!')</script>";
+				}
+					
+			}else 
+				echo "<script> alert('Unsuccessful register!')</script>";
+		}
 
 	}
 ?>
@@ -57,7 +71,7 @@
 	<tr><td><label class="form_header">Birthday</label></td></tr>
 	<tr><td><input required type="date" name="custDOB" value="<?php echo isset($_POST['custDOB']) ? $_POST['custDOB'] : '' ?>"/></td></tr>
 	<tr><td><label class="form_header">Contact</label></td></tr>
-	<tr><td><input required type="tel" name="custTel" value="<?php echo isset($_POST['custTel']) ? $_POST['custTel'] : '' ?>"/></td></tr>
+	<tr><td><input required type="number" name="custTel" pattern="[0-9]" value="<?php echo isset($_POST['custTel']) ? $_POST['custTel'] : '' ?>"/></td></tr>
 	<tr><td><label class="form_header">District</label></td></tr>
 	<tr><td><?php echo $box; ?></td></tr>
 	<tr><td><label class="form_header">Your Address</label></td></tr>

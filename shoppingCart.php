@@ -26,6 +26,10 @@
 <?php
 
 	include("header2.php");
+	if(isset($_GET["sucess"]))
+	{
+		echo "<script> alert('Thank You!');</script>";
+	}
 ?>
 <body>
 	
@@ -79,7 +83,7 @@
 	<tfoot>
 		<tr><td/><td/><td/><td/>
 		<td class="dt-right">Total Amount: </td><td style="border-left:none" class="dt-center">HKD$ <span id="totalAmount"><?php printf("%.2f",$cart->getTotalAmount()); ?></span></td>
-		<td class="dt-center"><input class="btn_ftyStyle" type="button" value="CHECK OUT"/></td></tr>
+		<td class="dt-center"><input class="btn_ftyStyle" type="button" onclick="location.replace('checkout.php')" value="CHECK OUT"/></td></tr>
 	</tfoot>
 	</table>
 	

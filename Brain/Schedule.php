@@ -69,8 +69,8 @@
 	
 	function matchSchedule($ordNo, $jobDate, $distNo)
 	{
+		
 		//1. Get All Driver and their jobs num in that day
-			
 		$query = "SELECT * FROM NoOfJobs "
 				."JOIN "
 				."(SELECT MIN(" . numOfJobs . ") AS MinNum FROM NoOfJobs "
@@ -79,7 +79,7 @@
 				."ON SubQuery.MinNum = " . numOfJobs . " "
 				."WHERE " . jobDate . " = '$jobDate' "
 				."AND " . distNo . " = '$distNo' ";
-			
+
 		$result = DB::query($query);
 		
 		if(!$result)

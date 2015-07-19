@@ -10,7 +10,7 @@
 		return;	
 	$isOwner = false;
 	include_once "Brain/UserControl.php";
-	UserControl::login("loginS0001","mypswd");
+
 	if(UserControl::checkState())
 	{
 		$userNo = UserControl::getUserNo();
@@ -239,8 +239,6 @@ JOBTABLE_ROW;
 		
 		include_once "Brain/Product.php";
 		$genderChart = getSalesSummaryByGender($typeID);
-		printThisDBResult($genderChart["M"]);
-		printThisDBResult($genderChart["F"]);
 		$ourProduct = getProductsBySupplier($typeID);
 		
 		$TABLE_FORMAT = <<<_TABLE
@@ -253,16 +251,26 @@ _TABLE;
 <tr><td><img src='product_image/%s'/></td><td>%s</td><td>%s</td><td>%5.2f</td><td>%d</td><td>%s</td>
 _TABLEROW;
 
+		$selectionBox = "<select id='selectcat' name='cat' onchange='getCatChart(6,\"$typeID\")'>";
+		$category = getAllCategories();
+		while($row = $category->fetch_assoc())
+			$selectionBox .= "<option value='" . $row[catNo] . "'>" . $row[catName] . "</option>"; 
+		$selectionBox .= "</select>";
 		$rows = "";
 		while($row = $ourProduct->fetch_assoc())
 			$rows .= sprintf($TABLE_ROW_FORMAT, $row[prodPhoto], $row[prodNo],$row[prodName],$row[prodPrice],$row[stockQty],$row[catNo]);
 		printf($TABLE_FORMAT,$rows);
 		echo "
-	<button onclick='getChart(1,\"$typeID\")'> GetSalesSummaryByGender - M</button>
-	<button onclick='getChart(2,\"$typeID\")'> GetSalesSummaryByGender - F</button>
-	<button onclick='getChart(3,\"$typeID\")'> District - HONG KONG</button>	
-	<button onclick='getChart(3,\"$typeID\")'> District - Kowloon</button>	
-	<button onclick='getChart(3,\"$typeID\")'> District - New Territories</button>	
+	<button onclick='getChart(1,\"$typeID\",\"Gender - Male\")'> GetSalesSummaryByGender - M</button>
+	<button onclick='getChart(2,\"$typeID\",\"Gender - Female\")'> GetSalesSummaryByGender - F</button>
+	<button onclick='getChart(3,\"$typeID\",\"HONG KONG\")'> District - HONG KONG</button>	
+	<button onclick='getChart(4,\"$typeID\",\"Kowloon\")'> District - Kowloon</button>	
+	<button onclick='getChart(5,\"$typeID\",\"New Territories\")'> District - New Territories</button>
+	<br><fty>Get Chart by catNo </fty>$selectionBox
+
+	
+	
+	
 	";
 	
 ?>

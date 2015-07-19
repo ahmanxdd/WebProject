@@ -65,8 +65,16 @@
 		public function checkOut($deliveryDate, $orderDiscount,$deliAddr, $custNo, $distNo)
 		{
 			include_once "Order.php";
-			addOrder(date("Y-m-d"), $deliveryDate, $orderDiscount, $deliAddr, $custNo, $distNo, $this->_product);
+
+			if(addOrder(date("Y-m-d"), $deliveryDate, $orderDiscount, $deliAddr, $custNo, $distNo, $this->_product))
+			{
+				$this->clear();
+				return true;
+		
+			}
+			return false;
 		}
+		
 		
 		public function __destruct() {
 			if(!isset($this->_product))

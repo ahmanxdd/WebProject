@@ -65,6 +65,36 @@
 		return $retArr;		
 	}
 	
+	function regCustomer($userNo, $custName, $custGender, $custDOB, $custTel, $custAddr, $distNo){
+		$query = "SELECT COUNT(*) FROM User "
+				."WHERE " . drvID . " IS NULL "
+				."AND " . custNo . " IS NULL "
+				."AND " . adminNo . " IS NULL "
+				."AND " . userNo . " = '$userNo'";
+				
+		$result = DB::query($query);
+		
+		if($result->num_rows == 0)
+			return false;
+
+		if (isset($custName) && is_array($custName)) { //for JSON
+			$custObj = $custName;
+			$custName = $custObj[custName];
+			$custGender = $custObj[custGender];
+			$custDOB = $custObj[custDOB];
+			$custTel = $custObj[custTel];
+			$custAddr = $custObj[custAddr];
+			$distNo = $custObj[distNo];
+		}
+		
+		$custNo = DB::getLastIndex("Customer");
+		$insert_customer_query = DB::genInsertStr("Customer", $custNo, $custName, $custGender, $custDOB, $custTel, $custAddr, $distNo);
+		$update_user_query = "UPDATE User SET " . custNo . " = '$custNo' WHERE " . userNo . " = '$userNo'";
+
+		if(DB::query($insert_customer_query))
+			return DB::query($update_user_query);
+		return false;		
+	}
 	//User
 	function getAllUsers() {
 		//desc, asc
@@ -84,17 +114,17 @@
 		return $result->fetch_assoc();
 	}
 	
-	function addUser($loginName, $loginPswd) {
-		if (isset($loginName) && is_array($loginName)) { //for JSON associated array
-			$userObj = $loginName;
-			$loginName = $userObj[loginName];
-			$loginPswd = $userObj[loginPswd];
-		}
-		
-		$userNo = DB::getLastIndex("User");
-		$query = DB::genInsertStr("User", $userNo, $loginName, $loginPswd, null, null, null, null,null);
-		return DB::query($query);
-	}
+		function addUser($loginName, $loginPswd) {
+		  if (isset($loginName) && is_array($loginName)) { //for JSON associated array
+		   $userObj = $loginName;
+		   $loginName = $userObj[loginName];
+		   $loginPswd = $userObj[loginPswd];
+		  }
+		  
+		  $userNo = DB::getLastIndex("User");
+		  $query = DB::genInsertStr("User", $userNo, $loginName, $loginPswd, null, null, null, null,null);
+		  return DB::query($query);
+ 	}
 
 	function delUser($userNo) {
 		$DRV_ID = drvID;
