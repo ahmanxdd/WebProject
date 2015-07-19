@@ -2,6 +2,69 @@
 	include_once("field_const.php");
 	include_once("Database.php");	
 	
+	function getInfo($userNo)
+	{
+		$user = getUser($userNo);
+		if(!isset($user))
+			return null;
+		$type = getUserType($userNo);
+		switch($type)
+		{
+			case "d":
+				return driver2custInfo($user[drvID]);
+			case "a":
+				return null;
+			case "c":
+				return user2custInfo($user[custNo]);
+			case "s":
+				return supp2custInfo($user[suppNo]);
+			default:
+				return null;
+		}
+	}
+	
+	function driver2custInfo($drvID)
+	{
+		$user = getDriver($drvID);
+		$retArr = array
+		(
+			"ID" => $user[drvID],
+			"Name" => $user[drvName],
+			"Gender" => $user[drvGender]
+		);
+		return $retArr;		
+	}
+	
+	
+	function supp2custInfo($suppNo)
+	{
+		$user = getSupplier($suppNo);
+		$retArr = array
+		(
+			"ID" => $user[suppNo],
+			"Name" => $user[suppName],
+			"Contact" => $user[suppTel],
+			"Address" => $user[suppAddr]
+		);
+		return $retArr;		
+	}
+	
+	function user2custInfo($custNo)
+	{
+		$user = getCustomer($custNo);
+		$retArr = array
+		(
+			"ID" => $user[custNo],
+			"Name" => $user[custName],
+			"Gender" => $user[custGender],
+			"Date of Birth" => $user[custDOB],
+			"Contact" => $user[custTel],
+			"Address" => $user[custAddr],
+			"District No" => $user[distNo]			
+		);
+		return $retArr;		
+	}
+	
 	//User
 	function getAllUsers() {
 		//desc, asc
@@ -15,7 +78,10 @@
 	function getUser($userNo) {
 		$query = "SELECT * FROM User " 
 			. "WHERE " . userNo . " = '$userNo'";	//no hardcode! , "WHERE userNo = $userNo" <-- 唔好咁打
-		return DB::query($query);
+		$result = DB::query($query);
+		if($result == null)
+			return null;
+		return $result->fetch_assoc();
 	}
 	
 	function addUser($loginName, $loginPswd, $drvID, $custNo, $suppNo, $adminNo) {
@@ -68,6 +134,31 @@
 		}
 	
 		return true;
+	}
+	
+	function getUserType($userNo)
+	{
+		$row = getUser($userNo);
+		if(isset($row[drvID]))
+			{
+				return "d";
+			}
+			else if(isset($row[adminNo]))
+			{
+				return "a";
+			}
+			else if(isset($row[custNo]))
+			{
+				return "c";
+			}
+			else if(isset($row[suppNo]))
+			{
+				return "s";
+			}
+			else
+			{
+				return null;
+			}
 	}
 	
 	function regAdmin($userNo, $adminTel) {
@@ -239,7 +330,7 @@
 	}
 	
 	function getDriver($drvNo) {
-		$query = 'SELECT * FROM Driver WHERE ' . drvNo . " = '$drvNo'";
+		$query = 'SELECT * FROM Driver WHERE ' . drvID . " = '$drvNo'";
 		$result = DB::query($query);
 		if (!($drv = $result->fetch_assoc()))
 			return null;

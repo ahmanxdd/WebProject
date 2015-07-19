@@ -28,5 +28,7 @@
 	$array = getSalesSummaryByGender("S0002", null);
 	foreach($array as $a)
 		printThisDBResult($a);
-
+		
+		$array = getSubCategoriesNested("CAT01","ASC");
+	print_r($array);
 ?>

@@ -1,7 +1,24 @@
 
+
 var tmp_obj, tmp_value;
 
+
+	$("#OrderTable tbody tr").on("click",".deletelanguage",function (event) {
+			alert ("HO");
+		}
+			
+	),
+
+
+
+
 $(document).ready(function () {
+
+
+
+
+
+
 	$(".changable").on
 		(
 		{
@@ -24,11 +41,11 @@ $(document).ready(function () {
 				if ($jd == tmp_value)
 					return;
 				$(this).attr('readonly', true);
+
 				var $jd = this.value;
 				var $jn = $(this).closest("tr")
 					.find('[name=jobNo]')
 					.val();
-
 				if (this.name == "cbdistrict") {
 
 					var acThis = $(this);
@@ -38,7 +55,7 @@ $(document).ready(function () {
 					var thisvalue = this.options[this.selectedIndex].value;
 					$.post
 						(
-						"driver.php",
+						"../BackProcess/driver.php",
 						{
 							jobNo: $jn,
 							distNo: $jd
@@ -46,6 +63,7 @@ $(document).ready(function () {
 
 						).done(
 							function (data) {
+
 								if (data != "true") {
 									alert("This job has order(s)! You can't change this");
 									tmp_obj.value = tmp_value;
@@ -63,7 +81,7 @@ $(document).ready(function () {
 				else if (this.name == "date") {
 					$.post
 						(
-						"driver.php",
+						"../BackProcess/driver.php",
 						{
 							jobNo: $jn,
 							jobDate: $jd
@@ -88,7 +106,7 @@ $(document).ready(function () {
 				.find('[name=jobNo]')
 				.val();
 			var acThis = $(this);
-			$.post("driver.php",
+			$.post("../BackProcess/driver.php",
 				{
 					jobNo: jobNo,
 					remove: true
@@ -107,7 +125,20 @@ $(document).ready(function () {
 
 		}
 
-		)
+		),
+
+	$("#jobTable tbody tr").click(function () {
+		var $jobNo = $(this).find('[name=jobNo]').val();
+
+		$.post("../BackProcess/driver.php",
+			{
+				getDetail: true,
+				jobNo: $jobNo
+			})
+			.done(function (data) {
+				$("#retPlaceHold\er").html(data);
+			})
+	})
 
 });
 
@@ -124,3 +155,46 @@ $(function () {
 });
 
 
+$(function () {
+    $("#weeklydialog").dialog({
+		autoOpen: false,
+		modal: true,
+		dialogClass: "alert",
+
+		resizable: false,
+		title: null,
+		show: {
+			effect: "blind",
+			duration: 250
+		},
+		hide: {
+			effect: "explode",
+			duration: 250
+		}
+    });
+
+    $("#weekopener").click(function () {
+		$("#weeklydialog").dialog("open");
+    });
+});
+
+$(function () {
+    $("#dailydialog").dialog({
+		autoOpen: false,
+		modal: true,
+		resizable: false,
+		width: 325,
+		show: {
+			effect: "blind",
+			duration: 250
+		},
+		hide: {
+			effect: "explode",
+			duration: 250
+		}
+    });
+
+    $("#dayopener").click(function () {
+		$("#dailydialog").dialog("open");
+    });
+});

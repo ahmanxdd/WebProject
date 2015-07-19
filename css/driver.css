@@ -1,21 +1,6 @@
 #format { margin-top: 2em; }
 
-body
-{
-	 font-family: Roboto Mono, Roboto, sans-serif;
-	 margin: 20px;
-}
 
-
-.jqStyle_selectDistrict
-{
-	width: 200px;
-}
-
-.jqStyle_spinner
-{
-	width: 200px;
-}
 
 #jobTable input, #jobTable .changable
 {
@@ -23,6 +8,13 @@ body
 	border: none;
 }
 
+
+
+.topLine
+{
+	display:inline-block;
+	vertical-align: top;
+}
 
 input[type="text"]
 {
@@ -33,26 +25,25 @@ input[type="date"]
 	background-color: transparent;
 }
 
-#jobTable
+
+
+.tableSimpleList
 {
 	border:  1px solid gray;
 	border-collapse: collapse;
 	box-shadow: 0px 0px 2px gray;
 }
 
-#jobTable th
+.tableSimpleList th
 {
-	background-color: seagreen;
-	color: white;
+	background-color: white;
+	border-bottom: 1px solid gray;
+	color: black;
 	padding: 0.5em;
 }
 
-#jobTable td
-{
-	border-right:  1px solid gray;
-	border-left:  1px solid gray;
-	border-collapse: collapse;
-}
+
+
 
 
 #jobTable input
@@ -89,8 +80,8 @@ input[type="date"]
 input[type="submit"]
 {
 	background-color: white;
-	color: seagreen;
-	border:seagreen solid 2px;
+	color: #55bbca;
+	border:#55bbca solid 2px;
 	float: right;
 	padding: 0.8em 2em;
 	margin: 5px;
@@ -99,15 +90,15 @@ input[type="submit"]
 
 input[type="submit"]:hover
 {
-	background-color: seagreen;
+	background-color: #55bbca;
 	color: white;
-	border:seagreen solid 2px;
+	border:#55bbca solid 2px;
 	float: right;
 	margin: 5px;
 	transition:background 0.5s;
 }
 
-#jobTable tr:hover
+.tableSimpleList tr:hover
 {
 	background-color: whitesmoke;
 	transition:background 0.2s;
@@ -116,7 +107,6 @@ input[type="submit"]:hover
 form
 {
 	border: 1px	solid gray;
-	display: inline-block;
 	box-shadow: 0px 0px 2px gray;
 }
 
@@ -127,7 +117,7 @@ form table
 
 caption
 {
-	background-color: seagreen;
+	background-color: #55bbca;
 	font-size: 1.5em;
 	padding: 0.3em;
 	font-weight: bold;
@@ -137,5 +127,12 @@ caption
 .simpleForm td
 {
 	height: 3em;
-	margin: 20px;
+	display: block;
+}
+
+
+#btn_group
+{
+	vertical-align: top;
+	display: inline-block;
 }
