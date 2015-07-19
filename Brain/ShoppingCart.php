@@ -1,8 +1,7 @@
 <?php
 	error_reporting(0);
 	include_once("field_const.php");
-	include_once("Product.php");
-	
+	include_once("Product.php");	
 	class SCart
 	{
 		private $_product;
@@ -28,6 +27,10 @@
 			return $this->_product;
 		}
 		
+		public function isExist($productNo)
+		{
+			return isset($this->_product[$productNo]);
+		}
 		public function removeItem($productNo)
 		{
 			unset($this->_product[$productNo]);

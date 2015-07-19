@@ -1,13 +1,6 @@
-<?php 
-	include_once "functions.php";
-	include_once "Product.php";
-	include_once "Order.php";
-	include_once "Category.php";
-	include_once "District.php";
-	include_once "Schedule.php";
-	include_once "field_const.php";
-	include_once "UserControl.php";
-	include_once "ShoppingCart.php";
+<html><body><?php 
+	
+	include "ShoppingCart.php";
 //	printThisDBResult(getOrdresByProductNo("OR001")); //RAYMOND:l 蟲蛀
 //	printThisDBResult(getAllJobsByDrvID("D0001"));
 
@@ -27,8 +20,8 @@
 	//$products = $cart->getProducts();
 	//$array = getSalesSummaryByGender("S0002", null)
 	//foreach($array as $a)
-		printThisDBResult(getProducts(null,null,null,null,null,"CAT01",null));
-		print_r(getSubCategories("CAT07",true));
-		//$array = getSubCategoriesNested("CAT01","ASC");
+	//	printThisDBResult(getProducts(null,null,null,null,null,"CAT01",null));
+	//	print_r(getSubCategories("CAT07",true));
+	//	//$array = getSubCategoriesNested("CAT01","ASC");
 	//print_r($array);
-?>
+?></html></body>

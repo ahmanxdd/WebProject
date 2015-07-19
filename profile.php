@@ -261,7 +261,8 @@ _TABLEROW;
 	<button onclick='getChart(1,\"$typeID\")'> GetSalesSummaryByGender - M</button>
 	<button onclick='getChart(2,\"$typeID\")'> GetSalesSummaryByGender - F</button>
 	<button onclick='getChart(3,\"$typeID\")'> District - HONG KONG</button>	
-	
+	<button onclick='getChart(3,\"$typeID\")'> District - Kowloon</button>	
+	<button onclick='getChart(3,\"$typeID\")'> District - New Territories</button>	
 	";
 	
 ?>

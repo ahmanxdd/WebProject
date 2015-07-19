@@ -1,5 +1,4 @@
 <?php
-
 	include_once('field_const.php');
 	include_once('Database.php');
 
