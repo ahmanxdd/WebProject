@@ -108,15 +108,15 @@
 	}
 	
 	function getProductsByName($nameWith) {
-		return getProducts($nameWith, null, null, null, null, null, null);
+		return getProducts($nameWith,null, null, null, null, null, null, null);
 	}
 	
 	function getProductsByCategory($catNo) {
-		return getProducts(null, null, null, null,null , $catNo, null);
+		return getProducts(null, null, null, null,null , $catNo, null,null);
 	}
 	
 	function getProductsBySupplier($suppNo) {
-		return getProducts(null, null, null, null, null, $suppNO, null);
+		return getProducts(null,null, null, null, null, null, $suppNo, null);
 	}
 	
 	function updateProduct($prodNo, $prodName, $prodPrice, $prodPhoto, $stockQty, $catNo, $suppNo) {
@@ -284,6 +284,30 @@
 			return DB::query($query);			
 	}
 	
+	function dataToChartArry($chart)
+	{
+		$ARRAY_FORMAT = "
+		{
+			title: { text: '%s' },
+			data: [
+			{
+				type: 'column',
+				dataPoints: [
+					%s
+				]
+			}]
+			
+		}";
+		
+		$DATA_POINT_FORMAT = "
+			{label: '%s', y: %d },
+		";		
+		$retDP = "";
+		while($row = $chart->fetch_assoc())
+			$retDP .= sprintf($DATA_POINT_FORMAT, $row[prodName], $row["Sold"]);
+		$retArray = sprintf($ARRAY_FORMAT, "Result", $retDP);
+		return $retArray; 		
+	}
 	
 	
 ?>

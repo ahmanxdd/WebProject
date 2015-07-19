@@ -84,7 +84,7 @@
 			session_regenerate_id(true);
 			session_destroy();
 			setCookie(userNo,"null");
-			setCookie("session_id", null);
+			setCookie("PHPSESSID", null);
 			UserControl::$type = null;
 			return DB::query($query);
 		}

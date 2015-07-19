@@ -84,19 +84,15 @@
 		return $result->fetch_assoc();
 	}
 	
-	function addUser($loginName, $loginPswd, $drvID, $custNo, $suppNo, $adminNo) {
+	function addUser($loginName, $loginPswd) {
 		if (isset($loginName) && is_array($loginName)) { //for JSON associated array
 			$userObj = $loginName;
 			$loginName = $userObj[loginName];
 			$loginPswd = $userObj[loginPswd];
-			$drvId = $userObj[drvId];
-			$custNo = $userObj[custNo];
-			$suppNo = $userObj[suppNo];
-			$adminNo = $userObj[adminNo];
 		}
 		
 		$userNo = DB::getLastIndex("User");
-		$query = DB::genInsertStr("User", $userNo, $loginName, $loginPswd, $drvID, $custNo, $suppNo, $adminNo);
+		$query = DB::genInsertStr("User", $userNo, $loginName, $loginPswd, null, null, null, null,null);
 		return DB::query($query);
 	}
 

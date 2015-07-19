@@ -10,6 +10,7 @@
 		return;	
 	$isOwner = false;
 	include_once "Brain/UserControl.php";
+	UserControl::login("loginS0001","mypswd");
 	if(UserControl::checkState())
 	{
 		$userNo = UserControl::getUserNo();
@@ -226,47 +227,74 @@ JOBTABLE_ROW;
 </div>
 
 <?php
+	} else if($type == "s")
+	{
+		echo		 
+		'<link href="css/supplier.css" rel="stylesheet" type="text/css" />'
+		.'<script src="js/supplier.js"> </script>'
+		."<link rel='stylesheet' type='text/css' href='jquery_ui/dataTable/jquery.dataTables.min.css'/>"
+		."<script src='jquery_ui/dataTable/jquery.dataTables.min.js'></script>"
+		."<script src='jquery_ui/chart/jquery.canvasjs.min.js'></script>";
+
+		
+		include_once "Brain/Product.php";
+		$genderChart = getSalesSummaryByGender($typeID);
+		printThisDBResult($genderChart["M"]);
+		printThisDBResult($genderChart["F"]);
+		$ourProduct = getProductsBySupplier($typeID);
+		
+		$TABLE_FORMAT = <<<_TABLE
+<table class="display" id="ourProductList">
+<thead><tr><th>Photo</th><th>No</th><th>Name</th><th>Price</th><th>QTY</th><th>Cat</th></tr></thead>
+<tbody>%s</tbody>
+</table>
+_TABLE;
+		$TABLE_ROW_FORMAT = <<<_TABLEROW
+<tr><td><img src='product_image/%s'/></td><td>%s</td><td>%s</td><td>%5.2f</td><td>%d</td><td>%s</td>
+_TABLEROW;
+
+		$rows = "";
+		while($row = $ourProduct->fetch_assoc())
+			$rows .= sprintf($TABLE_ROW_FORMAT, $row[prodPhoto], $row[prodNo],$row[prodName],$row[prodPrice],$row[stockQty],$row[catNo]);
+		printf($TABLE_FORMAT,$rows);
+		echo '
+	<button onclick="getChart(1,\"$typeID\")"> HIIIISSSIIIIII</button>';
+	
+?>
+	
+
+	
+	
+	<div id='chartHolder'> </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<?php
+	
 	}
 	
 }
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				
 		
 		
 		
@@ -288,4 +316,6 @@ JOBTABLE_ROW;
 	?>
 	</div>
 </div>
-<?php include("footer.php"); ?>
+<?php 
+	include("footer.php");
+?>
