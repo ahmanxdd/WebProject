@@ -94,12 +94,12 @@ JOBTABLE_HEAD;
 	$jobTable_row_format = 
 <<<JOBTABLE_ROW
 <tr>
-	<td><input name='jobNo' readonly type='text' style='border:none' value='%s'></input></td>
-	<td><input name='date' style='border:none' type='date' class='changable' readonly value='%s'/></td>
-	<td> $selectionBox	
+	<td align="center"><input name='jobNo' readonly type='text' style='border:none' value='%s'></input></td>
+	<td align="center"><input name='date' style='border:none' type='date' class='changable dataPickerTd' readonly value='%s'/></td>
+	<td align="center"> $selectionBox	
 		<input name='district' style='border:none' type='text' class='changable' readonly value='%s'/>
 		<input name='distNo' type='hidden' value='%s' /></td>
-	<td>
+	<td align="center">
 		<button class='removeJob'>Remove</button>
 	</td>
 </tr>
@@ -181,71 +181,31 @@ JOBTABLE_ROW;
 		
 <?php
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	else if($type == 'c')
+	{
+		
+
+?>
+<div id='jobTableDiv' class="col-79 col-m-100 topLine">
+	<table id='jobTable' class="tableSimpleList" width="100%">
+	<caption>My Order</caption>
+	<thead>
+		<tr>
+			<th>Order No</th>
+			<th>Job Date</th>
+			<th>District</th>
+			<th></th></tr>
+	</thead>
+	<tbody>
+	</tbody>
+	</table>
+</div>
+
+
+
+<?php
+	}
 	
 }
 		

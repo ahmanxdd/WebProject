@@ -35,7 +35,7 @@
 			}
 			while($row = $result->fetch_array())
 			{
-				$retTable .= "<tr><td>". $row[ordNo] ."</td><td>" . $row[deliAddr] . "</td></tr>";
+				$retTable .= "<tr><td align='center'>". $row[ordNo] ."</td><td align='center'>" . $row[deliAddr] . "</td></tr>";
 			}
 	
 		
@@ -69,10 +69,24 @@
 		{
 			$typeID = UserControl::getUserNo();
 			$typeID = getInfo($typeID)["ID"];
+			
 			$thisWeek = date("w");
 			$currentDate = date("Y-m-d");
+			$target_day = $_POST["weekDay"];
+			$weekDayArray = Array("Sun"=> "sunday","Mon" => "monday" ,"Tue" => "tuesday" ,"Wed" => "wednesday", "Thur"=> "thursday" , "Fri" => "friday", "Sat" => "saturday");
 			
-			print_r($_POST["weekDay"]);
+			foreach($weekDayArray as $key => $value)
+				if(isset($target_day[$key]))
+				{
+					$currentDate = date("Y-m-d");
+					for($i = 0; $i < $_POST["repeatTime"]; $i++)
+					{
+						$nextDate = date("Y-m-d",strtotime('next '.$value, strtotime($currentDate)));
+						markJobDate($typeID, $nextDate, $_POST["district"]);
+						$currentDate = $nextDate;
+					}	
+				}
+			
 		}
 		else
 		{
