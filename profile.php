@@ -257,8 +257,8 @@ _TABLEROW;
 		while($row = $ourProduct->fetch_assoc())
 			$rows .= sprintf($TABLE_ROW_FORMAT, $row[prodPhoto], $row[prodNo],$row[prodName],$row[prodPrice],$row[stockQty],$row[catNo]);
 		printf($TABLE_FORMAT,$rows);
-		echo '
-	<button onclick="getChart(1,\"$typeID\")"> HIIIISSSIIIIII</button>';
+		echo "
+	<button onclick='getChart(1,\"$typeID\")'> HIIIISSSIIIIII</button>";
 	
 ?>
 	

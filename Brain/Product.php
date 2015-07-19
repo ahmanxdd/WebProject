@@ -88,6 +88,7 @@
 				$condition[] = isDeleted . " = '0'";
 		if(isset($catNo))
 		{
+			echo"1";
 			$categoryCondition = "catNo IN(";
 			$subCategoryArray = getSubCategories($catNo, true);
 			foreach($subCategoryArray as $category)
@@ -95,7 +96,6 @@
 			$categoryCondition = rtrim($categoryCondition, ",") . ")";
 			$condition[] = $categoryCondition;			
 		}
-		
 		if(count($condition) > 0)
 		{
 			$query .= $condition[0];
@@ -104,6 +104,7 @@
 		}
 		$query .= " " . DB::genOrderByStr(func_get_args(), func_num_args(), 8);
 		//AND logic
+		echo $query;
 		return DB::query($query);
 	}
 	
@@ -284,30 +285,7 @@
 			return DB::query($query);			
 	}
 	
-	function dataToChartArry($chart)
-	{
-		$ARRAY_FORMAT = "
-		{
-			title: { text: '%s' },
-			data: [
-			{
-				type: 'column',
-				dataPoints: [
-					%s
-				]
-			}]
-			
-		}";
-		
-		$DATA_POINT_FORMAT = "
-			{label: '%s', y: %d },
-		";		
-		$retDP = "";
-		while($row = $chart->fetch_assoc())
-			$retDP .= sprintf($DATA_POINT_FORMAT, $row[prodName], $row["Sold"]);
-		$retArray = sprintf($ARRAY_FORMAT, "Result", $retDP);
-		return $retArray; 		
-	}
+	
 	
 	
 ?>

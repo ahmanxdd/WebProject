@@ -19,16 +19,16 @@
 //	UserControl::login("U0002");
 	//echo "<a href='loginText.php'> HI </a>";
 //	UserControl::logout();
-	$cart = new SCart();
-	$cart->addProduct("P00002", "100", "3");
-	$cart->addProduct("P00005", "100", "4");
+	//$cart = new SCart();
+	//$cart->addProduct("P00002", "100", "3");
+	//$cart->addProduct("P00005", "100", "4");
 	//$cart->qtyPlusPlus("P00001");
-	
-	$products = $cart->getProducts();
-	$array = getSalesSummaryByGender("S0002", null);
-	foreach($array as $a)
-		printThisDBResult($a);
-		
-		$array = getSubCategoriesNested("CAT01","ASC");
-	print_r($array);
+	//
+	//$products = $cart->getProducts();
+	//$array = getSalesSummaryByGender("S0002", null);
+	//foreach($array as $a)
+		printThisDBResult(getProducts(null,null,null,null,null,"CAT05",null));
+		print_r(getSubCategories("CAT05",true));
+		//$array = getSubCategoriesNested("CAT01","ASC");
+	//print_r($array);
 ?>

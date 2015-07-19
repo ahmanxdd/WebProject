@@ -13,28 +13,7 @@ $(document).ready(function () {
 window.onload = function () {
 
 //Better to construct options first and then pass it as a parameter
-	var options = {
-		title: {
-			text: "Column Chart using jQuery Plugin"
-		},
-                animationEnabled: true,
-		data: [
-		{
-			type: "column", //change it to line, area, bar, pie, etc
-			dataPoints: [
-				{ x: 10, y: 10 },
-				{ x: 20, y: 11 },
-				{ x: 30, y: 14 },
-				{ x: 40, y: 16 },
-				{ x: 50, y: 19 },
-				{ x: 60, y: 15 },
-				{ x: 70, y: 12 },
-				{ x: 80, y: 10 }
-			]
-		}
-		]
-	};
-
+	var options = array;
 	$("#chartHolder").CanvasJSChart(options);
     
     
@@ -42,9 +21,9 @@ window.onload = function () {
 
 function addData(array)
 {
-
-    $("#chartHolder").CanvasJSChart().options = array;
-      $("#chartHolder").CanvasJSChart().render();
+	var options = array;
+	$("#chartHolder").CanvasJSChart(options);    
+     $("#chartHolder").CanvasJSChart().render();
 }
 
 function getChart(reCode,suppNo)
@@ -52,10 +31,11 @@ function getChart(reCode,suppNo)
 	$.post("ajax/chart.php",
 		{
 			'suppNo': suppNo,
-			'requestCode': reCode 
+			'requestCode': reCode
 		}).done(		
 			function(data)
 			{
+					alert(data);
 				addData(JSON.parse(data));
 			}
 		);
