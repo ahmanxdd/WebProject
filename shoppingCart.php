@@ -2,13 +2,15 @@
 
 	include_once "Brain/ShoppingCart.php";
 	$cart = new SCart();
+	/*
 	$cart->clear();
 	$cart->addProduct("P0001","100","1");
 		$cart->addProduct("P0002","100","1");
 			$cart->addProduct("P0005","100","1");
 				$cart->addProduct("P0003","100","1");
 					$cart->addProduct("P0004","100","1");
-
+	*/
+	
 	if(isset($_POST["removeID"]))
 	{
 		$cart->removeItem($_POST["removeID"]);

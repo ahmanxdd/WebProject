@@ -46,7 +46,8 @@
 .prodInfo_C {
 	width: 300px;
 	float: left;
-	padding: 10px;
+	padding-top: 10px;
+	padding-left: 20px;
 }
 
 .prodInfo_C h2{
@@ -63,7 +64,8 @@
 }
 
 .prodInfo_C table tr th {
-	padding: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	padding-right: 15px;
 	color: #707070;
 	text-align: left;
@@ -73,8 +75,13 @@
 	font-weight: 600;
 }
 
+.prodInfoTable_C {
+	padding-left: 10px;
+}
+
 .qty {
 	width: 20px;
+	text-align: center;
 }
 
 .btnAddToChart {
@@ -99,5 +106,7 @@
 }
 
 .outOfStock {
-	
+	font-size: 1em;
+	margin-top: 10px;
+	color: red;
 }

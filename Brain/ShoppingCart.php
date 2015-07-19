@@ -1,5 +1,8 @@
 <?php
-	include_once "field_const.php";
+	error_reporting(0);
+	include_once("field_const.php");
+	include_once("Product.php");
+	
 	class SCart
 	{
 		private $_product;
@@ -68,6 +71,18 @@
 			else
        			$_SESSION["SCart"] = $this->_product;
    		}
-		   
+		  
+		public static function genCartMenuHtml($cartProds) {
+			$retStr = "";
+			foreach ($cartProds as $cartProd) {
+				$prod = getProduct($cartProd[prodNo]);
+				$retStr .= '
+					<li>
+						<label>' . $prod[prodName] . '</label>
+						<span>' . $cartProd[actualPrice] . '</span>
+					</li>';
+			}
+			return $retStr;
+		}
 	}
 ?>

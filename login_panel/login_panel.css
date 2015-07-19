@@ -10,6 +10,10 @@
 	visibility: hidden;
 }
 
+.loginPanel_C_shown {
+	visibility: visible;
+}
+
 .loginPanel {
 	
 }
