@@ -20,7 +20,9 @@
 		if ($includeSelf == true) {
 			$query = 'SELECT * FROM Category '
 			. 'WHERE ' . catNo . " = '$catNo'";
-			$retArr[$l++] = DB::query($query, true);
+			$result = DB::query($query, true);
+			if (!($retArr[$l++] = $result->fetch_assoc())
+				return null;
 		}
 		
 		$query = 'SELECT * FROM Category '

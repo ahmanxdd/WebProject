@@ -92,7 +92,7 @@
 			$subCategoryArray = getSubCategories($catNo, true);
 			foreach($subCategoryArray as $category)
 				$categoryCondition .= "'" . $category[catNo] . "',";
-			$categoryCondition = rtrim($categoryCondition, ",");
+			$categoryCondition = rtrim($categoryCondition, ",") . ")";
 			$condition[] = $categoryCondition;			
 		}
 		

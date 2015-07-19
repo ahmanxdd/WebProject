@@ -5,16 +5,21 @@
 <?php include("header2.php"); ?>
 <?php
 	include_once("Brain/field_const.php");
+	include_once("Brain/functinos.php");
 	include_once("Brain/Product.php");
 	include_once("Brain/Category.php");
 	error_reporting(0);
 	
-	$prods = getAllProducts();
+	regGet('prodName', 'priceMin', 'priceMax', 'catNo');
+	$prods = getProducts($prodName, $priceMin, $priceMax, null , null, $catNo, null);
+	//$prods = getAllProducts();
 ?>
 
 	<div class="row prod_C">
-		<span class="prod_C2">
 		<?php
+			if ($prods == null) {
+				echo '<div class="noProducts"> No products found. </div>';
+			}
 			foreach ($prods as $p) {
 				$s = getSupplier($p[suppNo]);
 				$prodName = $p[prodName];
@@ -57,7 +62,7 @@
 										ADD <input class="qty" type="text" value="1" onclick="event.stopPropagation();"/> TO CART
 									</button>';
 								} 
-								else {
+								if ($outOfStock) {
 									echo '
 									<div class="outOfStock">OUT OF STOCK!</div>';
 								}
@@ -68,7 +73,6 @@
 					</div>';
 			}
 		?>
-		</span>
 	</div>
 	
 <?php include("footer.php"); ?>

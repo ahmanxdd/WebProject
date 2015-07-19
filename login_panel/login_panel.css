@@ -7,7 +7,7 @@
 	padding: 10px;
 	background: white;
 	z-index: 200;
-	visibility: visible;
+	visibility: hidden;
 }
 
 .loginPanel_C_shown {

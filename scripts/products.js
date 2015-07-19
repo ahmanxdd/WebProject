@@ -9,17 +9,23 @@ function btnAddCartClicked(btnAddToCart) {
 			$btnAddToCart.find("input").css("background", ERROR_FIELD_COLOR);
 			return;
 		}
-		btnAddToCart.innerHTML = "REMOVE FROM CART";
-		$btnAddToCart.attr("rm", "true");
-		addToCart(prodNo, qty);
+		addToCart(prodNo, qty, function() {
+			btnAddToCart.innerHTML = "REMOVE FROM CART";
+			$btnAddToCart.attr("rm", "true");
+		});
+		
+		
 	}
 	else {
-		btnAddToCart.innerHTML = 'ADD <input class="qty" type="text" onclick="event.stopPropagation();"/> TO CART';
-		$btnAddToCart.attr("rm", "false");
+		removeFromCart(prodNo, function() {
+			btnAddToCart.innerHTML = 'ADD <input class="qty" type="text" value="1" onclick="event.stopPropagation();"/> TO CART';
+			$btnAddToCart.attr("rm", "false");
+		});
+		
 	}
 }
 
-function addToCart(prodNo, qty) {
+function addToCart(prodNo, qty, successFunct) {
 	$.get(CART_AJAX_URL,
 		{
 			"act" : "add",
@@ -33,20 +39,23 @@ function addToCart(prodNo, qty) {
 				return;
 			}
 			reloadCartMenu(data);
+			successFunct();
 		});
 }
 
-function removeFromCart(prodNo) {
+function removeFromCart(prodNo, successFunct) {
 	$.get(CART_AJAX_URL,
 		{
 			"act": "remove",
 			"prodNo": prodNo
 		}, function(data) {
+			alert(data);
 			if (data.indexOf("Error") != -1){
-				
+				alert("Cannot remove");
 				return;
 			}
-			alert(data);
+			reloadCartMenu(data);
+			successFunct();
 		})
 }
 
