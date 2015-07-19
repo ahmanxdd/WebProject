@@ -133,6 +133,14 @@
 		return $result;
 	}
 	
+	function getOrdersByCustNo($custNo)
+	{
+		$query = "SELECT * FROM CustOrder "
+				."WHERE " . custNo . " = '$custNo'";
+		$result = DB::query($query);
+		return $result;
+	}
+	
 	function updateJobNo($ordNo ,$jobNo)
 	{
 		$query = "UPDATE CustOrder SET " . jobNo . " = '$jobNo' "

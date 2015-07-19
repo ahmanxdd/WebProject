@@ -347,6 +347,8 @@
 	function getSupplier($suppNo) {
 		$query = 'SELECT * FROM Supplier WHERE ' . suppNo . " = '$suppNo'";
 		$result = DB::query($query);
+		if(!isset($result))
+			return null;
 		if (!($supp = $result->fetch_assoc()))
 			return null;
 		return $supp;

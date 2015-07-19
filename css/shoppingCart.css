@@ -53,6 +53,7 @@ thead, thead tr, thead tr th
 #header_table
 {
 	box-shadow: gray 0px 1px 5px 3px;
+	margin-top: 50px;
 }
 
 tfoot, tfoot tr

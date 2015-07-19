@@ -1,12 +1,269 @@
 <html>
-	<header1>
-		<link rel="stylesheet" type="text/css" href="css/register.css" />
-		<script src='scripts/admin_table.js'></script>
-	</head>
-	<body>
-		<div id="whole">
-		<div id="containerPage">
-		</div>
+<head>
+	<style type="text/css">	
+
+		.form-style{
+			margin:10px;
+		    max-width: 400px;
+		    padding: 20px 12px 10px 20px;
+		    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+		    border-color: #000000;
+		    border-style: solid;
+		}
+
+		.form-style .heading{
+			font-weight: bold;
+		    font-style: italic;
+		    border-bottom: 2px solid #ddd;
+		    margin-bottom: 20px;
+		    font-size: 15px;
+		    padding-bottom: 3px;
+		}
+
+		.form-style label{
+			margin: 0 0 3px 0;
+			padding: 0px;
+			display: inline;
+			font-weight: bold;
+		}
+
+	 	.li{
+	 		margin-bottom: 10px;
+		}
+
+		.form-style input[type=text],
+		.form-style input[type=date],
+		select
+		{
+			box-sizing: border-box;
+		    -webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    border:1px solid #BEBEBE;
+		    padding: 7px;
+		    margin:0px;
+		    margin-bottom: 5px;
+		    -webkit-transition: all 0.30s ease-in-out;
+		    -moz-transition: all 0.30s ease-in-out;
+		    -ms-transition: all 0.30s ease-in-out;
+		    -o-transition: all 0.30s ease-in-out;
+		    outline: none; 
+		}
+
+		.form-style input[type=text]:focus,
+		.form-style input[type=date]:focus,
+		select
+		{
+			-moz-box-shadow: 0 0 8px #88D5E9;
+		    -webkit-box-shadow: 0 0 8px #88D5E9;
+		    box-shadow: 0 0 8px #88D5E9;
+		    border: 1px solid #88D5E9;
+		}
+
+		.short {
+			width: 48%;
+		}
 		
+		.long{
+			width: 100%;
+		}
+
+		.deliaddr, .date{
+			width: 100%;
+		}
+		
+		.deliaddr .long{
+			margin-top: 5px;
+		}
+
+
+		.form-style input[type=submit]{
+			background: #4B99AD;
+		    padding: 8px 15px 8px 15px;
+		    border: none;
+		    color: #fff;
+		}
+
+		.form-style input[type=submit]:hover{
+		    background: #4691A4;
+		    box-shadow:none;
+		    -moz-box-shadow:none;
+		    -webkit-box-shadow:none;
+		}
+
+		.form-style .required{
+			color:red;
+		}
+
+		.s-p-ol{
+			width: 100%;
+		}
+		
+		.s-p-itemdetail{
+			width: 44%;
+		}
+
+		.s-p-qty{
+			float: right;
+			width:15%;
+			text-align: center;
+		}
+
+		.s-p-price{
+			float: right;
+			width:20%;
+			text-align: center;
+		}
+
+		.s-p-total{
+			float: right;
+			width:20%;
+			text-align: center;
+		}
+
+		.s-p-li-odd div{
+			display: inline-block;
+		}
+		
+		.s-p-li-odd{
+			margin: 0px;
+			padding: 0px;
+			width: 100%;
+		}
+		
+		.s-p-li-even div{
+			display: inline-block;
+		}
+
+		.s-p-li-even{
+			margin: 0px;
+			padding: 0px;
+			width: 100%;
+			background-color: #CCC;
+		}
+
+		.s-p-sub{
+			float:right;
+			width:70%;
+			text-align: right;
+			padding-right: 25px;
+		}
+
+
+		.s-p-subtotal{
+			float:right;
+			width:70%;
+			text-align: right;
+			font-size: 20px;
+			padding-right: 25px;
+		}
+
+		.s-p-totalAmount{
+			font-weight: bold;
+			float: right;
+			font-size: 20px;
+			width: 20%;
+			text-align: center;
+			border-bottom: 1px solid Black;
+			color: red;
+		}
+		
+
+
+	</style>
+</head>
+<body>
+	<form>
+		<div class="form-style">
+			<div name="selectedProduct">
+				<div class="heading">Selected Product</div>
+				<div name="item-head">
+					<div class="s-p-ol">
+						<label class="s-p-itemdetail">Item Details</label>
+						<label class="s-p-total">Total($)</label>
+						<label class="s-p-price">Price($)</label>
+						<label class="s-p-qty">Qty</label>
+					</div>
+				</div>
+				<hr />
+				<div name="item-body">
+					<div class="s-p-li-odd">
+						<div class="s-p-itemdetail">HP Black & White Laser Printer</div>
+						<div class="s-p-total">400</div>
+						<div class="s-p-price">100</div>
+						<div class="s-p-qty">4</div>
+					</div>
+					<div class="s-p-li-even">
+						<div class="s-p-itemdetail">LCD HD TV 42 Inch</div>
+						<div class="s-p-total">8000</div>
+						<div class="s-p-price">8000</div>
+						<div class="s-p-qty">1</div>
+					</div>
+					<div class="s-p-li-odd">
+						<div class="s-p-itemdetail">HP Colour Laser Printer</div>
+						<div class="s-p-total">7500</div>
+						<div class="s-p-price">2500</div>
+						<div class="s-p-qty">3</div>
+					</div>
+				</div>
+				<hr />
+				<div>
+					<div class="s-p-li-odd">
+							<div class="s-p-total">15900</div>
+							<div class="s-p-sub">Sub Total:</div>
+					</div>
+					<div class="s-p-li-odd">
+						<div class="s-p-total">150%</div>
+						<div class="s-p-sub">Discount:</div>
+					</div>
+					<div class="s-p-li-odd">
+						<div class="s-p-totalamount"><label>$</label>23850</div>
+						<div class="s-p-subtotal">Total Amount:</div>
+					</div>
+				</div>
+			</div>
+			<div name="information">
+				<div class="heading">Information</div>
+				<div class="li">
+					<div>
+						<label>
+							Full Name
+							<span class="required">*</span>
+						</label>
+					</div>
+					<div>
+						<input class="short" type="text" placeholder="First" />
+						&nbsp
+						<input class="short" type="text" placeholder="Last" />
+					</div>
+				</div>
+				<div class="li">
+					<div>
+						<label>
+							Delivery Date
+							<span class="required">*</span>
+						</label>
+					</div>
+					<div>
+						<input class="date" type="date" />
+					</div>
+				</div>
+				<div class="li">
+					<div class="deliaddr">
+						<label>
+							Delivery Address
+							<span class="required">*</span>
+						</label>
+						<input class="long" type="text" placeholder="Room" />
+						<input class="long" type="text" placeholder="Building" />
+						<input class="long" type="text" placeholder="Street" />
+						<select id="district" class="short" ></select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<input type="submit" value="Submit" />
+			</div>
 		</div>
-	</body>
+	</form>
+</body>
+</html>

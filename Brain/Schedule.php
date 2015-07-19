@@ -96,6 +96,14 @@
 		return DB::query($query);
 	}
 
+	function getJobByJobNo($jobNo)
+	{
+		$query = "SELECT * FROM Schedule WHERE " . jobNo . "='$jobNo'";
+		$result = DB::query($query);
+		if(isset($result) && $result)
+			return $result->fetch_assoc();
+		return null;
+	}
 	
 	/*
 		Raymond: 

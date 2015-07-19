@@ -41,7 +41,8 @@
 	<tr><td><?php echo $box; ?></td></tr>
 	<tr><td><label class="form_header">Your Address</label></td></tr>
 	<tr><td><textarea rows="5" cols="50"name="custAddr"> </textarea></td></tr>
-	<tr><td colspan="2" align="right"><input type="submit" class="btn" /></td></tr>
+	<tr><td colspan="2" align="right"><input type="submit" name="submit" value="true" class="btn" /></td></tr>
+
 </form>
 </div>
 </div>

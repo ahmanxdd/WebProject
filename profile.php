@@ -184,25 +184,46 @@ JOBTABLE_ROW;
 	}
 	else if($type == 'c')
 	{
-		
+		echo		 
+		'<link href="css/customer.css" rel="stylesheet" type="text/css" />'
+		.'<script src="js/customer.js"> </script>';
 
 ?>
-<div id='jobTableDiv' class="col-79 col-m-100 topLine">
-	<table id='jobTable' class="tableSimpleList" width="100%">
+<div id='jobTableDiv' class="col-45 col-m-100 topLine">
+	<table id='CustOrdersTable' class="tableSimpleList" width="100%">
 	<caption>My Order</caption>
 	<thead>
 		<tr>
 			<th>Order No</th>
-			<th>Job Date</th>
-			<th>District</th>
-			<th></th></tr>
+			<th>Delivery Date</th>
+			<th>Delivery Address</th>
+		</tr>
 	</thead>
 	<tbody>
+<?php
+	include_once "Brain/Order.php";
+	include_once "Brain/Schedule.php";
+	$myorder = getOrdersByCustNo($typeID);
+	$format = 	"<tr>
+				<td name='orderNo'align='center'>%s</td>
+				<td align='center'>%s</td>
+				<td align='center'>%s</td>
+				</tr>";
+	while($row = $myorder->fetch_assoc())
+	{
+		$jobDate = getJobByJobNo($row[jobNo])[jobDate];
+		printf($format,$row[ordNo],$jobDate,$row[deliAddr]);			
+	}
+	
+	
+?>
 	</tbody>
 	</table>
 </div>
 
-
+<div id="orderLine_placeHolder" class="col-50 col-m-100 topLine">
+	
+</div>
 
 <?php
 	}

@@ -1,6 +1,7 @@
 <?php
+
 	include_once "Brain/ShoppingCart.php";
-	$cart = new SCart("C0001");
+	$cart = new SCart();
 	$cart->clear();
 	$cart->addProduct("P0001","100","1");
 		$cart->addProduct("P0002","100","1");
@@ -16,22 +17,26 @@
 	}
 	else if(isset($_POST["getTotalAmount"]))
 	{
-		echo substr(printf("%.02f",$cart->getTotalAmount()),0,-1);
+		printf("%.02f",$cart->getTotalAmount());
 		return;
 	}
+	echo "<html>";
+	include("header1.php");
 ?>
-<html>
-<head>
+
 	<script src="jquery_ui/external/jquery/jquery.js"></script>
 	<link rel="stylesheet" type='text/css' href='jquery_ui/dataTable/jquery.dataTables.min.css'/>	
 	<script src="jquery_ui/dataTable/jquery.dataTables.min.js"></script>		
 	<link rel="stylesheet" href="jquery_ui/jquery-ui.min.css">
 	<link rel="stylesheet" href="css/shoppingCart.css">
 	<script src='js/shoppingCart.js'></script>
-</head>
+<?php
+
+	include("header2.php");
+?>
 <body>
 	
-		<div id="header_table">
+	<div id="header_table">
 	<table width="100%" id="cart" class="display" cellspacing="0">
 	<caption id="cart_caption">Shopping Cart</caption>
 	<thead><tr>
@@ -85,5 +90,4 @@
 	</tfoot>
 	</table>
 	
-</body>
-</html>
+<?php include("footer.php"); ?>
