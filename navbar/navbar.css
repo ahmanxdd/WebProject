@@ -18,10 +18,6 @@
 	float: left;
 }
 
-.navTab_active {
-	color: #505050;
-}
-
 .navTab > div, .navLogo > div {
 	height: 100%;
 	position: relative;
@@ -111,3 +107,92 @@
 	font-size: 1.2em;
 }
 
+.searchBar {
+	width: 100%;
+	position: absolute;
+	left: 0px;
+	top: 100%;
+	padding: 20px 50px;
+	background: #808080;
+	font-size: 1.5em;
+	color: white;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.5s;
+}
+
+.searchBar_shown {
+	visibility: visible;
+	opacity: 1
+}
+
+.searchBar * {
+}
+
+.searchInfo_C {
+	display: inline-block;
+	height: 60px;
+	margin-bottom: 20px;
+}
+
+.searchBar input, .searchBar select {
+	height: 100%;
+	font-size: 1.2em;
+}
+
+.searchBar select {
+	width: 300px;
+}
+
+.searchBar input[name="prodName"] {
+	width: 500px;
+}
+
+.searchBar label {
+	font-size: 35px;
+}
+
+.searchBar input[name="priceMin"], .searchBar input[name="priceMax"] {
+	width: 100px;
+	text-align: center;
+}
+
+.searchBar .btnSearch {
+	background: transparent;
+	outline: none;
+	border: 0px solid red;
+	color: white;
+	margin-top: -5px;
+	cursor: pointer;
+	transition: color 0.2s;
+}
+
+.searchBar .btnSearch:hover {
+	color: orange;
+}
+
+.clsSearchBar {
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+
+.cls {
+}
+
+.navIcon {
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.navIcon_active {
+	color: #F9E113;
+}
+
+.navIcon:hover {
+	color: #F9E113;
+}

@@ -14,6 +14,14 @@
 	
 	regGet('prodName', 'priceMin', 'priceMax', 'catNo');
 	$cart = new SCart();
+	if ($prodName == "")
+		$prodName = null;
+	if ($priceMin == "")
+		$priceMin = null;
+	if ($priceMax == "")
+		$priceMax = null;
+	if ($catNo == "")
+		$catNo = null;
 	$prods = getProducts($prodName, $priceMin, $priceMax, null , null, $catNo, null);
 	//$prods = getAllProducts();
 ?>
@@ -26,7 +34,7 @@
 			foreach ($prods as $p) {
 				$s = getSupplier($p[suppNo]);
 				$prodName = $p[prodName];
-				$outOfStock = ($p[stockQty] <= 1);
+				$outOfStock = ($p[stockQty] <= 0);
 				if (strlen($prodName) > 23) {
 					$prodName = substr($prodName, 0, 20) . '...';
 				}
@@ -61,9 +69,17 @@
 								if (!$outOfStock
 									&& (UserControl::getType() == NULL || UserControl::getType() == 'c')) {
 									echo '
-									<button class="btnAddToChart" rm="'. $cart->getTotalAmount($p[prodNo])==null?'true':'false' . "'" onclick="btnAddCartClicked(this)">
-										ADD <input class="qty" type="text" value="1" onclick="event.stopPropagation();"/> TO CART
-									</button>';
+									<button class="btnAddToChart" rm="';
+									if ($cart->isExist($p[prodNo]))
+										echo 'true';
+									else
+										echo 'false';
+									echo '" onclick="btnAddCartClicked(this)">';
+									if ($cart->isExist($p[prodNo]))
+										echo 'REMOVE FROM CART';
+									else
+										echo 'ADD <input class="qty" type="text" value="1" onclick="event.stopPropagation();"/> TO CART';
+									echo '</button>';
 								} 
 								if ($outOfStock) {
 									echo '
@@ -76,4 +92,5 @@
 					</div>';
 			}
 		?>
+	</div>
 <?php include("footer.php"); ?>

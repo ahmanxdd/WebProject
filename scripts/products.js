@@ -32,7 +32,6 @@ function addToCart(prodNo, qty, successFunct) {
 			"prodNo": prodNo,
 			"qty" : qty
 		}, function(data) {
-			alert(data);
 			if (data.indexOf("Error") != -1){
 				alert("Please login first");
 				showLoginPanel();
@@ -49,7 +48,6 @@ function removeFromCart(prodNo, successFunct) {
 			"act": "remove",
 			"prodNo": prodNo
 		}, function(data) {
-			alert(data);
 			if (data.indexOf("Error") != -1){
 				alert("Cannot remove");
 				return;

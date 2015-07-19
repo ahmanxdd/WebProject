@@ -2,16 +2,26 @@
 	width: 300px;
 	height: 100%;
 	position: fixed;
-	right: 0px;
+	right: -300px;
 	top: 0px;
 	padding: 10px;
+	padding-top: 50px;
 	background: white;
 	z-index: 200;
 	visibility: hidden;
+	border-left: 1px solid black;
+	transition: all 0.3s;
 }
 
 .loginPanel_C_shown {
 	visibility: visible;
+	right: 0px;
+}
+
+.clsLoginPanel {
+	position: absolute;
+	top: 5px;
+	right: 5px;
 }
 
 .loginPanel {
@@ -20,4 +30,38 @@
 
 .loginPanel label {
 	display: block;
+}
+
+.loginPanel label{
+ font-weight: bold;
+  
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 10px;
+    font-size: 15px;
+    padding-bottom: 3px;
+}
+
+.loginPanel input[type=text],
+.loginPanel input[type=password]{
+ width: 100%;
+    padding: 8px;
+    outline: none;
+    border: 1px solid #B0CFE0;
+    margin-bottom: 10px;
+}
+
+.loginPanel button{
+ width:100%;
+ color: #fff;
+ display: block;
+ border:none;
+ padding:10px;
+ text-align: center;
+ -webkit-border-radius:4px;
+ font-weight: bold;
+ background-color: #2196F3;
+}
+
+.loginPanel button:hover{
+ background-color: #1E88E5;
 }
