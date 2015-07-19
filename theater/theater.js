@@ -5,6 +5,15 @@ var THREATER_TIME = 400;
 var isAnimatingThreater = false;
 var $openedImgContainer;
 
+$(document).ready(function(){
+	$bigContainer = $("#bigContainer");
+	$threaterLay = $("#threaterLay");
+	$threaterContent = $("#threaterContent");
+	$threaterImgContainer = $("#threaterImgContainer");
+	
+	initTheater();
+});
+
 var animateThreater = function(isOpen, $fromContainer, $toContainer) {
 	var $fromImg = $fromContainer.children("img");
 	var $toImg = $toContainer.children("img");
@@ -180,8 +189,5 @@ var isVertical = function($img) {
 var initTheater = function () {
     $threaterLay.click(clsThreater);
     $(".closeThreater").click(clsThreater);
-}
-
-var initTheaterImg = function () {
-    $(".imgContainer img").click(openThreater);
+	$(".imgContainer img").click(openThreater);
 }

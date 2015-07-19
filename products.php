@@ -26,7 +26,9 @@
 				echo 
 					'<div id="' . $p[prodNo] . '" class="prodItem_C col-32 col-m-100">
 						<div class="prodItem_inContent">
-							<div class="imgContainer"></div>
+							<div class="imgContainer prodImg">
+								<img onload="cropImg(this);" src="product_image/' . $p[prodPhoto] . '"/>;
+							</div>
 							<div class="prodInfo_C">
 								<h2 alt="' . $p[prodName] . '">' . $prodName . '</h2>
 								<div class="prodInfoTable_C">

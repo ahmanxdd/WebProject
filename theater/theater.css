@@ -9,7 +9,7 @@
 }
 
 .threaterContent {
-	height: calc(100% - 40px);
+	height: 100%;
 	position: relative;
 	background-color: rgba(0, 0, 0, 0.9);
 	padding: 20px;

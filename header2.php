@@ -52,6 +52,7 @@
 		</div>
 	</div>
 	
+	<div id="bigContainer">
 	<div class="content_C">
 	 <?php
 		include_once("Brain/functions.php");

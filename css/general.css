@@ -8,6 +8,11 @@ body {
 	font-family: Roboto Mono, Roboto, sans-serif;
 }
 
+#bigContainer {
+	width: 100%;
+	position: relative;
+}
+
 .content_C {
 	padding-top: 50px;
 	font-size: 30px;
