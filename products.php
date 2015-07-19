@@ -4,11 +4,12 @@
 <script src="scripts/products.js"></script>
 <?php include("header2.php"); ?>
 <?php
+	error_reporting(0);
 	include_once("Brain/field_const.php");
-	include_once("Brain/functinos.php");
+	include_once("Brain/functions.php");
 	include_once("Brain/Product.php");
 	include_once("Brain/Category.php");
-	error_reporting(0);
+	include_once("Brain/User.php");
 	
 	regGet('prodName', 'priceMin', 'priceMax', 'catNo');
 	$prods = getProducts($prodName, $priceMin, $priceMax, null , null, $catNo, null);
@@ -74,5 +75,5 @@
 			}
 		?>
 	</div>
-	
-<?php include("footer.php"); ?>
+</body>	
+<?php //include("footer.php"); ?>

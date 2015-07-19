@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	//code 寫法參照User.php
 	//唔好hardcode任何column name! 我知會麻煩啲, 但唔該, 唔好hardcode
 	//Table名可以hardcode
@@ -21,8 +21,11 @@
 			$query = 'SELECT * FROM Category '
 			. 'WHERE ' . catNo . " = '$catNo'";
 			$result = DB::query($query, true);
-			if (!($retArr[$l++] = $result->fetch_assoc()))
+
+			if ($result == null)
+
 				return null;
+			$retArr[$l++] = $result[0];
 		}
 		
 		$query = 'SELECT * FROM Category '
