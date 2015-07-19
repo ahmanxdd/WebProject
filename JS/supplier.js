@@ -13,15 +13,18 @@ $(document).ready(function () {
 window.onload = function () {
 
 //Better to construct options first and then pass it as a parameter
+	var options = {
+                animationEnabled: true				
+	};
 
+	$("#chartHolder").CanvasJSChart(options);
     
     
 }
 
 function addData(array)
 {
-	var options = array;
-	$("#chartHolder").CanvasJSChart(options);    
+	$("#chartHolder").CanvasJSChart().options.data = array["data"];    
      $("#chartHolder").CanvasJSChart().render();
 }
 
@@ -34,7 +37,6 @@ function getChart(reCode,suppNo)
 		}).done(		
 			function(data)
 			{
-				alert(data);
 				addData(JSON.parse(data));
 			}
 		);

@@ -88,7 +88,6 @@
 				$condition[] = isDeleted . " = '0'";
 		if(isset($catNo))
 		{
-			echo"1";
 			$categoryCondition = "catNo IN(";
 			$subCategoryArray = getSubCategories($catNo, true);
 			foreach($subCategoryArray as $category)
@@ -185,7 +184,6 @@
 				."WHERE Product." . suppNo . " = '$suppNo' "
 				."AND " . isDeleted . " = 0 " 
 				."GROUP BY Product." .prodNo . " ";
-				echo $query;
 		return DB::query($query);
 	}
 	
