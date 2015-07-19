@@ -103,7 +103,6 @@
 		}
 		$query .= " " . DB::genOrderByStr(func_get_args(), func_num_args(), 8);
 		//AND logic
-		echo $query;
 		return DB::query($query);
 	}
 	
