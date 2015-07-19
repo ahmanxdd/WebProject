@@ -77,14 +77,18 @@
 	
 	<body>
 
+
+
 <link href="js/function.js"/>
-<table>
+<table id="jobTable">
+	<thead>
 	<tr>
 		<th>Job No</th>
 		<th>Job Date</th>
 		<th>District</th>
 		<th></th>
 	</tr>
+	</thead>
 <?php
 	/*
 		This part of the code for
@@ -93,7 +97,7 @@
 	$jobs = getAllJobsByDrvID($drvID, jobDate, "DESC");
 	$districts = getAllDistricts();
 	$selectionBox = "<select class='changable' hidden name='cbdistrict'>";
-	$selectionBox_v = "<select name='$district' class='jqStyle_selectDistrict'>";
+	$selectionBox_v = "<select name='$district'>";
 	while($row = $districts->fetch_assoc())
 	{
 		$selectionBox .= "<option value='" . $row[distNo] . "'>" . $row[distName] . "</option>";
@@ -120,24 +124,19 @@
 	
 ?>	
 	</table>
-	<?php
-
-		
-	?>
-	<form action="driver.php#" method="post">
-		<table>
+	
+	<form action="driver.php" method="post">
+		<table class="simpleForm" width="450px">
+			<caption>Assign Job weekly</caption>
 			<tr>
-				<td>Mark: </td>
-				<td>
-					<div id="format">
+				<td colspan='2' style=>
 					<?php
 						//print Day week selector
 						$weekdays = array("Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun");
-						$format = "<input type='checkbox' id='check%d' name='" . $weekDay . "[]' value='%d' /><label for='check%d'>%s</label>";
+						$format = "<input type='checkbox' id='check%d' name='" . $weekDay . "[]' value='%d' />%s      ";
 						for($i = 0; $i < count($weekdays); $i++)
-							printf($format,$i+1,$i+1,$i+1,$weekdays[$i]);
+							printf($format,$i+1,$i+1,$weekdays[$i]);
 					?>						
-					</div>
 				</td>
 			</tr>
 			<tr>
@@ -146,26 +145,26 @@
 			</tr>
 			<tr>
 				<td>Repeat time</td>
-				<td><input name="<?php echo $repeatTime; ?>" class="jqStyle_spinner" min ='1' max='99' readonly/></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Assign"/></td>
+				<td><input type="number" name="<?php echo $repeatTime; ?>" min ='1' max='99' /></td>
 			</tr>
 		</table>	
+		<input type="submit" value="Assign"/>
 	</form>	
 	
 	<form action="driver.php" method="post">
-		<table>
+		<table class="simpleForm">
+				<caption>Assign Job Daily</caption>
 			<tr>
-				<td>Date: </td>
+				<td>Date</td>
 				<td>
-					<input type="text" id="datepicker" readonly />
+					<input type="date" name="date" />
 				</td>
 			</tr>
 			<tr>
-				<td>District</td>
+				<td>District </td>
 				<td><?php echo $selectionBox_v; ?></td>
 			</tr>		
+
 		</table>	
 		<input type="submit" value='Assign' />
 	</form>	

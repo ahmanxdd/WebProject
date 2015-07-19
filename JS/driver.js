@@ -50,10 +50,13 @@ $(document).ready(function () {
 									alert("This job has order(s)! You can't change this");
 									tmp_obj.value = tmp_value;
 								}
-								acThis.closest("tr")
-									.find('[name=distNo]')
-									.val(thisvalue);
+								else {
+									acThis.closest("tr")
+										.find('[name=distNo]')
+										.val(thisvalue);
+								}
 							}
+
 							);
 					return;
 				}
@@ -121,28 +124,3 @@ $(function () {
 });
 
 
-$(function () {
-    $("input[type=submit]")
-		.button()
-		.click(function (event) {
-			event.preventDefault();
-			$(this).closest("form").submit();
-		});
-});
-
-$(function () {
-    $("#check").button();
-    $("#format").buttonset();
-});
-
-$(function () {
-    $(".jqStyle_selectDistrict").selectmenu();
-});
-
-$(function () {
-
-})
-
-$(function () {
-	var spinner = $(".jqStyle_spinner").spinner();
-})

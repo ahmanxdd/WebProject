@@ -58,7 +58,8 @@
 	
 	function getProduct($prodNo) {
 		$query = "SELECT * FROM Product WHERE " . prodNo . " = '$prodNo'";
-		return DB::query($query);
+		$retValue = DB::query($query);
+		return $retValue->fetch_assoc();
 	}
 	
 	//8 arguments for getProducts

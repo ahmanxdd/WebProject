@@ -1,7 +1,12 @@
 <?php
 	include_once "Brain/ShoppingCart.php";
-	$cart = new SCart();
-
+	$cart = new SCart("C0001");
+	$cart->clear();
+	$cart->addProduct("P0001","100","1");
+		$cart->addProduct("P0002","100","1");
+			$cart->addProduct("P0005","100","1");
+				$cart->addProduct("P0003","100","1");
+					$cart->addProduct("P0004","100","1");
 
 	if(isset($_POST["removeID"]))
 	{
@@ -66,7 +71,7 @@
 		foreach($products as $p)
 		{
 			$productInfo = getProduct($p[prodNo]);
-			$row = $productInfo->fetch_assoc();
+			$row = $productInfo;
 			$supplier = getSupplier($row[suppNo]);
 			$supplier = $supplier[suppName];
 			printf($format, "product_image/".$row[prodPhoto], $row[prodName],$supplier, $p[actualPrice], $p[qty], $cart->getTotalAmount($p[prodNo]) ,$p[prodNo]);
