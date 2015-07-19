@@ -8,26 +8,26 @@
 		regPost('login', 'pw');
 		
 		echo "<div>";
-		if (isset($login) && isset($pw)) {
-			if (UserControl::login($login, $pw)) {
-				$loginUser = getUser(UserControl::getUserNo());
-				echo 'Logged in as ' . $loginUser[userNo] . ' '. UserControl::getType() . '<br/>'
-					. 'use $loginUser to get the the current user';
-			}
-			else {
-				echo 'Login failed';
-			}
-		}
-		else if (UserControl::checkState()) {
-			$loginUser = getUser(UserControl::getUserNo());
-			echo 'Already logged in as ' . $loginUser[userNo] . ' ' . UserControl::getType() . '<br/>'
-				. 'user $loginUser to get the the current user';
-		}
-		else {
-			echo 'Not logged in.';
-		}
-		
-		echo '</div>';
+		// if (isset($login) && isset($pw)) {
+		// 	if (UserControl::login($login, $pw)) {
+		// 		$loginUser = getUser(UserControl::getUserNo());
+		// 		echo 'Logged in as ' . $loginUser[userNo] . ' '. UserControl::getType() . '<br/>'
+		// 			. 'use $loginUser to get the the current user';
+		// 	}
+		// 	else {
+		// 		echo 'Login failed';
+		// 	}
+		// }
+		// else if (UserControl::checkState()) {
+		// 	$loginUser = getUser(UserControl::getUserNo());
+		// 	echo 'Already logged in as ' . $loginUser[userNo] . ' ' . UserControl::getType() . '<br/>'
+		// 		. 'user $loginUser to get the the current user';
+		// }
+		// else {
+		// 	echo 'Not logged in.';
+		// }
+		// 
+		// echo '</div>';
 	?>
 	
 	<div class="navBar_C">
