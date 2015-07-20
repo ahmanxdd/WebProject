@@ -75,7 +75,16 @@
 				<div><span class="fa fa-2x fa-search userIcon navIcon" onclick="showSearchBar()"></span></div>
 			</div>
 			<div class="navTab col-10 col-m-20">
-				<div><span class="fa fa-2x fa-user userIcon navIcon" onclick="showLoginPanel()"></span></div>
+				
+				<?php 
+					include_once("UserControl.php");
+					echo '<div><span class="fa fa-2x fa-user userIcon navIcon" onclick="';
+					if (UserControl::checkState())
+						echo "window.location = 'profile.php?userNo=" . UserControl::getUserNo() . "'\"";
+					else
+						echo 'showLoginPanel()';
+					echo "\"></span></div>";
+				?>
 			</div>
 			
 			
